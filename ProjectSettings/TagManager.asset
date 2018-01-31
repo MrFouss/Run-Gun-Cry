@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy_Charger
+  - Obstacle_Wall
+  - Enemy_Laser
+  - Void
   layers:
   - Default
   - TransparentFX
