@@ -8,22 +8,30 @@ public class LettersDisplay : MonoBehaviour {
     public Text currentLetterText;
     public Text previousLettersText;
     public Text nextLettersText;
+    public Text comboText;
 
     public Color successColor = Color.green;
 
     // Use this for initialization
     void Awake () {
-        EngineerEventManager.onCurrentLetterChange.AddListener(UpdateCurrentLetter);
-        EngineerEventManager.onNextLettersChange.AddListener(UpdateNextLetters);
-        EngineerEventManager.onPastLettersChange.AddListener(UpdatePastLetters);
+        EventManager.onCurrentLetterChange.AddListener(UpdateCurrentLetter);
+        EventManager.onNextLettersChange.AddListener(UpdateNextLetters);
+        EventManager.onPastLettersChange.AddListener(UpdatePastLetters);
+        EventManager.onComboMultiplierChange.AddListener(UpdateComboMultiplier);
     }
 
-    void UpdateCurrentLetter(char newLetter)
+    private void UpdateComboMultiplier(long combo, long maxCombo)
+    {
+        Color color = Color.HSVToRGB((float)0.9f*combo / maxCombo, 1f, 0.8f);
+        comboText.text = "<b><color=#" + ColorUtility.ToHtmlStringRGB(color) +">x" + combo + "</color></b>";
+    }
+
+    private void UpdateCurrentLetter(char newLetter)
     {
         currentLetterText.text = newLetter.ToString();
     }
 
-    void UpdateNextLetters(char[] nextLetters)
+    private void UpdateNextLetters(char[] nextLetters)
     {
         string tmp = "";
 
@@ -35,7 +43,7 @@ public class LettersDisplay : MonoBehaviour {
         nextLettersText.text = tmp;
     }
 
-    void UpdatePastLetters(char[] pastLetters, bool[] success)
+    private void UpdatePastLetters(char[] pastLetters, bool[] success)
     {
         string tmp = "";
 

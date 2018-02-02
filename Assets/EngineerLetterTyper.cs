@@ -17,15 +17,15 @@ public class EngineerLetterTyper : MonoBehaviour
     void Start()
     {
         currLetter = (char)Random.Range('A', 'Z');
-        EngineerEventManager.onCurrentLetterChange.Invoke(currLetter);
+        EventManager.onCurrentLetterChange.Invoke(currLetter);
 
         for (int i = 0; i < NEXT_LETTERS_NBR; ++i)
         {
             nextLetters.Add((char)Random.Range('A', 'Z'));
         }
-        EngineerEventManager.onNextLettersChange.Invoke(nextLetters.ToArray());
+        EventManager.onNextLettersChange.Invoke(nextLetters.ToArray());
 
-        EngineerEventManager.onPastLettersChange.Invoke(new char[] { }, new bool[] { });
+        EventManager.onPastLettersChange.Invoke(new char[] { }, new bool[] { });
     }
 
     // Update is called once per frame
@@ -41,12 +41,13 @@ public class EngineerLetterTyper : MonoBehaviour
                 {
                     // correct letter entered
                     pastLettersSucces.Add(true);
+                    EventManager.onLetterTyped.Invoke(upperC, true);
                 }
                 else
                 {
                     // wrong letter entered
                     pastLettersSucces.Add(false);
-                    
+                    EventManager.onLetterTyped.Invoke(upperC, false);
                 }
                 
                 // update past letters
@@ -56,16 +57,16 @@ public class EngineerLetterTyper : MonoBehaviour
                     pastLetters.RemoveAt(0);
                     pastLettersSucces.RemoveAt(0);
                 }
-                EngineerEventManager.onPastLettersChange.Invoke(pastLetters.ToArray(), pastLettersSucces.ToArray());
+                EventManager.onPastLettersChange.Invoke(pastLetters.ToArray(), pastLettersSucces.ToArray());
 
                 // update curr letter
                 currLetter = nextLetters[0];
-                EngineerEventManager.onCurrentLetterChange.Invoke(currLetter);
+                EventManager.onCurrentLetterChange.Invoke(currLetter);
 
                 // update next letters
                 nextLetters.RemoveAt(0);
                 nextLetters.Add((char)Random.Range('A', 'Z'));
-                EngineerEventManager.onNextLettersChange.Invoke(nextLetters.ToArray());
+                EventManager.onNextLettersChange.Invoke(nextLetters.ToArray());
             }
         }
     }
