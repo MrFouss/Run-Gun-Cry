@@ -16,11 +16,14 @@ public class EventManager {
 
     /// Engineer letter typing events
 
+    // when the combo multiplier value changes <multiplier>
+    public static readonly UnityEvent<long> onMultiplierChange = new CustomEvent1<long>();
+
+    // when the combo value changes <combo>
+    public static readonly UnityEvent<long> onComboChange = new CustomEvent1<long>();
+
     // when a keyboard letter is typed <letter, successful>
     public static readonly UnityEvent<char, bool> onLetterTyped = new CustomEvent2<char, bool>();
-
-    // when the combo multiplier value changes <combo, maxCombo>
-    public static readonly UnityEvent<long, long> onComboMultiplierChange = new CustomEvent2<long, long>();
 
     // when the current letter changes (for UI) <letter>
     public static readonly UnityEvent<char> onCurrentLetterChange = new CustomEvent1<char>();
