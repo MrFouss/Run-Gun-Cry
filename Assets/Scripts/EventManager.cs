@@ -13,17 +13,8 @@ public class CustomEvent1<T> : UnityEvent<T> {}
 public class CustomEvent2<T1, T2> : UnityEvent<T1, T2> { }
 
 public class EventManager {
-
-    /// Engineer letter typing events
-
-    // when the combo multiplier value changes <multiplier>
-    public static readonly UnityEvent<long> onComboMultiplierChange = new CustomEvent1<long>();
-
-    // when the combo value changes <combo>
-    public static readonly UnityEvent<long> onComboChange = new CustomEvent1<long>();
-
-    // when the remaining time before a time out changes <remaining percentage>
-    public static readonly UnityEvent<float> onComboRemainingTimeChange = new CustomEvent1<float>();
+    
+    // Letter typing
 
     // when a keyboard letter is typed <letter, successful>
     public static readonly UnityEvent<char, bool> onLetterTyped = new CustomEvent2<char, bool>();
@@ -36,4 +27,18 @@ public class EventManager {
 
     // when past letters list changes (for UI) <pastLetters, succeful>
     public static readonly UnityEvent<char[], bool[]> onPastLettersChange = new CustomEvent2<char[], bool[]>();
+
+    // combo
+
+    // when the combo multiplier value changes <multiplier> (for UI)
+    public static readonly UnityEvent<long> onComboMultiplierChange = new CustomEvent1<long>();
+
+    // when the combo value changes <combo> (for UI)
+    public static readonly UnityEvent<long> onComboChange = new CustomEvent1<long>();
+
+    // when the remaining time before a time out changes <remaining percentage> (for UI)
+    public static readonly UnityEvent<float> onComboRemainingTimeChange = new CustomEvent1<float>();
+
+    // when a letter is successfully typed and whichever selected ressource should be reloaded <multiplier>
+    public static readonly UnityEvent<long> requestReloadRessource = new CustomEvent1<long>();
 }

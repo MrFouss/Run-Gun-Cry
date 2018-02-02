@@ -104,6 +104,7 @@ public class EngineerCombo : MonoBehaviour {
         // increment combo count
         if (successful)
         {
+            EventManager.requestReloadRessource.Invoke(Multiplier);
             Combo++;
             // reset remainingTime
             RemainingTimeSec = timeOutSec;
