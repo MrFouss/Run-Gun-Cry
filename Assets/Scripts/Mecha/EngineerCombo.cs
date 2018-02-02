@@ -111,6 +111,7 @@ public class EngineerCombo : MonoBehaviour {
         } else
         {
             Combo = 0;
+            RemainingTimeSec = 0;
         }
     }
 }
