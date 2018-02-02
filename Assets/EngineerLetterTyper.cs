@@ -5,21 +5,23 @@ using UnityEngine.UI;
 
 public class EngineerLetterTyper : MonoBehaviour
 {
-    public int NEXT_LETTERS_NBR = 5;
-    public int PAST_LETTERS_NBR = 5;
+    public int NextLettersNumber = 5;
+    public int PastLettersNumber = 5;
 
     private char currLetter;
     private List<char> nextLetters = new List<char>();
     private List<char> pastLetters = new List<char>();
-    private List<bool> pastLettersSucces = new List<bool>();
+    private List<bool> pastLettersSuccess = new List<bool>();
 
     // Use this for initialization
     void Start()
     {
+        // randomly init current and next letters
+
         currLetter = (char)Random.Range('A', 'Z');
         EventManager.onCurrentLetterChange.Invoke(currLetter);
 
-        for (int i = 0; i < NEXT_LETTERS_NBR; ++i)
+        for (int i = 0; i < NextLettersNumber; ++i)
         {
             nextLetters.Add((char)Random.Range('A', 'Z'));
         }
@@ -33,31 +35,30 @@ public class EngineerLetterTyper : MonoBehaviour
     {
         foreach (char c in Input.inputString)
         {
-            Debug.Log("Entered " + c);
             char upperC = char.ToUpper(c);
             if (upperC >= 'A' && upperC <= 'Z')
             {
                 if (upperC == currLetter)
                 {
                     // correct letter entered
-                    pastLettersSucces.Add(true);
+                    pastLettersSuccess.Add(true);
                     EventManager.onLetterTyped.Invoke(upperC, true);
                 }
                 else
                 {
                     // wrong letter entered
-                    pastLettersSucces.Add(false);
+                    pastLettersSuccess.Add(false);
                     EventManager.onLetterTyped.Invoke(upperC, false);
                 }
                 
                 // update past letters
                 pastLetters.Add(currLetter);
-                if (pastLetters.Count > PAST_LETTERS_NBR)
+                if (pastLetters.Count > PastLettersNumber)
                 {
                     pastLetters.RemoveAt(0);
-                    pastLettersSucces.RemoveAt(0);
+                    pastLettersSuccess.RemoveAt(0);
                 }
-                EventManager.onPastLettersChange.Invoke(pastLetters.ToArray(), pastLettersSucces.ToArray());
+                EventManager.onPastLettersChange.Invoke(pastLetters.ToArray(), pastLettersSuccess.ToArray());
 
                 // update curr letter
                 currLetter = nextLetters[0];

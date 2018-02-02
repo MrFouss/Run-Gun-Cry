@@ -10,8 +10,10 @@ public class LettersDisplay : MonoBehaviour {
     public Text nextLettersText;
     public Text comboText;
     public Text multiplierText;
+    public ProgressBar timeOutBar;
 
-    public Color successColor = Color.green;
+    // color of the successful letters
+    public Color successfulLettersColor = Color.green;
 
     // the color of the combo text will change depending on the combo value utile this value is reached
     public int comboTopValue = 64;
@@ -21,11 +23,23 @@ public class LettersDisplay : MonoBehaviour {
         EventManager.onCurrentLetterChange.AddListener(UpdateCurrentLetter);
         EventManager.onNextLettersChange.AddListener(UpdateNextLetters);
         EventManager.onPastLettersChange.AddListener(UpdatePastLetters);
-        EventManager.onMultiplierChange.AddListener(UpdateMultiplier);
+        EventManager.onComboMultiplierChange.AddListener(UpdateComboMultiplier);
         EventManager.onComboChange.AddListener(UpdateCombo);
+        EventManager.onComboRemainingTimeChange.AddListener(UpdateComboRemainingTime);
     }
 
-    private void UpdateMultiplier(long combo)
+    private void UpdateComboRemainingTime(float remainingPercentage)
+    {
+        timeOutBar.Progress = remainingPercentage;
+        timeOutBar.gameObject.SetActive(remainingPercentage != 0);
+        foreach (Renderer r in timeOutBar.gameObject.GetComponentsInChildren<Renderer>())
+        {
+            Debug.Log("hiding bar");
+            r.enabled = remainingPercentage != 0;
+        }
+    }
+
+    private void UpdateComboMultiplier(long combo)
     {
         multiplierText.text = "x" + combo;
     }
@@ -62,7 +76,7 @@ public class LettersDisplay : MonoBehaviour {
         {
             if (success[i])
             {
-                tmp += "<color=#" + ColorUtility.ToHtmlStringRGB(successColor) + ">" + pastLetters[i] + "</color>";
+                tmp += "<color=#" + ColorUtility.ToHtmlStringRGB(successfulLettersColor) + ">" + pastLetters[i] + "</color>";
             }
             else
             {
