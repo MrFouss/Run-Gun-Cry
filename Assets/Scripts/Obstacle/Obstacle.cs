@@ -16,7 +16,7 @@ public class Obstacle : MonoBehaviour {
 
     // Instance of the created broken obstacle and particle system
     public GameObject brokenObstacle;
-    public GameObject particleSystem;
+    public GameObject particleSystemPrefab;
 
     // Data about the blinking routine
     public float blinkingDuration = 1.0f;
@@ -80,7 +80,8 @@ public class Obstacle : MonoBehaviour {
     private void SpawnParticles(GameObject otherObject) {
         Rigidbody rb = otherObject.GetComponent<Rigidbody>();
         Quaternion particleSystemRotation = Quaternion.FromToRotation(Vector3.forward, -rb.velocity);
-        Instantiate(particleSystem, otherObject.transform.position, particleSystemRotation);
+        GameObject particleSystemInstance = Instantiate(particleSystemPrefab, otherObject.transform.position, particleSystemRotation);
+        Destroy(particleSystemInstance, 1.0f);
     }
 
     // Routine to blink the obstacle
