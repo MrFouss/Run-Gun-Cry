@@ -41,24 +41,24 @@ public class Obstacle : MonoBehaviour {
         switch (other.gameObject.tag) {
             case Tags.MechaBodyTag:
                 // remove all structure points and destroy the obstacle
-                TakeDamage(structurePoints);
+                TakeDamage(structurePoints, other.gameObject);
                 break;
             case Tags.MechaBulletTag:
                 // TODO uncomment when machine gun mechanic is implemented
                 // int damage = other.GetComponent<Bullet>().Damage;
-                // TakeDamage(damage);
-                TakeDamage(1);
+                // TakeDamage(damage, other.gameObject);
+                TakeDamage(1, other.gameObject);
                 break;
             case Tags.MechaMissileTag:
                 // TODO uncomment when missile launcher mechanic is implemented
                 // int damage = other.GetComponent<Missile>().Damage;
-                // TakeDamage(damage);
-                TakeDamage(50);
+                // TakeDamage(damage, other.gameObject);
+                TakeDamage(50, other.gameObject);
                 break;
         }
     }
 
-    private void TakeDamage(int damage) {
+    private void TakeDamage(int damage, GameObject otherObject) {
         structurePoints -= damage;
 
         if (structurePoints <= 0) {
@@ -66,6 +66,7 @@ public class Obstacle : MonoBehaviour {
             DestroyObstacle();
         } else {
             AudioSource.PlayClipAtPoint(obstacleHitSound, transform.position);
+            SpawnParticles(otherObject);
             StartCoroutine(BlinkColor());
         }
     }
@@ -76,6 +77,13 @@ public class Obstacle : MonoBehaviour {
         Instantiate(brokenObstacle, transform.position, transform.rotation);
     }
 
+    private void SpawnParticles(GameObject otherObject) {
+        Rigidbody rb = otherObject.GetComponent<Rigidbody>();
+        Quaternion particleSystemRotation = Quaternion.FromToRotation(Vector3.forward, -rb.velocity);
+        Instantiate(particleSystem, otherObject.transform.position, particleSystemRotation);
+    }
+
+    // Routine to blink the obstacle
     private IEnumerator BlinkColor() {
         float endTime = Time.time + blinkingDuration;
 
