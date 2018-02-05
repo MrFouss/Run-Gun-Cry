@@ -6,14 +6,15 @@ public class PilotController : MonoBehaviour
 {
 
     private bool isJumping;
-    public float jumpForce;
     private Vector3 groundCheck;
     private bool isGrounded;
     private LayerMask layerMask;
 
-    public float frontAccelerationForce;
-    public float backwardAccelerationForce;
-    public float sidesAccelerationForce;
+    public float jumpForce;
+    public float frontAcceleration;
+    public float neutralAcceleration;
+    public float brakeAcceleration;
+    public float sidesAcceleration;
     public float maxSpeed;
     public float minSpeed;
     public float airControlMultiplier;
@@ -24,6 +25,9 @@ public class PilotController : MonoBehaviour
             return Mathf.Sqrt(Mathf.Pow(rb.velocity.x, 2) + Mathf.Pow(rb.velocity.z, 2));
         }
     }
+
+    private bool cruiseControl;
+    private float cruiseControlSpeed;
 
 
     private Rigidbody rb;
@@ -40,12 +44,16 @@ public class PilotController : MonoBehaviour
         groundCheck = Vector3.down * 0.5f;
         layerMask = (1 << LayerMask.NameToLayer("Ground"));
 
-        frontAccelerationForce = 100f;
-        backwardAccelerationForce = 50f;
-        sidesAccelerationForce = 100f;
-        maxSpeed = 20f;
+        frontAcceleration = 25f;
+        neutralAcceleration = 2.5f;
+        brakeAcceleration = 25f;
+        sidesAcceleration = 50f;
+        maxSpeed = 30f;
         minSpeed = 5f;
         airControlMultiplier = 0.25f;
+
+        cruiseControl = false;
+        cruiseControlSpeed = minSpeed;
     }
 
     private void Update()
@@ -56,6 +64,25 @@ public class PilotController : MonoBehaviour
             if (isGrounded)
             {
                 isJumping = true;
+            }
+        }
+        if(Input.GetButtonDown("CruiseControl"))
+        {
+            if(Mathf.Abs(rb.velocity.z - cruiseControlSpeed) < 0.5f)
+            {
+                cruiseControl = !cruiseControl;
+            }
+            else
+            {
+                cruiseControl = true;
+            }
+            if (cruiseControl)
+            {
+                cruiseControlSpeed = rb.velocity.z;
+            }
+            else
+            {
+                cruiseControlSpeed = minSpeed;
             }
         }
     }
@@ -71,15 +98,35 @@ public class PilotController : MonoBehaviour
         float dirX = Input.GetAxis("Horizontal");
         float dirZ = Input.GetAxis("Vertical");
 
-        if(dirZ >= 0f)
+        Vector3 updatedVelocity = rb.velocity;
+
+        if(dirX == 0f)
         {
-            rb.AddForce(new Vector3(dirX * sidesAccelerationForce, 0f, dirZ * frontAccelerationForce) * (isGrounded ? 1f : airControlMultiplier));
+            updatedVelocity.x = 0f;
         }
         else
         {
-            rb.AddForce(new Vector3(dirX * sidesAccelerationForce, 0f, dirZ * backwardAccelerationForce) * (isGrounded ? 1f : airControlMultiplier));
+            updatedVelocity.x = Mathf.Min(maxSpeed, updatedVelocity.x + dirX * sidesAcceleration * Time.fixedDeltaTime * (isGrounded ? 1f : airControlMultiplier));
         }
-        
+
+        if(dirZ < 0f)
+        {
+            updatedVelocity.z = Mathf.Max(minSpeed, updatedVelocity.z + dirZ * brakeAcceleration * Time.fixedDeltaTime * (isGrounded ? 1f : airControlMultiplier));
+            cruiseControl = false;
+            cruiseControlSpeed = minSpeed;
+        }
+        else if(dirZ == 0f)
+        {
+            updatedVelocity.z += neutralAcceleration * Time.fixedDeltaTime;
+        }
+        else
+        {
+            updatedVelocity.z = Mathf.Min(maxSpeed, updatedVelocity.z + dirZ * frontAcceleration * Time.fixedDeltaTime * (isGrounded ? 1f : airControlMultiplier));
+        }
+
+        Debug.Log(updatedVelocity);
+
+        rb.velocity = updatedVelocity;
 
         if (Velocity > maxSpeed)
         {
@@ -87,19 +134,12 @@ public class PilotController : MonoBehaviour
             rb.velocity = new Vector3(v.x, rb.velocity.y, v.y);
         }
 
-        if (rb.velocity.z < minSpeed)
+        if (rb.velocity.z < cruiseControlSpeed)
         {
-            if (rb.velocity.x == 0f)
+            rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, cruiseControlSpeed);
+            if(Velocity > maxSpeed)
             {
-                rb.velocity = new Vector3(0f, rb.velocity.y, minSpeed);
-            }
-            else if (rb.velocity.x > 0f)
-            {
-                rb.velocity = new Vector3(Mathf.Sqrt(Mathf.Abs(Mathf.Pow(Velocity, 2) - Mathf.Pow(minSpeed, 2))), rb.velocity.y, minSpeed);
-            }
-            else
-            {
-                rb.velocity = new Vector3(-Mathf.Sqrt(Mathf.Abs(Mathf.Pow(Velocity, 2) - Mathf.Pow(minSpeed, 2))), rb.velocity.y, minSpeed);
+                rb.velocity = new Vector3(Mathf.Sign(rb.velocity.x) * Mathf.Sqrt(Mathf.Pow(Velocity, 2) - Mathf.Pow(cruiseControlSpeed, 2)), rb.velocity.y, cruiseControlSpeed); 
             }
         }
     }
