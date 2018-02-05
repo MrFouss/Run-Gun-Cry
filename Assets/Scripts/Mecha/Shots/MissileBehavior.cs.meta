@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 379c3a35531b5de489ec7486cf8df63e
+timeCreated: 1517776578
+licenseType: Free
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - shot_sound: {fileID: 82963870290525674, guid: 8aff8625668e7fe4f8a2d3d602381436,
+      type: 2}
+  - destroy_sound: {fileID: 82925177217858678, guid: 11eb05dd227a62c4789ff46e34f56b87,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
