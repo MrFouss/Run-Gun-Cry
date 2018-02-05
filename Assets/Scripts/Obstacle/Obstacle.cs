@@ -23,16 +23,6 @@ public class Obstacle : MonoBehaviour {
     public float blinkingFrequency = 10.0f;
     public float blinkingTransparency = 0.0f;
 
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
     // Detects collisions between the obstacle and:
     //  - the body of the mecha ("MechaBody")
     //  - a missile launched by the mecha ("MechaMissile")
