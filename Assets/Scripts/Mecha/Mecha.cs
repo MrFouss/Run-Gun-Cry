@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Mecha : MonoBehaviour
 {
@@ -77,6 +78,8 @@ public class Mecha : MonoBehaviour
         {
             isDead = true;
             Debug.Log("Mecha is Destoyed");
+            GameOver();
+            //Time.timeScale = 0;
         }
 
         if (shield <= 0)
@@ -157,7 +160,7 @@ public class Mecha : MonoBehaviour
                 audioSource.Play();
 
                 //animation_Enemy_Charger.Play();
-                Mecha_DamageTaken(20);
+                Mecha_DamageTaken(200);
                 break;
             case ("ObstacleWall"):
                 Debug.Log("Hit a wall");
@@ -171,5 +174,12 @@ public class Mecha : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    public void GameOver()
+    {
+
+        // move to the GameOver Scene
+        SceneManager.LoadScene("GameOver");
     }
 }
