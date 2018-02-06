@@ -3,20 +3,20 @@ using System.Collections;
 
 public class MissileBehavior : MonoBehaviour {
 
-    public AudioClip shot_sound;
-    public AudioClip destroy_sound;
+    public AudioClip ShotSound;
+    public AudioClip DestroySound;
 
-    public int fuse_time;
+    public int FuseTime;
 
-    AudioSource audio_source;
+    AudioSource AudioSource;
 
     // Use this for initialization
     void Start()
     {
-        Invoke("Explode", fuse_time);
-        audio_source = GetComponent<AudioSource>();
-        audio_source.clip = shot_sound;
-        audio_source.Play();
+        Invoke("Explode", FuseTime);
+        AudioSource = GetComponent<AudioSource>();
+        AudioSource.clip = ShotSound;
+        AudioSource.Play();
     }
 
     // Update is called once per frame
@@ -26,8 +26,8 @@ public class MissileBehavior : MonoBehaviour {
     }
     private void OnCollisionEnter(Collision collision)
     {
-        audio_source.Stop();
-        audio_source.PlayOneShot(destroy_sound, 1F);
+        AudioSource.Stop();
+        AudioSource.PlayOneShot(DestroySound, 1F);
         Explode();
     }
 
