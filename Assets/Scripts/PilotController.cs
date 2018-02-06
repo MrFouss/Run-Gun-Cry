@@ -31,29 +31,12 @@ public class PilotController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    private void InitValues()
-    {
-        jumpForce = 5f;
-        frontAcceleration = 25f;
-        neutralAcceleration = 2.5f;
-        brakeAcceleration = 25f;
-        sidesAcceleration = 75f;
-        maxSpeedZ = 30f;
-        maxSpeedX = 50f;
-        minSpeed = 5f;
-        airControlMultiplier = 0.25f;
-        timeToStopStrafing = 0.1f;
-        cruiseControl = false;
-    }
-
     private void Start()
     {
         isJumping = false;
         isGrounded = false;
         groundCheck = Vector3.down * 0.5f;
         layerMask = (1 << LayerMask.NameToLayer("Ground"));
-
-        InitValues();
 
         cruiseControlSpeed = minSpeed;
     }
