@@ -51,7 +51,7 @@ Shader "VolumetricLine/Additive" {
 				#pragma fragment frag
 				#pragma multi_compile __ FOV_SCALING_OFF
 				
-				#include "_SimpleShader.cginc"
+				#include "SimpleVolumetricLineShader.cginc"
 			ENDCG
 		}
 	}
