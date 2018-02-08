@@ -4,10 +4,14 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Enemy_Charger
-  - Obstacle_Wall
-  - Enemy_Laser
+  - EnemyCharger
+  - ObstacleWall
+  - EnemyLaser
   - Void
+  - EnemyCharger
+  - MechaBody
+  - MechaLaser
+  - MechaMissile
   layers:
   - Default
   - TransparentFX
@@ -17,7 +21,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Ground
   - 
   - 
   - 
