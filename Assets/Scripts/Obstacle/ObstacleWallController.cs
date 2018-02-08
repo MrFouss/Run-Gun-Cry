@@ -27,17 +27,22 @@ public class ObstacleWallController : MonoBehaviour {
                 // remove all structure points and destroy the obstacle
                 TakeDamage(StructurePoints, other.gameObject);
                 break;
+
             case Tags.MechaLaserTag:
                 // TODO uncomment when laser mechanic is implemented
                 // int damage = other.GetComponent<LaserProjectile>().Damage;
                 // TakeDamage(damage, other.gameObject);
                 TakeDamage(1, other.gameObject);
                 break;
+
             case Tags.MechaMissileTag:
                 // TODO uncomment when missile launcher mechanic is implemented
                 // int damage = other.GetComponent<MissileProjectile>().Damage;
                 // TakeDamage(damage, other.gameObject);
                 TakeDamage(50, other.gameObject);
+                break;
+
+            default:
                 break;
         }
     }

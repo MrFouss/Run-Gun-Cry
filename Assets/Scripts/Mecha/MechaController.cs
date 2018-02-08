@@ -38,22 +38,18 @@ public class MechaController : MonoBehaviour
         audioSource.volume = 1.0f;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Health <= 0)
-        {
-            GameOver();
-        }
-    }
-
     public void TakeDamage(int damage)
     {
         Shield -= damage;
+
         if (Shield < 0)
         {
-            Health -= Shield;
+            Health += Shield;
             Shield = 0;
+
+            if (Health <= 0) {
+                GameOver();
+            }
         }
     }
     
@@ -61,39 +57,35 @@ public class MechaController : MonoBehaviour
     {
         switch (other.gameObject.tag)
         {
-            case (Tags.EnemyLaserTag):
+            case Tags.EnemyLaserTag:
                 // TODO uncomment when these files are added
                 // audioSource.clip = LaserDamageSound;
                 // audioSource.Play();
                 // LaserDamageAnimation.Play();
-
                 TakeDamage(LaserDamage);
                 break;
 
-            case (Tags.VoidTag):
+            case Tags.VoidTag:
                 // TODO uncomment when these files are added
                 // audioSource.clip = VoidDamageSound;
                 // audioSource.Play();
                 // VoidDamageAnimation.Play();
-
                 TakeDamage(VoidDamage);
                 break;
 
-            case (Tags.EnemyChargerTag):
+            case Tags.EnemyChargerTag:
                 // TODO uncomment when these files are added
                 // audioSource.clip = EnemyCollisionDamageSound;
                 // audioSource.Play();
                 // EnemyCollisionDamageAnimation.Play();
-
                 TakeDamage(EnemyCollisionDamage);
                 break;
 
-            case (Tags.ObstacleWallTag):
+            case Tags.ObstacleWallTag:
                 // TODO uncomment when these files are added
                 // audioSource.clip = WallObstacleDamageSound;
                 // audioSource.Play();
                 // WallObstacleDamageAnimation.Play();
-
                 TakeDamage(WallObstacleDamage);
                 break;
 
