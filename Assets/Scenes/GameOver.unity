@@ -254,7 +254,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Cryer
+  m_Text: Engineer
 --- !u!222 &766845177
 CanvasRenderer:
   m_ObjectHideFlags: 0

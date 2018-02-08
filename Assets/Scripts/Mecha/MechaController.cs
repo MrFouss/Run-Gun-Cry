@@ -66,7 +66,7 @@ public class MechaController : MonoBehaviour
     {
         switch (other.gameObject.tag)
         {
-            case ("EnemyLaser"):
+            case (Tags.EnemyLaserTag):
                 // TODO remove log
                 Debug.Log("shot by enemy laser");
 
@@ -78,7 +78,7 @@ public class MechaController : MonoBehaviour
                 TakeDamage(LaserDamage);
                 break;
 
-            case ("Void"):
+            case (Tags.VoidTag):
                 // TODO remove log
                 Debug.Log("Fell in the void");
 
@@ -90,7 +90,7 @@ public class MechaController : MonoBehaviour
                 TakeDamage(VoidDamage);
                 break;
 
-            case ("EnemyCharger"):
+            case (Tags.EnemyChargerTag):
                 // TODO remove log
                 Debug.Log("Hit by charger");
 
@@ -102,7 +102,7 @@ public class MechaController : MonoBehaviour
                 TakeDamage(EnemyCollisionDamage);
                 break;
 
-            case ("ObstacleWall"):
+            case (Tags.ObstacleWallTag):
                 // TODO remove log
                 Debug.Log("Hit a wall");
 
