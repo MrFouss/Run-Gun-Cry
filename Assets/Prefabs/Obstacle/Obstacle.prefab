@@ -111,7 +111,7 @@ MonoBehaviour:
   ObstacleHitSound: {fileID: 8300000, guid: 23fde0db8293b624ca5186e7af7fe8b0, type: 3}
   ObstacleDestroyedSound: {fileID: 8300000, guid: 2021b08f31132ca4782838c452283762,
     type: 3}
-  BrokenObstacle: {fileID: 1607189094719680, guid: a596211943895414282a6ae274978097,
+  BrokenObstacle: {fileID: 1184356893556998, guid: a596211943895414282a6ae274978097,
     type: 2}
   ParticleSystemPrefab: {fileID: 1646541400532126, guid: aa91bf70f2872f4419f380fa68f52f0a,
     type: 2}
