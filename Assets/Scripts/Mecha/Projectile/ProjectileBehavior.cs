@@ -6,8 +6,9 @@ public class ProjectileBehavior : MonoBehaviour {
 
     public AudioClip ShotSound;
     public AudioClip DestroySound;
+    public float ProjectileSpeed = 1000.0f;
 
-    public int FuseTime;
+    public float FuseTime = 1.0f;
 
     private AudioSource audioSource;
 
@@ -23,20 +24,22 @@ public class ProjectileBehavior : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-		transform.position += transform.forward * Time.deltaTime * 1000.0f;
+		transform.position += transform.forward * Time.deltaTime * ProjectileSpeed;
 	}
     
     private void OnCollisionEnter(Collision collision)
     {
-        audioSource.Stop();
-        audioSource.PlayOneShot(DestroySound, 1.0f);
         Explode();
     }
 
-    void Explode()
+    private void Explode()
     {
+        audioSource.Stop();
+        audioSource.PlayOneShot(DestroySound, 1.0f);
+
         ParticleSystem particleSystem = GetComponent<ParticleSystem>();
         particleSystem.Play();
+
         Destroy(gameObject, 0.25f);
     }
 
