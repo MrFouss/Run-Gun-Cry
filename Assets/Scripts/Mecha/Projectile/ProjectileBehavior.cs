@@ -6,41 +6,49 @@ public class ProjectileBehavior : MonoBehaviour {
 
     public AudioClip ShotSound;
     public AudioClip DestroySound;
+    public GameObject ExplosionParticleSystem;
     public float ProjectileSpeed = 1000.0f;
 
-    public float FuseTime = 1.0f;
+    public float FuseTime = 2.0f;
 
     private AudioSource audioSource;
 
 	// Use this for initialization
 	void Start ()
     {
-        Invoke("Explode", FuseTime);
+        Destroy(Instantiate(ExplosionParticleSystem, transform.position, transform.rotation), 1.0f);
+
+        Rigidbody rb = GetComponent<Rigidbody>();
+        rb.AddForce(transform.forward * ProjectileSpeed);
+
         audioSource = GetComponent<AudioSource>();
         audioSource.clip = ShotSound;
         audioSource.Play();
+
+        Invoke("Explode", FuseTime); 
     }
-	
-	// Update is called once per frame
-	void Update ()
-    {
-		transform.position += transform.forward * Time.deltaTime * ProjectileSpeed;
-	}
     
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        Explode();
+        switch (other.gameObject.tag)
+        {
+            case Tags.ObstacleWallTag:
+            case Tags.EnemyChargerTag:
+                Explode();
+                break;
+
+            default:
+                break;
+        }
     }
 
     private void Explode()
     {
         audioSource.Stop();
-        audioSource.PlayOneShot(DestroySound, 1.0f);
 
-        ParticleSystem particleSystem = GetComponent<ParticleSystem>();
-        particleSystem.Play();
-
-        Destroy(gameObject, 0.25f);
+        AudioSource.PlayClipAtPoint(DestroySound, transform.position, 1.0f);
+        Destroy(Instantiate(ExplosionParticleSystem, transform.position, transform.rotation), 1.0f);
+        Destroy(gameObject);
     }
 
 }
