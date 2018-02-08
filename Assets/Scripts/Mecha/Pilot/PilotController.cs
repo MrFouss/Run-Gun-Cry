@@ -10,16 +10,16 @@ public class PilotController : MonoBehaviour
     private bool isGrounded;
     private LayerMask layerMask;
 
-    public float jumpForce = 5f;
-    public float frontAcceleration = 25f;
-    public float neutralAcceleration = 2.5f;
-    public float brakeAcceleration = 25f;
-    public float sidesAcceleration = 75f;
-    public float maxSpeedZ = 30f;
-    public float maxSpeedX = 50f;
-    public float minSpeed = 5f;
-    public float airControlMultiplier = 0.25f;
-    public float timeToStopStrafing = 0.1f;
+    public float JumpForce = 5f;
+    public float FrontAcceleration = 25f;
+    public float NeutralAcceleration = 2.5f;
+    public float BrakeAcceleration = 25f;
+    public float SidesAcceleration = 75f;
+    public float MaxSpeedZ = 30f;
+    public float MaxSpeedX = 50f;
+    public float MinSpeed = 5f;
+    public float AirControlMultiplier = 0.25f;
+    public float TimeToStopStrafing = 0.1f;
    
     private bool cruiseControl = false;
     private float cruiseControlSpeed;
@@ -38,7 +38,7 @@ public class PilotController : MonoBehaviour
         groundCheck = Vector3.down * 0.5f;
         layerMask = (1 << LayerMask.NameToLayer("Ground"));
 
-        cruiseControlSpeed = minSpeed;
+        cruiseControlSpeed = MinSpeed;
     }
 
     private void Update()
@@ -67,7 +67,7 @@ public class PilotController : MonoBehaviour
             }
             else
             {
-                cruiseControlSpeed = minSpeed;
+                cruiseControlSpeed = MinSpeed;
             }
         }
     }
@@ -76,7 +76,7 @@ public class PilotController : MonoBehaviour
     {
         if (isJumping)
         {
-            rb.AddForce(new Vector3(0f, jumpForce, 0f), ForceMode.VelocityChange);
+            rb.AddForce(new Vector3(0f, JumpForce, 0f), ForceMode.VelocityChange);
             isJumping = false;
         }
 
@@ -84,33 +84,30 @@ public class PilotController : MonoBehaviour
         float dirZ = Input.GetAxis("Vertical");
 
         Vector3 updatedVelocity = rb.velocity;
-        Debug.Log(rb.velocity);
         if(dirX == 0f)
         {
-            Debug.Log(updatedVelocity.x);
-            float xVel = updatedVelocity.x - (updatedVelocity.x / timeToStopStrafing) * Time.fixedDeltaTime;
-            Debug.Log(xVel);
+            float xVel = updatedVelocity.x - (updatedVelocity.x / TimeToStopStrafing) * Time.fixedDeltaTime;
             updatedVelocity.x = (Mathf.Abs(xVel) <= Mathf.Epsilon ? 0f : xVel);
         }
         else
         {
-            float xVel = updatedVelocity.x + dirX * sidesAcceleration * Time.fixedDeltaTime * (isGrounded ? 1f : airControlMultiplier);
-            updatedVelocity.x = Mathf.Sign(xVel) * Mathf.Min(maxSpeedX, Mathf.Abs(xVel));
+            float xVel = updatedVelocity.x + dirX * SidesAcceleration * Time.fixedDeltaTime * (isGrounded ? 1f : AirControlMultiplier);
+            updatedVelocity.x = Mathf.Sign(xVel) * Mathf.Min(MaxSpeedX, Mathf.Abs(xVel));
         }
 
         if(dirZ < 0f)
         {
-            updatedVelocity.z = Mathf.Max(minSpeed, updatedVelocity.z + dirZ * brakeAcceleration * Time.fixedDeltaTime * (isGrounded ? 1f : airControlMultiplier));
+            updatedVelocity.z = Mathf.Max(MinSpeed, updatedVelocity.z + dirZ * BrakeAcceleration * Time.fixedDeltaTime * (isGrounded ? 1f : AirControlMultiplier));
             cruiseControl = false;
-            cruiseControlSpeed = minSpeed;
+            cruiseControlSpeed = MinSpeed;
         }
         else if(dirZ == 0f)
         {
-            updatedVelocity.z += neutralAcceleration * Time.fixedDeltaTime;
+            updatedVelocity.z += NeutralAcceleration * Time.fixedDeltaTime;
         }
         else
         {
-            updatedVelocity.z = Mathf.Min(maxSpeedZ, updatedVelocity.z + dirZ * frontAcceleration * Time.fixedDeltaTime * (isGrounded ? 1f : airControlMultiplier));
+            updatedVelocity.z = Mathf.Min(MaxSpeedZ, updatedVelocity.z + dirZ * FrontAcceleration * Time.fixedDeltaTime * (isGrounded ? 1f : AirControlMultiplier));
         }
 
         rb.velocity = updatedVelocity;

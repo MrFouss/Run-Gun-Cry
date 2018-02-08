@@ -4,8 +4,12 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - ObstacleWall
+  - EnemyLaser
+  - Void
+  - EnemyCharger
   - MechaBody
-  - MechaBullet
+  - MechaLaser
   - MechaMissile
   layers:
   - Default
