@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BrokenObstacle : MonoBehaviour {
+public class BrokenObstacleWallController : MonoBehaviour {
 
-    public float fadingStartDelay = 5.0f;
-    public float fadingDuration = 1.0f;
+    public float FadingStartDelay = 5.0f;
+    public float FadingDuration = 1.0f;
 
     private float startTime;
     private Color startColor;
@@ -13,7 +13,7 @@ public class BrokenObstacle : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        startTime = Time.time + fadingStartDelay;
+        startTime = Time.time + FadingStartDelay;
         startColor = GetComponent<Renderer>().material.color;
         endColor = GetComponent<Renderer>().material.color;
         endColor.a = 0.0f;
@@ -23,15 +23,15 @@ public class BrokenObstacle : MonoBehaviour {
             child.material = GetComponent<Renderer>().material;
         }
 
-        Destroy(gameObject, fadingStartDelay + fadingDuration);
+        Destroy(gameObject, FadingStartDelay + FadingDuration);
     }
 	
 	// Update is called once per frame
 	void Update () {
         // for each cube, set the right color
         foreach (Renderer child in GetComponentsInChildren<Renderer>()) {
-            if (Time.time > startTime && Time.time < startTime + fadingDuration) {
-                child.material.color = Color.Lerp(startColor, endColor, (Time.time - startTime) / fadingDuration);
+            if (Time.time > startTime && Time.time < startTime + FadingDuration) {
+                child.material.color = Color.Lerp(startColor, endColor, (Time.time - startTime) / FadingDuration);
             }
         }
     }
