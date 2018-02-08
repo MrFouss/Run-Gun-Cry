@@ -28,18 +28,19 @@ public class ObstacleWallController : MonoBehaviour {
                 TakeDamage(StructurePoints, other.gameObject);
                 break;
 
-            case Tags.MechaLaserTag:
-                // TODO uncomment when laser mechanic is implemented
-                // int damage = other.GetComponent<LaserProjectile>().Damage;
-                // TakeDamage(damage, other.gameObject);
-                TakeDamage(1, other.gameObject);
+            default:
                 break;
-
+        }
+    }
+    
+    // Detects collisions between the obstacle and immaterial things that can hurt it
+    private void OnTriggerEnter(Collider other) {
+        Debug.Log("Ouch!");
+        switch (other.gameObject.tag) {
+            case Tags.MechaLaserTag:
             case Tags.MechaMissileTag:
-                // TODO uncomment when missile launcher mechanic is implemented
-                // int damage = other.GetComponent<MissileProjectile>().Damage;
-                // TakeDamage(damage, other.gameObject);
-                TakeDamage(50, other.gameObject);
+                int damage = other.GetComponent<ProjectileBehavior>().Damage;
+                TakeDamage(damage, other.gameObject);
                 break;
 
             default:

@@ -7,9 +7,10 @@ public class ProjectileBehavior : MonoBehaviour {
     public AudioClip ShotSound;
     public AudioClip DestroySound;
     public GameObject ExplosionParticleSystem;
-    public float ProjectileSpeed = 1000.0f;
 
+    public float ProjectileSpeed = 1000.0f;
     public float FuseTime = 2.0f;
+    public int Damage = 10;
 
     private AudioSource audioSource;
 
