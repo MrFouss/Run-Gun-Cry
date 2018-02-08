@@ -43,8 +43,6 @@ public class MechaController : MonoBehaviour
     {
         if (Health <= 0)
         {
-            // TODO remove log
-            Debug.Log("Mecha is Destroyed");
             GameOver();
         }
     }
@@ -57,9 +55,6 @@ public class MechaController : MonoBehaviour
             Health -= Shield;
             Shield = 0;
         }
-
-        // TODO remove log
-        Debug.Log("Health : " + Health + "\n" + "Shield : " + Shield);
     }
     
     void OnCollisionEnter(Collision other)
@@ -67,9 +62,6 @@ public class MechaController : MonoBehaviour
         switch (other.gameObject.tag)
         {
             case (Tags.EnemyLaserTag):
-                // TODO remove log
-                Debug.Log("shot by enemy laser");
-
                 // TODO uncomment when these files are added
                 // audioSource.clip = LaserDamageSound;
                 // audioSource.Play();
@@ -79,9 +71,6 @@ public class MechaController : MonoBehaviour
                 break;
 
             case (Tags.VoidTag):
-                // TODO remove log
-                Debug.Log("Fell in the void");
-
                 // TODO uncomment when these files are added
                 // audioSource.clip = VoidDamageSound;
                 // audioSource.Play();
@@ -91,9 +80,6 @@ public class MechaController : MonoBehaviour
                 break;
 
             case (Tags.EnemyChargerTag):
-                // TODO remove log
-                Debug.Log("Hit by charger");
-
                 // TODO uncomment when these files are added
                 // audioSource.clip = EnemyCollisionDamageSound;
                 // audioSource.Play();
@@ -103,9 +89,6 @@ public class MechaController : MonoBehaviour
                 break;
 
             case (Tags.ObstacleWallTag):
-                // TODO remove log
-                Debug.Log("Hit a wall");
-
                 // TODO uncomment when these files are added
                 // audioSource.clip = WallObstacleDamageSound;
                 // audioSource.Play();

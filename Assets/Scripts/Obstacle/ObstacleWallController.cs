@@ -7,9 +7,6 @@ public class ObstacleWallController : MonoBehaviour {
     // Data about an obstacle
     public int StructurePoints = 100;
 
-    // Collider of the obstacle
-    public BoxCollider BoxCollider;
-
     // Feedback sounds
     public AudioClip ObstacleHitSound;
     public AudioClip ObstacleDestroyedSound;
@@ -49,10 +46,10 @@ public class ObstacleWallController : MonoBehaviour {
         StructurePoints -= damage;
 
         if (StructurePoints <= 0) {
-            AudioSource.PlayClipAtPoint(ObstacleDestroyedSound, transform.position);
+            AudioSource.PlayClipAtPoint(ObstacleDestroyedSound, transform.position, 1.0f);
             DestroyObstacle();
         } else {
-            AudioSource.PlayClipAtPoint(ObstacleHitSound, transform.position);
+            AudioSource.PlayClipAtPoint(ObstacleHitSound, transform.position, 1.0f);
             SpawnParticles(otherObject);
             StartCoroutine(BlinkColor());
         }
