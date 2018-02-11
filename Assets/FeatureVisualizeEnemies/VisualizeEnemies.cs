@@ -16,16 +16,21 @@ public class VisualizeEnemies : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		foreach (GameObject enemy in enemiesList)
+        if (enemiesList != null)
         {
-            if (filterSelector.GetSelectedFilter() == enemy.GetComponent<EnemyFilterSelector>().RequiredFilter)
+            foreach (GameObject enemy in enemiesList)
             {
-                enemy.GetComponent<Renderer>().enabled = true;
-            } else
-            {
-                enemy.GetComponent<Renderer>().enabled = false;
+                if (filterSelector.GetSelectedFilter() == enemy.GetComponent<EnemyFilterSelector>().RequiredFilter)
+                {
+                    enemy.GetComponent<Renderer>().enabled = true;
+                }
+                else
+                {
+                    enemy.GetComponent<Renderer>().enabled = false;
+                }
             }
         }
+		
 	}
 
     // To be called whenever an enemy is created for it to be analyzed later on by the visualizer
