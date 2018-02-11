@@ -232,7 +232,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShotSound: {fileID: 8300000, guid: 2e3995159f4d1c344af6f73df9ca355b, type: 3}
   DestroySound: {fileID: 8300000, guid: 55b0c4788364df1488110a46c7c37d0f, type: 3}
-  ExplosionParticleSystem: {fileID: 1481478511582522, guid: b8cc1c4c4864a2b41b46c57adaf1bcd9,
+  ExplosionParticleSystem: {fileID: 1753248193243812, guid: 3850ae304315ee9499136e6271ecdb5a,
     type: 2}
   ProjectileSpeed: 2000
   FuseTime: 1
