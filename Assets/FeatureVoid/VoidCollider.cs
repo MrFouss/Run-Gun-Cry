@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class VoidCollider : MonoBehaviour {
 
-    public int heightRespawn;
+    private int heightRespawn = 0;
     // This script repositions the mecha whenever he falls into the void
     // A PlatforMemorizer Script must be attached to the mecha beforehand
 
@@ -14,8 +14,8 @@ public class VoidCollider : MonoBehaviour {
         if (other.tag == "MechaBody")
         {
             // When the Mecha falls, reposition it over the last platform it landed on
-            GameObject lastPlatform = collision.collider.gameObject.GetComponent<PlatformMemorizer>().getLastPlatform();
-            other.transform.position = new Vector3(lastPlatform.transform.position.x, lastPlatform.transform.position.y + 2 + heightRespawn, lastPlatform.transform.position.z);
+            GameObject lastPlatform = other.GetComponent<MechaController>().LastPlatform;
+            other.transform.position = new Vector3(lastPlatform.transform.position.x, lastPlatform.transform.position.y + heightRespawn, lastPlatform.transform.position.z);
         }
     }
     

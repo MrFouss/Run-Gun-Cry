@@ -30,12 +30,16 @@ public class MechaController : MonoBehaviour
     public Animation EnemyCollisionDamageAnimation;
     public Animation WallObstacleDamageAnimation;
 
+    private GameObject lastPlatForm;
+
     // Use this for initialization
     void Start()
     {
         // set AudioSource
         audioSource = GetComponent<AudioSource>();
         audioSource.volume = 1.0f;
+        // Use a random platform for initialization
+        lastPlatForm = GameObject.FindGameObjectWithTag("Platform");
     }
 
     // Update is called once per frame
@@ -97,6 +101,9 @@ public class MechaController : MonoBehaviour
                 TakeDamage(WallObstacleDamage);
                 break;
 
+            case (Tags.PlatformTag):
+                lastPlatForm = other.gameObject;
+                break;
             default:
                 break;
         }
@@ -105,5 +112,17 @@ public class MechaController : MonoBehaviour
     public void GameOver()
     {
         SceneManager.LoadScene("GameOver");
+    }
+
+    public GameObject LastPlatform
+    {
+        get
+        {
+            return lastPlatForm;
+        }
+        set
+        {
+            lastPlatForm = value;
+        }
     }
 }
