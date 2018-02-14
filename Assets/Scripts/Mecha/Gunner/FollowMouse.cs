@@ -7,7 +7,7 @@ public class FollowMouse : MonoBehaviour {
 
     // Mask used to limit crosshair movement
     // Black pixels should reprensent the accessible area
-    public RawImage mask;
+    public RawImage Mask;
     private Texture2D textureMask;
     
     // Array used to have a representation of the mask
@@ -15,13 +15,12 @@ public class FollowMouse : MonoBehaviour {
     // (perfomance reason)
     private int[,] arrayMask;
 
-
     private int maskWidth;
     private int maskHeight;
 
     // Use this for initialization
     void Awake() {
-        textureMask = mask.texture as Texture2D;
+        textureMask = Mask.texture as Texture2D;
         maskWidth = Screen.width;
         maskHeight = Screen.height;
         // Ratios used to adapt the mask's texture to the screen
@@ -43,7 +42,7 @@ public class FollowMouse : MonoBehaviour {
             }
         }
         // Disable the displayed mask
-        mask.gameObject.SetActive(false);
+        Mask.gameObject.SetActive(false);
         // Disable the default cursor
         Cursor.visible = false;
     }
