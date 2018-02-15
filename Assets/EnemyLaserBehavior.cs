@@ -2,17 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyLaserBehavior : MonoBehaviour {
-
-    void Start ()
-    {
-        
-    }
-
-    void Update ()
-    {
-           
-	}
+public class EnemyLaserBehavior : MonoBehaviour
+{
+    #region Public Functions
 
     public void LockNLoad(Transform PlayerTransform)
     {
@@ -21,5 +13,5 @@ public class EnemyLaserBehavior : MonoBehaviour {
 
     }
 
-    
+    #endregion
 }

@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4924684699840216}
-  - component: {fileID: 114458583106266252}
+  - component: {fileID: 114956217302582296}
   - component: {fileID: 33467045974710052}
   - component: {fileID: 135582376982127154}
   m_Layer: 0
@@ -37,6 +37,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4834594673966058}
+  - component: {fileID: 114360886516736948}
   - component: {fileID: 23657916104797846}
   - component: {fileID: 33305442593118808}
   - component: {fileID: 135357571866871332}
@@ -55,10 +56,10 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4812488173930246}
-  - component: {fileID: 33825848974511620}
   - component: {fileID: 65743184983253786}
+  - component: {fileID: 33825848974511620}
+  - component: {fileID: 114724496766575690}
   - component: {fileID: 23555788018587520}
-  - component: {fileID: 114418136251765938}
   m_Layer: 0
   m_Name: Cannon
   m_TagString: Untagged
@@ -208,7 +209,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114418136251765938
+--- !u!114 &114360886516736948
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1821962545106804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abb0d24d3da32b94d92ced8688b54a36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114724496766575690
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -216,16 +228,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1923163678616006}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ea36ef7a00788340aa4961f12313cec, type: 3}
+  m_Script: {fileID: 11500000, guid: ce93edbea7eb55445a8efdef5807e118, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Muzzle: {fileID: 4812488173930246}
   LaserShot: {fileID: 1779170460631076, guid: 3fb6390608e58dc4492a9154c79d7dc0, type: 2}
-  MissileShot: {fileID: 1128944587546064, guid: 93aadd84080187345a14fb4ea8dd90b8,
-    type: 2}
   FireRateLaser: 0.1
-  FireRateMissile: 1
---- !u!114 &114458583106266252
+--- !u!114 &114956217302582296
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -233,7 +242,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1619964916625928}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abb0d24d3da32b94d92ced8688b54a36, type: 3}
+  m_Script: {fileID: 11500000, guid: 29118f576f71638469d185451d69c70e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!135 &135357571866871332
@@ -258,5 +267,5 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 5
+  m_Radius: 15
   m_Center: {x: 0, y: 0, z: 0}

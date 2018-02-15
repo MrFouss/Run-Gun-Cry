@@ -2,13 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyCannonBehavior : MonoBehaviour {
+public class EnemyCannonBehavior : MonoBehaviour
+{
+
+    #region Public Variables
 
     public Transform Muzzle;
     public GameObject LaserShot;
     public float FireRateLaser = 0.1f;
 
+    #endregion
+
+    #region Private Variables
+
     private float nextFire;
+
+    #endregion
+
+    #region Public Functions
 
     public void Fire()
     {
@@ -19,4 +30,6 @@ public class EnemyCannonBehavior : MonoBehaviour {
         }
         
     }
+
+    #endregion
 }
