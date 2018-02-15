@@ -40,9 +40,9 @@ public class LettersDisplay : MonoBehaviour {
         }
     }
 
-    private void UpdateComboMultiplier(long combo)
+    private void UpdateComboMultiplier(int multiplier)
     {
-        multiplierText.text = "x" + combo;
+        multiplierText.text = "x" + multiplier;
     }
 
     private void UpdateCombo(long combo)

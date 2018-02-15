@@ -5,6 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class MechaController : MonoBehaviour
 {
+    public enum ReloadType {ENERGY, SHIELD};
+
+    public ReloadType ReloadedResource = ReloadType.ENERGY;
+    public int BaseShieldReload = 1;
+    public int BaseEnergyReload = 1;
+
     // resources
     public int MaxHealth = 100;
     public int MaxShield = 100;
@@ -17,7 +23,7 @@ public class MechaController : MonoBehaviour
         set
         {
             _health = Mathf.Min(value, MaxHealth);
-            EventManager.onLifeChange.Invoke((float)_health/MaxHealth);
+            EventManager.onHealthChange.Invoke((float)_health/MaxHealth);
         }
         get
         {
@@ -127,6 +133,24 @@ public class MechaController : MonoBehaviour
     public void ConsumeEnergy(int consumption)
     {
         Energy = Mathf.Max(0, Energy - consumption);
+    }
+
+    public bool CanConsumeEnergy(int consumption)
+    {
+        return Energy - consumption >= 0;
+    }
+
+    public void ReloadResource(int multiplier)
+    {
+        switch (ReloadedResource)
+        {
+            case ReloadType.ENERGY:
+                Energy = Mathf.Min(MaxEnergy, Energy + multiplier * BaseEnergyReload);
+                break;
+            case ReloadType.SHIELD:
+                Shield = Mathf.Min(MaxShield, Shield + multiplier * BaseShieldReload);
+                break;
+        }
     }
     
     void OnCollisionEnter(Collision other)

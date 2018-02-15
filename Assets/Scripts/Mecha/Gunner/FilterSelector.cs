@@ -7,8 +7,17 @@ public class FilterSelector : MonoBehaviour {
     private int selectedFilter;
     private int previousFilter;
 
-	// Use this for initialization
-	void Start () {
+    public int EnergyConsumption = 1;
+
+    private MechaController mechaController;
+
+    private void Awake()
+    {
+        mechaController = GetComponent<MechaController>();
+    }
+
+    // Use this for initialization
+    void Start () {
         selectedFilter = 0;
         previousFilter = 1;
         UpdateFilters();
@@ -20,10 +29,12 @@ public class FilterSelector : MonoBehaviour {
         // Check scrollwheel
         if (Input.GetAxis("Mouse ScrollWheel") > 0f)
         {
+            mechaController.ConsumeEnergy(EnergyConsumption);
             selectedFilter = (selectedFilter + 1) % 3;
             UpdateFilters();
         } else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
         {
+            mechaController.ConsumeEnergy(EnergyConsumption);
             selectedFilter = (selectedFilter + 2) % 3;
             UpdateFilters();
         }

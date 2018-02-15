@@ -33,7 +33,7 @@ public class EventManager {
     // combo
 
     // when the combo multiplier value changes <multiplier> (for UI)
-    public static readonly UnityEvent<long> onComboMultiplierChange = new CustomEvent1<long>();
+    public static readonly UnityEvent<int> onComboMultiplierChange = new CustomEvent1<int>();
 
     // when the combo value changes <combo> (for UI)
     public static readonly UnityEvent<long> onComboChange = new CustomEvent1<long>();
@@ -41,15 +41,11 @@ public class EventManager {
     // when the remaining time before a time out changes <remaining percentage> (for UI)
     public static readonly UnityEvent<float> onComboRemainingTimeChange = new CustomEvent1<float>();
 
-    // when a letter is successfully typed and whichever selected ressource should be reloaded <multiplier>
-    public static readonly UnityEvent<long> requestReloadRessource = new CustomEvent1<long>();
-
     // stats
 
     // when these stats change <remaining percentage> (for UI)
     public static readonly UnityEvent<float> onShieldChange = new CustomEvent1<float>();
-    public static readonly UnityEvent<float> onLifeChange = new CustomEvent1<float>();
+    public static readonly UnityEvent<float> onHealthChange = new CustomEvent1<float>();
     public static readonly UnityEvent<float> onEnergyChange = new CustomEvent1<float>();
     public static readonly UnityEvent<long> onScoreChange = new CustomEvent1<long>();
-
-}
+ }
