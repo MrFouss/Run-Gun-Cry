@@ -50,6 +50,6 @@ public class EventManager {
     public static readonly UnityEvent<float> onShieldChange = new CustomEvent1<float>();
     public static readonly UnityEvent<float> onLifeChange = new CustomEvent1<float>();
     public static readonly UnityEvent<float> onEnergyChange = new CustomEvent1<float>();
-    public static readonly UnityEvent<float> onScoreChange = new CustomEvent1<float>();
+    public static readonly UnityEvent<long> onScoreChange = new CustomEvent1<long>();
 
 }

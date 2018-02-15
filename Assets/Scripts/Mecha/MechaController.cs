@@ -53,6 +53,20 @@ public class MechaController : MonoBehaviour
         }
     }
 
+    private int _score;
+    public int Score
+    {
+        set
+        {
+            _score = Mathf.Max(0, value);
+            EventManager.onScoreChange.Invoke(_score);
+        }
+        get
+        {
+            return _score;
+        }
+    }
+
     // sound
     private AudioSource audioSource;
 
@@ -83,6 +97,7 @@ public class MechaController : MonoBehaviour
         Health = MaxHealth;
         Shield = MaxShield;
         Energy = MaxEnergy;
+        Score = 0;
 
         // consume energy every second
         InvokeRepeating("ConsumeEnergyPassive", 1, 1);
