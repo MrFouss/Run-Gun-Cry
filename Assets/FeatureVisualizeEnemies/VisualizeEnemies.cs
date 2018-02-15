@@ -5,13 +5,13 @@ using UnityEngine;
 public class VisualizeEnemies : MonoBehaviour {
 
     private GameObject[] enemiesList;
-    public GameObject filtersSystem;
+    public GameObject FiltersSystem;
     private FilterSelector filterSelector;
 
 	// Use this for initialization
 	void Start () {
-        filterSelector = filtersSystem.GetComponent<FilterSelector>();
-        updateEnemiesList();
+        filterSelector = FiltersSystem.GetComponent<FilterSelector>();
+        UpdateEnemiesList();
 	}
 	
 	// Update is called once per frame
@@ -34,7 +34,7 @@ public class VisualizeEnemies : MonoBehaviour {
 	}
 
     // To be called whenever an enemy is created for it to be analyzed later on by the visualizer
-    public void updateEnemiesList()
+    public void UpdateEnemiesList()
     {
         enemiesList = GameObject.FindGameObjectsWithTag("Enemy");
     }
