@@ -8,6 +8,7 @@ public class CannonBehavior : MonoBehaviour {
     public GameObject MissileShot;
     public float FireRateLaser = 0.1f;
     public float FireRateMissile = 1.0f;
+    public int Damage = 35;
 
     private float nextFire;
     

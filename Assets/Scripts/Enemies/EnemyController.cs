@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour {
+public abstract class EnemyController : MonoBehaviour {
 
     public int Health;
 
-    public int LaserDamage = 10;
+    public int Damage = 10;
+
+    // Delete when damages function works
     public int MissileDamage = 35;
     public int MechaCollisionDamage = 100;
 
@@ -21,32 +23,27 @@ public class EnemyController : MonoBehaviour {
 
 
 	// Use this for initialization
-	void Start () {
+	protected void Start () {
         audioSource = GetComponent<AudioSource>();
         audioSource.volume = 1.0f;
     }
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
-    void OnCollisionEnter(Collision collision)
+    protected void OnCollisionEnter(Collision collision)
     {
         switch (collision.gameObject.tag)
         {
             case Tags.MechaLaserTag:
-                TakeDamage(LaserDamage);
+                TakeDamage(collision.gameObject.GetComponent<ProjectileBehavior>().Damage);
                 //HitByLaserAnimation.Play(); 
                 // TODO uncomment when these files are added
                 //audioSource.clip = HitByLaserSound;
                 //audioSource.Play();
                 break;
             case Tags.MechaMissileTag:
-                TakeDamage(MissileDamage);
+                TakeDamage(collision.gameObject.GetComponent<CannonBehavior>().Damage);
                 break;
             case Tags.MechaBodyTag:
-                TakeDamage(MechaCollisionDamage);
+                TakeDamage(collision.gameObject.GetComponent<MechaController>().Damage);
                 break;
             default:
                 break;

@@ -14,6 +14,9 @@ public class MechaController : MonoBehaviour
     private AudioSource audioSource;
 
     // damage properties
+    public int Damage = 100;
+
+    // TODO Delete if Damages function works
     public int LaserDamage = 5;
     public int VoidDamage = 30;
     public int EnemyCollisionDamage = 100;
@@ -62,7 +65,7 @@ public class MechaController : MonoBehaviour
                 // audioSource.clip = LaserDamageSound;
                 // audioSource.Play();
                 // LaserDamageAnimation.Play();
-                TakeDamage(LaserDamage);
+                TakeDamage(other.gameObject.GetComponent<ProjectileBehavior>().Damage);
                 break;
 
             case Tags.VoidTag:
@@ -78,7 +81,10 @@ public class MechaController : MonoBehaviour
                 // audioSource.clip = EnemyCollisionDamageSound;
                 // audioSource.Play();
                 // EnemyCollisionDamageAnimation.Play();
-                TakeDamage(EnemyCollisionDamage);
+                
+                // TakeDamage(EnemyCollisionDamage);
+
+                TakeDamage(other.gameObject.GetComponent<EnemyController>().Damage);
                 break;
 
             case Tags.ObstacleWallTag:
@@ -86,7 +92,10 @@ public class MechaController : MonoBehaviour
                 // audioSource.clip = WallObstacleDamageSound;
                 // audioSource.Play();
                 // WallObstacleDamageAnimation.Play();
-                TakeDamage(WallObstacleDamage);
+                
+                // TakeDamage(WallObstacleDamage);
+
+                TakeDamage(other.gameObject.GetComponent<ObstacleWallController>().Damage);
                 break;
 
             default:
