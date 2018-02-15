@@ -30,7 +30,10 @@ public class MechaController : MonoBehaviour
     public Animation EnemyCollisionDamageAnimation;
     public Animation WallObstacleDamageAnimation;
 
-    private GameObject lastPlatForm;
+    // heightRespawn after being positionned over a platform after falling into the void
+    private int heightRespawn = 0;
+
+    public Transform LastPlatformCoordinates;
 
     // Use this for initialization
     void Start()
@@ -38,8 +41,6 @@ public class MechaController : MonoBehaviour
         // set AudioSource
         audioSource = GetComponent<AudioSource>();
         audioSource.volume = 1.0f;
-        // Use a random platform for initialization
-        lastPlatForm = GameObject.FindGameObjectWithTag("Platform");
     }
 
     // Update is called once per frame
@@ -79,8 +80,9 @@ public class MechaController : MonoBehaviour
                 // audioSource.clip = VoidDamageSound;
                 // audioSource.Play();
                 // VoidDamageAnimation.Play();
-
                 TakeDamage(VoidDamage);
+                transform.position = new Vector3(LastPlatformCoordinates.position.x, LastPlatformCoordinates.position.y + heightRespawn, LastPlatformCoordinates.position.z);
+                transform.eulerAngles = new Vector3(LastPlatformCoordinates.eulerAngles.x, LastPlatformCoordinates.eulerAngles.y, LastPlatformCoordinates.eulerAngles.z);
                 break;
 
             case (Tags.EnemyChargerTag):
@@ -102,7 +104,7 @@ public class MechaController : MonoBehaviour
                 break;
 
             case (Tags.PlatformTag):
-                lastPlatForm = other.gameObject;
+                LastPlatformCoordinates = other.gameObject.transform;
                 break;
             default:
                 break;
@@ -114,15 +116,4 @@ public class MechaController : MonoBehaviour
         SceneManager.LoadScene("GameOver");
     }
 
-    public GameObject LastPlatform
-    {
-        get
-        {
-            return lastPlatForm;
-        }
-        set
-        {
-            lastPlatForm = value;
-        }
-    }
 }
