@@ -49,6 +49,7 @@ public class EventManager {
     // when these stats change <remaining percentage> (for UI)
     public static readonly UnityEvent<float> onShieldChange = new CustomEvent1<float>();
     public static readonly UnityEvent<float> onLifeChange = new CustomEvent1<float>();
+    public static readonly UnityEvent<float> onEnergyChange = new CustomEvent1<float>();
     public static readonly UnityEvent<float> onScoreChange = new CustomEvent1<float>();
 
 }

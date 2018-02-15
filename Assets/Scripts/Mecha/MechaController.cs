@@ -6,9 +6,52 @@ using UnityEngine.SceneManagement;
 public class MechaController : MonoBehaviour
 {
     // resources
-    public int Health = 100;
-    public int Shield = 100;
-    public int Energy = 75;
+    public int MaxHealth = 100;
+    public int MaxShield = 100;
+    public int MaxEnergy = 70;
+    public int EnergyConsumptionPerSecond = 1;
+
+    private int _health;
+    public int Health
+    {
+        set
+        {
+            _health = Mathf.Min(value, MaxHealth);
+            EventManager.onLifeChange.Invoke((float)_health/MaxHealth);
+        }
+        get
+        {
+            return _health;
+        }
+    }
+
+    private int _shield;
+    public int Shield
+    {
+        set
+        {
+            _shield = Mathf.Min(value, MaxShield);
+            EventManager.onShieldChange.Invoke((float)_shield/MaxHealth);
+        }
+        get
+        {
+            return _shield;
+        }
+    }
+
+    private int _energy;
+    public int Energy
+    {
+        set
+        {
+            _energy = Mathf.Min(value, MaxEnergy);
+            EventManager.onEnergyChange.Invoke((float)_energy/MaxEnergy);
+        }
+        get
+        {
+            return _energy;
+        }
+    }
 
     // sound
     private AudioSource audioSource;
@@ -36,6 +79,13 @@ public class MechaController : MonoBehaviour
         // set AudioSource
         audioSource = GetComponent<AudioSource>();
         audioSource.volume = 1.0f;
+
+        Health = MaxHealth;
+        Shield = MaxShield;
+        Energy = MaxEnergy;
+
+        // consume energy every second
+        InvokeRepeating("ConsumeEnergyPassive", 1, 1);
     }
 
     public void TakeDamage(int damage)
@@ -51,6 +101,17 @@ public class MechaController : MonoBehaviour
                 GameOver();
             }
         }
+    }
+
+    // Passive energy consumption (every second)
+    private void ConsumeEnergyPassive()
+    {
+        ConsumeEnergy(EnergyConsumptionPerSecond);
+    }
+    
+    public void ConsumeEnergy(int consumption)
+    {
+        Energy = Mathf.Max(0, Energy - consumption);
     }
     
     void OnCollisionEnter(Collision other)
