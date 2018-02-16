@@ -48,4 +48,9 @@ public class EventManager {
     public static readonly UnityEvent<float> onHealthChange = new CustomEvent1<float>();
     public static readonly UnityEvent<float> onEnergyChange = new CustomEvent1<float>();
     public static readonly UnityEvent<long> onScoreChange = new CustomEvent1<long>();
- }
+
+    // when selected filter change <filter color>
+    public static readonly UnityEvent<FilterSelector.FilterColor> onFilterSelected = new CustomEvent1<FilterSelector.FilterColor>();
+
+    public static readonly UnityEvent<Vector3> onCrosshairPositionChange = new CustomEvent1<Vector3>();
+}

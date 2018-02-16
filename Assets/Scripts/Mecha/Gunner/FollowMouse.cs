@@ -7,26 +7,24 @@ public class FollowMouse : MonoBehaviour {
 
     // Mask used to limit crosshair movement
     // Black pixels should reprensent the accessible area
-    public RawImage Mask;
-    private Texture2D textureMask;
-    
+    public Texture2D textureMask;
+
     // Array used to have a representation of the mask
     // without having to access pixels of the texture
     // (perfomance reason)
-    private int[,] arrayMask;
+    private bool[,] arrayMask;
 
     private int maskWidth;
     private int maskHeight;
 
     // Use this for initialization
     void Awake() {
-        textureMask = Mask.texture as Texture2D;
         maskWidth = Screen.width;
         maskHeight = Screen.height;
         // Ratios used to adapt the mask's texture to the screen
-        float ratioX = ((float) textureMask.width) / ((float) maskWidth);
-        float ratioY = ((float) textureMask.height) / ((float) maskHeight);
-        arrayMask = new int[maskWidth,maskHeight];
+        float ratioX = ((float)textureMask.width) / ((float)maskWidth);
+        float ratioY = ((float)textureMask.height) / ((float)maskHeight);
+        arrayMask = new bool[maskWidth,maskHeight];
         // Filling the array with 1s and 0s, 1 means the area is accessible for the crosshair
         for (int i = 0; i < maskWidth; i++)
         {
@@ -34,15 +32,13 @@ public class FollowMouse : MonoBehaviour {
             {
                 if (textureMask.GetPixel((int)((float)i*ratioX), (int) ((float)j*ratioY)).a > 0)
                 {
-                    arrayMask[i,j] = 1;
+                    arrayMask[i,j] = true;
                 } else
                 {
-                    arrayMask[i,j] = 0;
+                    arrayMask[i,j] = false;
                 }
             }
         }
-        // Disable the displayed mask
-        Mask.gameObject.SetActive(false);
         // Disable the default cursor
         Cursor.visible = false;
     }
@@ -56,7 +52,7 @@ public class FollowMouse : MonoBehaviour {
         pos.y = Mathf.Clamp(pos.y, 0, Screen.height-1);
 
         // Check if cursor is out of boundaries
-        bool crosshairOutOfBoundaries = (arrayMask[(int)pos.x,(int)pos.y] < 1);
+        bool crosshairOutOfBoundaries = (!arrayMask[(int)pos.x,(int)pos.y]);
         if (crosshairOutOfBoundaries)
         {
             Vector3 desiredPos = pos;
@@ -73,13 +69,13 @@ public class FollowMouse : MonoBehaviour {
                 {
                     desiredPos.y -= 1;
                 }
-                desiredCrosshairOutOfBoundaries = (arrayMask[(int)desiredPos.x,(int)desiredPos.y] < 1);
+                desiredCrosshairOutOfBoundaries = (!arrayMask[(int)desiredPos.x,(int)desiredPos.y]);
             }
             // Put the cursor on the found desired position
-            gameObject.GetComponent<RectTransform>().position = desiredPos;
+            EventManager.onCrosshairPositionChange.Invoke(desiredPos);
         } else
         {
-            gameObject.GetComponent<RectTransform>().position = pos;
+            EventManager.onCrosshairPositionChange.Invoke(pos);
         }
         
 	}

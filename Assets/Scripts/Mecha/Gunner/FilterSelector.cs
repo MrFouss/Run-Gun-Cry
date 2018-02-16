@@ -4,8 +4,21 @@ using UnityEngine;
 
 public class FilterSelector : MonoBehaviour {
 
-    private int selectedFilter;
-    private int previousFilter;
+    public enum FilterColor { RED=0, GREEN=1, BLUE=2 };
+
+    private FilterColor _selectedFilter;
+    public FilterColor SelectedFilter
+    {
+        set
+        {
+            _selectedFilter = value;
+            EventManager.onFilterSelected.Invoke(_selectedFilter);
+        }
+        get
+        {
+            return _selectedFilter;
+        }
+    }
 
     public int EnergyConsumption = 1;
 
@@ -18,36 +31,20 @@ public class FilterSelector : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        selectedFilter = 0;
-        previousFilter = 1;
-        UpdateFilters();
+        SelectedFilter = FilterColor.RED;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        previousFilter = selectedFilter;
         // Check scrollwheel
         if (Input.GetAxis("Mouse ScrollWheel") > 0f)
         {
             mechaController.ConsumeEnergy(EnergyConsumption);
-            selectedFilter = (selectedFilter + 1) % 3;
-            UpdateFilters();
+            SelectedFilter = (FilterColor) ( ((int)SelectedFilter + 1) % 3);
         } else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
         {
             mechaController.ConsumeEnergy(EnergyConsumption);
-            selectedFilter = (selectedFilter + 2) % 3;
-            UpdateFilters();
+            SelectedFilter = (FilterColor)(((int)SelectedFilter + 2) % 3);
         }
-    }
-
-    void UpdateFilters()
-    {
-        transform.GetChild(0).gameObject.transform.GetChild(selectedFilter).gameObject.SetActive(true);
-        transform.GetChild(0).gameObject.transform.GetChild(previousFilter).gameObject.SetActive(false);
-    }
-
-    public int GetSelectedFilter()
-    {
-        return selectedFilter;
     }
 }
