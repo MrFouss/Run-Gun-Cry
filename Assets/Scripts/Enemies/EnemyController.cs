@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class EnemyController : MonoBehaviour {
+public class EnemyController : MonoBehaviour {
 
     public int Health;
 
     public int Damage = 10;
 
-    // Delete when damages function works
+    // TODO Delete when damages function works
     public int MissileDamage = 35;
     public int MechaCollisionDamage = 100;
 

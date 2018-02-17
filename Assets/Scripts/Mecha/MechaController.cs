@@ -60,22 +60,7 @@ public class MechaController : MonoBehaviour
     {
         switch (other.gameObject.tag)
         {
-            case Tags.EnemyLaserTag:
-                // TODO uncomment when these files are added
-                // audioSource.clip = LaserDamageSound;
-                // audioSource.Play();
-                // LaserDamageAnimation.Play();
-                TakeDamage(other.gameObject.GetComponent<ProjectileBehavior>().Damage);
-                break;
-
-            case Tags.VoidTag:
-                // TODO uncomment when these files are added
-                // audioSource.clip = VoidDamageSound;
-                // audioSource.Play();
-                // VoidDamageAnimation.Play();
-                TakeDamage(VoidDamage);
-                break;
-
+            
             case Tags.EnemyChargerTag:
                 // TODO uncomment when these files are added
                 // audioSource.clip = EnemyCollisionDamageSound;
@@ -98,6 +83,30 @@ public class MechaController : MonoBehaviour
                 TakeDamage(other.gameObject.GetComponent<ObstacleWallController>().Damage);
                 break;
 
+            default:
+                break;
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        switch (other.gameObject.tag)
+        {
+            case Tags.EnemyLaserTag:
+                // TODO uncomment when these files are added
+                // audioSource.clip = LaserDamageSound;
+                // audioSource.Play();
+                // LaserDamageAnimation.Play();
+                TakeDamage(other.gameObject.GetComponent<ProjectileBehavior>().Damage);
+                break;
+
+            case Tags.VoidTag:
+                // TODO uncomment when these files are added
+                // audioSource.clip = VoidDamageSound;
+                // audioSource.Play();
+                // VoidDamageAnimation.Play();
+                TakeDamage(VoidDamage);
+                break;
             default:
                 break;
         }
