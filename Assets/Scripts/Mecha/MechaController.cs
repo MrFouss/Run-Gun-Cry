@@ -16,6 +16,14 @@ public class MechaController : MonoBehaviour
     public int MaxShield = 100;
     public int MaxEnergy = 70;
     public int EnergyConsumptionPerSecond = 1;
+    public int HealthThreshold = 10;
+    public int EnergyThreshold = 10;
+
+    public AudioClip LowHealthSound;
+    public AudioClip LowEnergySound;
+
+    public Animation LowHealthAnimation;
+    public Animation LowEnergyAnimation;
 
     private int _health;
     public int Health
@@ -122,6 +130,13 @@ public class MechaController : MonoBehaviour
                 GameOver();
             }
         }
+        if (Health <= HealthThreshold && Shield == 0)
+        {
+            // TODO uncomment when files are added
+            //audioSource.clip = LowHealthSound;
+            //audioSource.Play();
+            //LowHealthAnimation.Play();
+        }
     }
 
     // Passive energy consumption (every second)
@@ -133,6 +148,13 @@ public class MechaController : MonoBehaviour
     public void ConsumeEnergy(int consumption)
     {
         Energy = Mathf.Max(0, Energy - consumption);
+        if (Energy <= EnergyThreshold)
+        {
+            // TODO uncomment when files are added
+            //audioSource.clip = LowEnergySound;
+            //audioSource.Play();
+            //LowEnergyAnimation.Play();
+        }
     }
 
     public bool CanConsumeEnergy(int consumption)
