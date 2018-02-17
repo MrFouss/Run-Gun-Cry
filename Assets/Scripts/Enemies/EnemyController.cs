@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour {
+public abstract class EnemyController : MonoBehaviour {
 
     public int Health;
 
@@ -32,18 +32,28 @@ public class EnemyController : MonoBehaviour {
     {
         switch (collision.gameObject.tag)
         {
+            
+            case Tags.MechaBodyTag:
+                TakeDamage(collision.gameObject.GetComponent<MechaController>().Damage);
+                break;
+            default:
+                break;
+        }
+    }
+
+    protected void OnTriggerEnter(Collider other)
+    {
+        switch (other.gameObject.tag)
+        {
             case Tags.MechaLaserTag:
-                TakeDamage(collision.gameObject.GetComponent<ProjectileBehavior>().Damage);
+                TakeDamage(other.gameObject.GetComponent<ProjectileBehavior>().Damage);
                 //HitByLaserAnimation.Play(); 
                 // TODO uncomment when these files are added
                 //audioSource.clip = HitByLaserSound;
                 //audioSource.Play();
                 break;
             case Tags.MechaMissileTag:
-                TakeDamage(collision.gameObject.GetComponent<CannonBehavior>().Damage);
-                break;
-            case Tags.MechaBodyTag:
-                TakeDamage(collision.gameObject.GetComponent<MechaController>().Damage);
+                TakeDamage(other.gameObject.GetComponent<CannonBehavior>().Damage);
                 break;
             default:
                 break;
