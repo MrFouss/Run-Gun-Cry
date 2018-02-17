@@ -41,4 +41,7 @@ public class EventManager {
 
     // when a letter is successfully typed and whichever selected ressource should be reloaded <multiplier>
     public static readonly UnityEvent<long> requestReloadRessource = new CustomEvent1<long>();
+
+    // when a filter is selected
+    public static readonly UnityEvent<int> onFilterSelected = new CustomEvent1<int>();
 }

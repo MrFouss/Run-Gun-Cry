@@ -11,11 +11,19 @@ public class EnemyFilterSelector : MonoBehaviour {
 
 	void Awake() {
         RequiredFilter = Random.Range(0, 3);
-        GameObject.Find("EnemyVisualizer").GetComponent<VisualizeEnemies>().UpdateEnemiesList();
+        EventManager.onFilterSelected.AddListener(Display);
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Display (int filterSelected) {
+        if (filterSelected != RequiredFilter)
+        {
+            transform.GetComponent<Renderer>().enabled = false;
+        }
+        else
+        {
+            transform.GetComponent<Renderer>().enabled = true;
+        }
 	}
 
 }
