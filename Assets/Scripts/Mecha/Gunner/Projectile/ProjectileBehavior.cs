@@ -31,6 +31,17 @@ public class ProjectileBehavior : MonoBehaviour {
     
     private void OnTriggerEnter(Collider other)
     {
+        // when a projectile shot from mecha hits an enemy or an obstacle, create an event for the score to calculate accuracy later on
+        if (other.gameObject.tag == Tags.EnemyChargerTag || other.gameObject.tag == Tags.ObstacleWallTag)
+        {
+            if (gameObject.tag == Tags.MechaLaserTag)
+            {
+                EventManager.onShotHitting.Invoke(ShotType.Laser);
+            } else if (gameObject.tag == Tags.MechaMissileTag)
+            {
+                EventManager.onShotHitting.Invoke(ShotType.Missile);
+            }
+        }
         switch (other.gameObject.tag)
         {
             case Tags.ObstacleWallTag:

@@ -17,14 +17,15 @@ public class CannonBehavior : MonoBehaviour {
 		if (Input.GetButton("FireLaser") && Time.time > nextFire)
 		{
             nextFire = Time.time + FireRateLaser;
+            EventManager.onGunnerShot.Invoke(ShotType.Laser);
 			Instantiate(LaserShot, Muzzle.position, Muzzle.rotation);
 		}
 
         if (Input.GetButton("FireMissile") && Time.time > nextFire)
         {
             nextFire = Time.time + FireRateMissile;
+            EventManager.onGunnerShot.Invoke(ShotType.Missile);
             Instantiate(MissileShot, Muzzle.position, Muzzle.rotation);
         }
-
     }	
 }

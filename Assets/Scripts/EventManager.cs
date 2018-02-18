@@ -12,6 +12,14 @@ public class CustomEvent1<T> : UnityEvent<T> {}
 [System.Serializable]
 public class CustomEvent2<T1, T2> : UnityEvent<T1, T2> { }
 
+public enum EnemyType { Obstacle, Shooter, Charger, Coward };
+
+public enum DestructionType { Shot, Collided };
+
+public enum ShotType { Laser, Missile };
+
+public enum DamageSourceType { CollidingObstacle, CollidingCharger, FallingIntoVoid, HitByEnemyLaser};
+
 public class EventManager {
     
     // Letter typing
@@ -41,4 +49,19 @@ public class EventManager {
 
     // when a letter is successfully typed and whichever selected ressource should be reloaded <multiplier>
     public static readonly UnityEvent<long> requestReloadRessource = new CustomEvent1<long>();
+
+    // scoring
+
+    // when an enemy is destroyed by the player
+    public static readonly UnityEvent<EnemyType, DestructionType> onEnemyDestruction = new CustomEvent2<EnemyType, DestructionType>();
+
+    // when the gunner shoots
+    public static readonly UnityEvent<ShotType> onGunnerShot = new CustomEvent1<ShotType>();
+
+    // when a projectile hits
+    public static readonly UnityEvent<ShotType> onShotHitting = new CustomEvent1<ShotType>();
+
+    // when the mecha takes damage
+    public static readonly UnityEvent<DamageSourceType, int> onDamageTaken = new CustomEvent2<DamageSourceType, int>();
+
 }

@@ -52,6 +52,11 @@ public class ObstacleWallController : MonoBehaviour {
 
         if (StructurePoints <= 0) {
             AudioSource.PlayClipAtPoint(ObstacleDestroyedSound, transform.position, 1.0f);
+            // if the obstacle is destroyed by the gunner, call an event to update the score
+            if ((otherObject.tag == Tags.MechaLaserTag) || (otherObject.tag == Tags.MechaMissileTag))
+            {
+                EventManager.onEnemyDestruction.Invoke(EnemyType.Obstacle, DestructionType.Shot);
+            }
             DestroyObstacle();
         } else {
             AudioSource.PlayClipAtPoint(ObstacleHitSound, transform.position, 1.0f);
