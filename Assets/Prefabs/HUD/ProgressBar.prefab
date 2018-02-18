@@ -72,8 +72,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2e6bfad5ad07694b9403b9b5b45a044, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bar: {fileID: 114892698552862438}
-  background: {fileID: 114538736078086014}
+  Bar: {fileID: 114892698552862438}
+  Background: {fileID: 114538736078086014}
 --- !u!114 &114538736078086014
 MonoBehaviour:
   m_ObjectHideFlags: 1
