@@ -5,10 +5,10 @@ using UnityEngine;
 public class EngineerCombo : MonoBehaviour {
     
     // max multiplier
-    public int maxMultiplier = 4;
+    public int MaxMultiplier = 4;
 
     // if the player doesn't type a successful letter before timeout, the combo is reset
-    public float timeOutSec = 1;
+    public float TimeOutSec = 1;
 
     private float _remainingTimeSec;
     private float RemainingTimeSec
@@ -16,7 +16,7 @@ public class EngineerCombo : MonoBehaviour {
         set
         {
             _remainingTimeSec = value;
-            EventManager.onComboRemainingTimeChange.Invoke(Mathf.Max(0, _remainingTimeSec/timeOutSec));
+            EventManager.onComboRemainingTimeChange.Invoke(Mathf.Max(0, _remainingTimeSec/TimeOutSec));
         }
         get
         {
@@ -56,7 +56,7 @@ public class EngineerCombo : MonoBehaviour {
                 closestPowerOf2--;
             }
             // cap multiplier to maxMultiplier at most
-            Multiplier = (int)Mathf.Min(maxMultiplier, closestPowerOf2 / 2 + 1);
+            Multiplier = (int)Mathf.Min(MaxMultiplier, closestPowerOf2 / 2 + 1);
         }
     }
 
@@ -110,7 +110,7 @@ public class EngineerCombo : MonoBehaviour {
             mechaController.ReloadResource(Multiplier);
             Combo++;
             // reset remainingTime
-            RemainingTimeSec = timeOutSec;
+            RemainingTimeSec = TimeOutSec;
         } else
         {
             Combo = 0;

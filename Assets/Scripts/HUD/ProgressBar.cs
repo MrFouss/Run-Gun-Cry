@@ -5,23 +5,23 @@ using UnityEngine.UI;
 
 public class ProgressBar : MonoBehaviour {
 
-    public Image bar;
-    public Image background;
+    public Image Bar;
+    public Image Background;
 
     // between 0 and 1
-    private float _Progress = 0;
+    private float _progress = 0;
     public float Progress
     {
         set
         {
-            _Progress = Mathf.Clamp(value, 0, 1);
-            Vector2 scale = bar.rectTransform.GetComponent<RectTransform>().localScale;
-            scale.x = _Progress;
-            bar.rectTransform.GetComponent<RectTransform>().localScale = scale;
+            _progress = Mathf.Clamp(value, 0, 1);
+            Vector2 scale = Bar.rectTransform.GetComponent<RectTransform>().localScale;
+            scale.x = _progress;
+            Bar.rectTransform.GetComponent<RectTransform>().localScale = scale;
         }
         get
         {
-            return _Progress;
+            return _progress;
         }
     }
 }

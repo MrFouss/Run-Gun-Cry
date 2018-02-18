@@ -12,30 +12,30 @@ public class CannonBehavior : MonoBehaviour {
     public int LaserEnergyConsumption = 1;
     public int MissileEnergyConsumption = 10;
 
-    private MechaController mechaConstroller;
+    private MechaController mechaController;
 
     private float nextFire;
 
     private void Awake()
     {
-        mechaConstroller = GetComponent<MechaController>();
+        mechaController = GetComponent<MechaController>();
     }
 
     void Update () 
 	{
 		
-		if (mechaConstroller.CanConsumeEnergy(LaserEnergyConsumption) && Input.GetButton("FireLaser") && Time.time > nextFire)
+		if (mechaController.CanConsumeEnergy(LaserEnergyConsumption) && Input.GetButton("FireLaser") && Time.time > nextFire)
 		{
             nextFire = Time.time + FireRateLaser;
 			Instantiate(LaserShot, Muzzle.position, Muzzle.rotation);
-            mechaConstroller.ConsumeEnergy(LaserEnergyConsumption);
+            mechaController.ConsumeEnergy(LaserEnergyConsumption);
 		}
 
-        if (mechaConstroller.CanConsumeEnergy(MissileEnergyConsumption) && Input.GetButton("FireMissile") && Time.time > nextFire)
+        if (mechaController.CanConsumeEnergy(MissileEnergyConsumption) && Input.GetButton("FireMissile") && Time.time > nextFire)
         {
             nextFire = Time.time + FireRateMissile;
             Instantiate(MissileShot, Muzzle.position, Muzzle.rotation);
-            mechaConstroller.ConsumeEnergy(MissileEnergyConsumption);
+            mechaController.ConsumeEnergy(MissileEnergyConsumption);
         }
 
     }	

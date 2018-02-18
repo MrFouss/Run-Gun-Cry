@@ -7,7 +7,7 @@ public class FollowMouse : MonoBehaviour {
 
     // Mask used to limit crosshair movement
     // Black pixels should reprensent the accessible area
-    public Texture2D textureMask;
+    public Texture2D TextureMask;
 
     // Array used to have a representation of the mask
     // without having to access pixels of the texture
@@ -22,15 +22,15 @@ public class FollowMouse : MonoBehaviour {
         maskWidth = Screen.width;
         maskHeight = Screen.height;
         // Ratios used to adapt the mask's texture to the screen
-        float ratioX = ((float)textureMask.width) / ((float)maskWidth);
-        float ratioY = ((float)textureMask.height) / ((float)maskHeight);
+        float ratioX = ((float)TextureMask.width) / ((float)maskWidth);
+        float ratioY = ((float)TextureMask.height) / ((float)maskHeight);
         arrayMask = new bool[maskWidth,maskHeight];
         // Filling the array with 1s and 0s, 1 means the area is accessible for the crosshair
         for (int i = 0; i < maskWidth; i++)
         {
             for (int j = 0; j < maskHeight; j++)
             {
-                if (textureMask.GetPixel((int)((float)i*ratioX), (int) ((float)j*ratioY)).a > 0)
+                if (TextureMask.GetPixel((int)((float)i*ratioX), (int) ((float)j*ratioY)).a > 0)
                 {
                     arrayMask[i,j] = true;
                 } else
