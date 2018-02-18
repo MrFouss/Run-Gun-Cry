@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class Tags {
     public const string MechaBodyTag = "MechaBody";
-    public const string MechaBulletTag = "MechaBullet";
+    public const string MechaLaserTag = "MechaLaser";
     public const string MechaMissileTag = "MechaMissile";
     public const string EnemyLaserTag = "EnemyLaser";
     public const string EnemyChargerTag = "EnemyCharger";

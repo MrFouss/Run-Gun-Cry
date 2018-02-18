@@ -13,6 +13,8 @@ public class CustomEvent1<T> : UnityEvent<T> {}
 public class CustomEvent2<T1, T2> : UnityEvent<T1, T2> { }
 
 public class EventManager {
+
+    // note : percentages are floats between 0 and 1
     
     // Letter typing
 
@@ -31,7 +33,7 @@ public class EventManager {
     // combo
 
     // when the combo multiplier value changes <multiplier> (for UI)
-    public static readonly UnityEvent<long> onComboMultiplierChange = new CustomEvent1<long>();
+    public static readonly UnityEvent<int> onComboMultiplierChange = new CustomEvent1<int>();
 
     // when the combo value changes <combo> (for UI)
     public static readonly UnityEvent<long> onComboChange = new CustomEvent1<long>();
@@ -39,9 +41,16 @@ public class EventManager {
     // when the remaining time before a time out changes <remaining percentage> (for UI)
     public static readonly UnityEvent<float> onComboRemainingTimeChange = new CustomEvent1<float>();
 
-    // when a letter is successfully typed and whichever selected ressource should be reloaded <multiplier>
-    public static readonly UnityEvent<long> requestReloadRessource = new CustomEvent1<long>();
+    // stats
 
-    // when a filter is selected
-    public static readonly UnityEvent<int> onFilterSelected = new CustomEvent1<int>();
+    // when these stats change <remaining percentage> (for UI)
+    public static readonly UnityEvent<float> onShieldChange = new CustomEvent1<float>();
+    public static readonly UnityEvent<float> onHealthChange = new CustomEvent1<float>();
+    public static readonly UnityEvent<float> onEnergyChange = new CustomEvent1<float>();
+    public static readonly UnityEvent<long> onScoreChange = new CustomEvent1<long>();
+
+    // when selected filter change <filter color>
+    public static readonly UnityEvent<FilterSelector.FilterColor> onFilterSelected = new CustomEvent1<FilterSelector.FilterColor>();
+
+    public static readonly UnityEvent<Vector3> onCrosshairPositionChange = new CustomEvent1<Vector3>();
 }
