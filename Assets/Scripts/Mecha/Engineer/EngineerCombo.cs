@@ -5,10 +5,10 @@ using UnityEngine;
 public class EngineerCombo : MonoBehaviour {
     
     // max multiplier
-    public long maxMultiplier = 4;
+    public int MaxMultiplier = 4;
 
     // if the player doesn't type a successful letter before timeout, the combo is reset
-    public float timeOutSec = 1;
+    public float TimeOutSec = 1;
 
     private float _remainingTimeSec;
     private float RemainingTimeSec
@@ -16,7 +16,7 @@ public class EngineerCombo : MonoBehaviour {
         set
         {
             _remainingTimeSec = value;
-            EventManager.onComboRemainingTimeChange.Invoke(Mathf.Max(0, _remainingTimeSec/timeOutSec));
+            EventManager.onComboRemainingTimeChange.Invoke(Mathf.Max(0, _remainingTimeSec/TimeOutSec));
         }
         get
         {
@@ -56,15 +56,15 @@ public class EngineerCombo : MonoBehaviour {
                 closestPowerOf2--;
             }
             // cap multiplier to maxMultiplier at most
-            Multiplier = (long)Mathf.Min(maxMultiplier, closestPowerOf2 / 2 + 1);
+            Multiplier = (int)Mathf.Min(MaxMultiplier, closestPowerOf2 / 2 + 1);
         }
     }
 
     // the multiplier of the ressource reloaded
     // it is always infered from combo (thus nerver directly affected in functions)
     // for exemple, if multiplier = 2, each letter typed reloads 2x the base reload
-    private long _multiplier;
-    private long Multiplier
+    private int _multiplier;
+    private int Multiplier
     {
         get
         {
@@ -77,8 +77,11 @@ public class EngineerCombo : MonoBehaviour {
         }
     }
 
+    private MechaController mechaController;
+
     void Awake()
     {
+        mechaController = GetComponent<MechaController>();
         EventManager.onLetterTyped.AddListener(OnLetterTyped);
     }
 
@@ -104,10 +107,10 @@ public class EngineerCombo : MonoBehaviour {
         // increment combo count
         if (successful)
         {
-            EventManager.requestReloadRessource.Invoke(Multiplier);
+            mechaController.ReloadResource(Multiplier);
             Combo++;
             // reset remainingTime
-            RemainingTimeSec = timeOutSec;
+            RemainingTimeSec = TimeOutSec;
         } else
         {
             Combo = 0;
