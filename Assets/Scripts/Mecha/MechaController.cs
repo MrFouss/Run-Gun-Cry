@@ -180,9 +180,10 @@ public class MechaController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other) {
-
-        switch (other.gameObject.tag) {
+    void OnCollisionEnter(Collision other)
+    {
+        switch (other.gameObject.tag)
+        {
 
             case Tags.VoidTag:
                 // TODO uncomment when these files are added
@@ -195,15 +196,6 @@ public class MechaController : MonoBehaviour
                 transform.eulerAngles = new Vector3(lastPlatformCoordinates.eulerAngles.x, lastPlatformCoordinates.eulerAngles.y, lastPlatformCoordinates.eulerAngles.z);
                 break;
 
-            default:
-                break;
-        }
-    }
-
-    void OnCollisionEnter(Collision other)
-    {
-        switch (other.gameObject.tag)
-        {
             case Tags.EnemyLaserTag:
                 // TODO uncomment when these files are added
                 // audioSource.clip = LaserDamageSound;
