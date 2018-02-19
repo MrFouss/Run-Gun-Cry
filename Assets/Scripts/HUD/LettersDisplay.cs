@@ -15,6 +15,7 @@ public class LettersDisplay : MonoBehaviour {
     // color of the successful letters
     public Color successfulLettersColor = Color.green;
 
+    // above this combo, the multiplier does not change
     // the color of the combo text will change depending on the combo value utile this value is reached
     public int comboTopValue = 64;
 
@@ -39,9 +40,9 @@ public class LettersDisplay : MonoBehaviour {
         }
     }
 
-    private void UpdateComboMultiplier(long combo)
+    private void UpdateComboMultiplier(int multiplier)
     {
-        multiplierText.text = "x" + combo;
+        multiplierText.text = "x" + multiplier;
     }
 
     private void UpdateCombo(long combo)
