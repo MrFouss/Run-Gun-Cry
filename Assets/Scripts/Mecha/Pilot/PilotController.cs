@@ -90,6 +90,7 @@ public class PilotController : MonoBehaviour
 
         if (isJumping)
         {
+            // TODO edit for tubular gravity
             rb.AddForce(new Vector3(0f, JumpForce, 0f), ForceMode.VelocityChange);
             isJumping = false;
         }
