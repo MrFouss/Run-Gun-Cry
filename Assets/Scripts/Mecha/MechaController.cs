@@ -67,17 +67,18 @@ public class MechaController : MonoBehaviour
         }
     }
 
-    private int _score;
-    public int Score
+
+    private int _distanceTravelled;
+    public int DistanceTravelled
     {
         set
         {
-            _score = Mathf.Max(0, value);
-            EventManager.onScoreChange.Invoke(_score);
+            _distanceTravelled = value;
+            EventManager.onDistanceTravelledChange.Invoke(_distanceTravelled);
         }
         get
         {
-            return _score;
+            return _distanceTravelled;
         }
     }
 
@@ -111,10 +112,15 @@ public class MechaController : MonoBehaviour
         Health = MaxHealth;
         Shield = MaxShield;
         Energy = MaxEnergy;
-        Score = 0;
 
         // consume energy every second
         InvokeRepeating("ConsumeEnergyPassive", 1, 1);
+
+        // update distance travelled
+        InvokeRepeating("UpdateDistanceTravelled", 0.1f, 0.1f);
+
+        // inform the scoring of the shield amount every second
+        InvokeRepeating("SendShieldData", 1, 1);
     }
 
     public void TakeDamage(int damage)
@@ -168,13 +174,28 @@ public class MechaController : MonoBehaviour
         {
             case ReloadType.ENERGY:
                 Energy = Mathf.Min(MaxEnergy, Energy + multiplier * BaseEnergyReload);
+                // event for the scoring script
+                EventManager.onEngineerReload.Invoke(ReloadType.ENERGY, multiplier * BaseEnergyReload);
                 break;
             case ReloadType.SHIELD:
                 Shield = Mathf.Min(MaxShield, Shield + multiplier * BaseShieldReload);
+                // event for the scoring script
+                EventManager.onEngineerReload.Invoke(ReloadType.SHIELD, multiplier * BaseEnergyReload);
                 break;
         }
     }
-    
+
+    private void UpdateDistanceTravelled()
+    {
+        DistanceTravelled = (int)Mathf.Floor(gameObject.transform.position.z);
+    }
+
+    private void SendShieldData()
+    {
+        EventManager.onShieldDataSending.Invoke(Shield);
+    }
+
+
     void OnCollisionEnter(Collision other)
     {
         switch (other.gameObject.tag)
@@ -185,6 +206,8 @@ public class MechaController : MonoBehaviour
                 // audioSource.Play();
                 // LaserDamageAnimation.Play();
                 TakeDamage(LaserDamage);
+                // let the scoring script know about the damage taken
+                EventManager.onDamageTaken.Invoke(DamageSourceType.HitByEnemyLaser, LaserDamage);
                 break;
 
             case Tags.VoidTag:
@@ -193,6 +216,8 @@ public class MechaController : MonoBehaviour
                 // audioSource.Play();
                 // VoidDamageAnimation.Play();
                 TakeDamage(VoidDamage);
+                // let the scoring script know about the damage taken
+                EventManager.onDamageTaken.Invoke(DamageSourceType.FallingIntoVoid, VoidDamage);
                 break;
 
             case Tags.EnemyChargerTag:
@@ -201,6 +226,8 @@ public class MechaController : MonoBehaviour
                 // audioSource.Play();
                 // EnemyCollisionDamageAnimation.Play();
                 TakeDamage(EnemyCollisionDamage);
+                // let the scoring script know about the damage taken
+                EventManager.onDamageTaken.Invoke(DamageSourceType.CollidingCharger, EnemyCollisionDamage);
                 break;
 
             case Tags.ObstacleWallTag:
@@ -209,6 +236,8 @@ public class MechaController : MonoBehaviour
                 // audioSource.Play();
                 // WallObstacleDamageAnimation.Play();
                 TakeDamage(WallObstacleDamage);
+                // let the scoring script know about the damage taken
+                EventManager.onDamageTaken.Invoke(DamageSourceType.CollidingObstacle, WallObstacleDamage);
                 break;
 
             default:

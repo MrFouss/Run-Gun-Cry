@@ -26,6 +26,8 @@ public class ObstacleWallController : MonoBehaviour {
             case Tags.MechaBodyTag:
                 // remove all structure points and destroy the obstacle
                 TakeDamage(StructurePoints, other.gameObject);
+                // invoke an event to let the scoring script know
+                EventManager.onEnemyDestruction.Invoke(EnemyType.Obstacle, DestructionType.Collided);
                 break;
 
             default:

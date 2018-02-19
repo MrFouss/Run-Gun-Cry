@@ -23,11 +23,12 @@ public class CannonBehavior : MonoBehaviour {
 
     void Update () 
 	{
-		
 		if (mechaController.CanConsumeEnergy(LaserEnergyConsumption) && Input.GetButton("FireLaser") && Time.time > nextFire)
 		{
             nextFire = Time.time + FireRateLaser;
             EventManager.onGunnerShot.Invoke(ShotType.Laser);
+            // for the scoring script
+            EventManager.onGunnerConsumesEnergy.Invoke(LaserEnergyConsumption);
 			Instantiate(LaserShot, Muzzle.position, Muzzle.rotation);
             mechaController.ConsumeEnergy(LaserEnergyConsumption);
 		}
@@ -36,6 +37,8 @@ public class CannonBehavior : MonoBehaviour {
         {
             nextFire = Time.time + FireRateMissile;
             EventManager.onGunnerShot.Invoke(ShotType.Missile);
+            // for the scoring script
+            EventManager.onGunnerConsumesEnergy.Invoke(MissileEnergyConsumption);
             Instantiate(MissileShot, Muzzle.position, Muzzle.rotation);
             mechaController.ConsumeEnergy(MissileEnergyConsumption);
         }
