@@ -101,6 +101,11 @@ public class MechaController : MonoBehaviour
     public Animation EnemyCollisionDamageAnimation;
     public Animation WallObstacleDamageAnimation;
 
+    // heightRespawn after being positionned over a platform after falling into the void
+    public float RespawnHeight = 0.0f;
+
+    private Transform lastPlatformCoordinates;
+
     // Use this for initialization
     void Start()
     {
@@ -174,7 +179,27 @@ public class MechaController : MonoBehaviour
                 break;
         }
     }
-    
+
+    private void OnTriggerEnter(Collider other) {
+
+        switch (other.gameObject.tag) {
+
+            case Tags.VoidTag:
+                // TODO uncomment when these files are added
+                // audioSource.clip = VoidDamageSound;
+                // audioSource.Play();
+                // VoidDamageAnimation.Play();
+                TakeDamage(VoidDamage);
+                // TODO change when platforms become tubular
+                transform.position = new Vector3(lastPlatformCoordinates.position.x, lastPlatformCoordinates.position.y + RespawnHeight, lastPlatformCoordinates.position.z);
+                transform.eulerAngles = new Vector3(lastPlatformCoordinates.eulerAngles.x, lastPlatformCoordinates.eulerAngles.y, lastPlatformCoordinates.eulerAngles.z);
+                break;
+
+            default:
+                break;
+        }
+    }
+
     void OnCollisionEnter(Collision other)
     {
         switch (other.gameObject.tag)
@@ -185,14 +210,6 @@ public class MechaController : MonoBehaviour
                 // audioSource.Play();
                 // LaserDamageAnimation.Play();
                 TakeDamage(LaserDamage);
-                break;
-
-            case Tags.VoidTag:
-                // TODO uncomment when these files are added
-                // audioSource.clip = VoidDamageSound;
-                // audioSource.Play();
-                // VoidDamageAnimation.Play();
-                TakeDamage(VoidDamage);
                 break;
 
             case Tags.EnemyChargerTag:
@@ -211,6 +228,10 @@ public class MechaController : MonoBehaviour
                 TakeDamage(WallObstacleDamage);
                 break;
 
+            case (Tags.PlatformTag):
+                lastPlatformCoordinates = other.gameObject.transform;
+                break;
+
             default:
                 break;
         }
@@ -220,4 +241,5 @@ public class MechaController : MonoBehaviour
     {
         SceneManager.LoadScene("GameOver");
     }
+
 }
