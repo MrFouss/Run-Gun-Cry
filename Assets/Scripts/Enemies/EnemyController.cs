@@ -32,7 +32,9 @@ public abstract class EnemyController : MonoBehaviour {
     {
         switch (collision.gameObject.tag)
         {
-            
+            case Tags.ObstacleWallTag:
+                TakeDamage(collision.gameObject.GetComponent<ObstacleWallController>().Damage);
+                break;
             case Tags.MechaBodyTag:
                 TakeDamage(collision.gameObject.GetComponent<MechaController>().Damage);
                 break;
