@@ -28,9 +28,6 @@ public class Charger : MonoBehaviour
     public AudioClip ExplosionClip;
     public AudioClip ChargeClip;
 
-    public Animation ExplosionAnim;
-    public Animation ChargeAnim;
-
     private AudioSource audioSource;
 
     private void Awake()
@@ -78,6 +75,10 @@ public class Charger : MonoBehaviour
         {
             if (!startedCharge)
             {
+                //TODO : Uncomment when charge clip is available
+                //audioSource.loop = true;
+                //audioSource.clip = ChargeClip;
+                //audioSource.Play();
                 ParticleSystem trail = Instantiate(Trail, transform.position, Quaternion.Euler(180f, 0f, 0f));
                 trail.transform.parent = transform;
                 startedCharge = true;
