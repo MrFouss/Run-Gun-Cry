@@ -9,7 +9,7 @@ public class EnemyCannonBehavior : MonoBehaviour
 
     public Transform Muzzle;
     public GameObject LaserShot;
-    public float FireRateLaser = 0.1f;
+    public float FireRateLaser = 1.0f;
 
     #endregion
 
@@ -20,6 +20,10 @@ public class EnemyCannonBehavior : MonoBehaviour
     #endregion
 
     #region Public Functions
+
+    public void Start() {
+        nextFire = Time.time;
+    }
 
     public void Fire()
     {
