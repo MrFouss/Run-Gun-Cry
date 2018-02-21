@@ -8,10 +8,6 @@ public abstract class EnemyController : MonoBehaviour {
 
     public int Damage = 10;
 
-    // TODO Delete when damages function works
-    public int MissileDamage = 35;
-    public int MechaCollisionDamage = 100;
-
     private AudioSource audioSource;
 
     public AudioClip HitByLaserSound;
@@ -19,8 +15,6 @@ public abstract class EnemyController : MonoBehaviour {
 
     public Animation HitByLaserAnimation;
     public Animation DestructionAnimation;
-
-
 
 	// Use this for initialization
 	protected void Start () {
@@ -33,10 +27,10 @@ public abstract class EnemyController : MonoBehaviour {
         switch (collision.gameObject.tag)
         {
             case Tags.ObstacleWallTag:
-                TakeDamage(collision.gameObject.GetComponent<ObstacleWallController>().Damage);
+                TakeDamage(Health / 2);
                 break;
             case Tags.MechaBodyTag:
-                TakeDamage(collision.gameObject.GetComponent<MechaController>().Damage);
+                TakeDamage(Health);
                 break;
             default:
                 break;
@@ -48,14 +42,12 @@ public abstract class EnemyController : MonoBehaviour {
         switch (other.gameObject.tag)
         {
             case Tags.MechaLaserTag:
+            case Tags.MechaMissileTag:
                 TakeDamage(other.gameObject.GetComponent<ProjectileBehavior>().Damage);
                 //HitByLaserAnimation.Play(); 
                 // TODO uncomment when these files are added
                 //audioSource.clip = HitByLaserSound;
                 //audioSource.Play();
-                break;
-            case Tags.MechaMissileTag:
-                TakeDamage(other.gameObject.GetComponent<CannonBehavior>().Damage);
                 break;
             default:
                 break;
