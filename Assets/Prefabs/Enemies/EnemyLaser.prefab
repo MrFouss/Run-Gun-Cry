@@ -41,6 +41,8 @@ GameObject:
   - component: {fileID: 23657916104797846}
   - component: {fileID: 33305442593118808}
   - component: {fileID: 135357571866871332}
+  - component: {fileID: 114985607437458740}
+  - component: {fileID: 114749500761694388}
   m_Layer: 0
   m_Name: EnemyLaser
   m_TagString: EnemyLaser
@@ -234,6 +236,17 @@ MonoBehaviour:
   Muzzle: {fileID: 4812488173930246}
   LaserShot: {fileID: 1779170460631076, guid: 3fb6390608e58dc4492a9154c79d7dc0, type: 2}
   FireRateLaser: 0.1
+--- !u!114 &114749500761694388
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1821962545106804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdae93a4c490fbf4885fdd3f42079c77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114956217302582296
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -245,6 +258,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29118f576f71638469d185451d69c70e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114985607437458740
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1821962545106804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce93edbea7eb55445a8efdef5807e118, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Muzzle: {fileID: 4834594673966058}
+  LaserShot: {fileID: 1569945426386332, guid: 42344e5ba39c7a64faf1b70d3369b83d, type: 2}
+  FireRateLaser: 1
 --- !u!135 &135357571866871332
 SphereCollider:
   m_ObjectHideFlags: 1
