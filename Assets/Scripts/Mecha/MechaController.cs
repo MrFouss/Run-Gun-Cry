@@ -192,8 +192,9 @@ public class MechaController : MonoBehaviour
                 // VoidDamageAnimation.Play();
                 TakeDamage(VoidDamage);
                 // TODO change when platforms become tubular
-                transform.position = new Vector3(lastPlatformCoordinates.position.x, lastPlatformCoordinates.position.y + RespawnHeight, lastPlatformCoordinates.position.z);
+                transform.position = new Vector3(lastPlatformCoordinates.position.x, lastPlatformCoordinates.position.y, lastPlatformCoordinates.position.z);
                 transform.eulerAngles = new Vector3(lastPlatformCoordinates.eulerAngles.x, lastPlatformCoordinates.eulerAngles.y, lastPlatformCoordinates.eulerAngles.z);
+                transform.Translate(Vector3.up, Space.Self);
                 break;
 
             case Tags.EnemyLaserTag:
