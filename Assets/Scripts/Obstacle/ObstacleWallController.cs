@@ -38,7 +38,6 @@ public class ObstacleWallController : MonoBehaviour {
     
     // Detects collisions between the obstacle and immaterial things that can hurt it
     private void OnTriggerEnter(Collider other) {
-        Debug.Log("Ouch!");
         switch (other.gameObject.tag) {
             case Tags.MechaLaserTag:
             case Tags.MechaMissileTag:

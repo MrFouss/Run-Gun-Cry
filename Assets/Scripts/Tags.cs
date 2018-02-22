@@ -10,4 +10,5 @@ public static class Tags {
     public const string EnemyChargerTag = "EnemyCharger";
     public const string VoidTag = "Void";
     public const string ObstacleWallTag = "ObstacleWall";
+    public const string PlatformTag = "Platform";
 }
