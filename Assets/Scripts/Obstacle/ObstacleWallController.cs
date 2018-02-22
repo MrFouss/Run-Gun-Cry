@@ -7,6 +7,9 @@ public class ObstacleWallController : MonoBehaviour {
     // Data about an obstacle
     public int StructurePoints = 100;
 
+    // Damage dealt on collision
+    public int Damage = 50;
+
     // Feedback sounds
     public AudioClip ObstacleHitSound;
     public AudioClip ObstacleDestroyedSound;
@@ -35,7 +38,6 @@ public class ObstacleWallController : MonoBehaviour {
     
     // Detects collisions between the obstacle and immaterial things that can hurt it
     private void OnTriggerEnter(Collider other) {
-        Debug.Log("Ouch!");
         switch (other.gameObject.tag) {
             case Tags.MechaLaserTag:
             case Tags.MechaMissileTag:

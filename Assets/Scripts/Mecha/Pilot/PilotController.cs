@@ -15,7 +15,9 @@ public class PilotController : MonoBehaviour
     public float NeutralAcceleration = 2.5f;
     public float BrakeAcceleration = 25f;
     public float SidesAcceleration = 75f;
-    public float MaxSpeedZ = 30f;
+    public float MaxNormalSpeedZ = 30f;
+    public float MaxZeroEnergySpeedZ = 20f;
+    private float MaxSpeedZ = 30f;
     public float MaxSpeedX = 50f;
     public float MinSpeed = 5f;
     public float AirControlMultiplier = 0.25f;
@@ -26,9 +28,12 @@ public class PilotController : MonoBehaviour
 
     private Rigidbody rb;
 
+    private MechaController mechaController;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        mechaController = GetComponent<MechaController>();
     }
 
     private void Start()
@@ -74,6 +79,15 @@ public class PilotController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (mechaController.Energy == 0)
+        {
+            MaxSpeedZ = MaxZeroEnergySpeedZ;
+        }
+        else
+        {
+            MaxSpeedZ = MaxNormalSpeedZ;
+        }
+
         if (isJumping)
         {
             rb.AddForce(new Vector3(0f, JumpForce, 0f), ForceMode.VelocityChange);
