@@ -18,10 +18,10 @@ public class CustomGravity : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         Vector3 directionVector = -1.0f * objectTransform.position;
+        directionVector = Vector3.ProjectOnPlane(directionVector, objectTransform.forward);
         directionVector.Normalize();
 
         objectForce.force = directionVector * gravityFactor;
-
-        objectTransform.Rotate(objectTransform.forward, Vector3.SignedAngle(objectTransform.up, directionVector, objectTransform.forward));
-	}
+        objectTransform.Rotate(objectTransform.forward, Vector3.SignedAngle(objectTransform.up, directionVector, objectTransform.forward), Space.World);
+    }
 }
