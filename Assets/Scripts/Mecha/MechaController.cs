@@ -191,7 +191,7 @@ public class MechaController : MonoBehaviour
     {
         DistanceTravelled = (int)Mathf.Floor(gameObject.transform.position.z);
     }
-
+    
     private void SendShieldData()
     {
         EventManager.onShieldDataSending.Invoke(Shield);
