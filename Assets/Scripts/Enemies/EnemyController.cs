@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class EnemyController : MonoBehaviour {
+public class EnemyController : MonoBehaviour {
 
-    public int Health;
+    public int Health = 100;
 
     public int Damage = 10;
 

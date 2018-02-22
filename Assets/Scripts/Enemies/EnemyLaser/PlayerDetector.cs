@@ -10,7 +10,7 @@ public class PlayerDetector : MonoBehaviour
     {
         if (other.tag == "MechaBody")
         {
-            GetComponentInParent<EnemyLaserBehavior>().LockNLoad(other.transform);
+            GetComponentInParent<EnemyLaserController>().LockNLoad(other.transform);
         }
     }
 

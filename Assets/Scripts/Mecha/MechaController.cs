@@ -211,6 +211,34 @@ public class MechaController : MonoBehaviour
                 TakeDamage(other.gameObject.GetComponent<EnemyController>().Damage);
                 break;
 
+            case Tags.VoidTag:
+                // TODO uncomment when these files are added
+                // audioSource.clip = VoidDamageSound;
+                // audioSource.Play();
+
+                // VoidDamageAnimation.Play();
+                TakeDamage(VoidDamage);
+                // TODO change when platforms become tubular
+                transform.position = new Vector3(lastPlatformCoordinates.position.x, lastPlatformCoordinates.position.y, lastPlatformCoordinates.position.z);
+                transform.eulerAngles = new Vector3(lastPlatformCoordinates.eulerAngles.x, lastPlatformCoordinates.eulerAngles.y, lastPlatformCoordinates.eulerAngles.z);
+                transform.Translate(Vector3.up, Space.Self);
+                break;
+
+            case Tags.ObstacleWallTag:
+                // TODO uncomment when these files are added
+                // audioSource.clip = WallObstacleDamageSound;
+                // audioSource.Play();
+                // WallObstacleDamageAnimation.Play();
+                // let the scoring script know about the damage taken
+                int obstacleWallDamage = other.gameObject.GetComponent<ObstacleWallController>().Damage;
+                EventManager.onDamageTaken.Invoke(DamageSourceType.CollidingObstacle, obstacleWallDamage);
+                TakeDamage(obstacleWallDamage);
+                break;
+
+            case (Tags.PlatformTag):
+                lastPlatformCoordinates = other.gameObject.transform;
+                break;
+
             default:
                 break;
         }
@@ -229,33 +257,6 @@ public class MechaController : MonoBehaviour
                 int enemyLaserDamage = other.gameObject.GetComponent<ProjectileBehavior>().Damage;
                 EventManager.onDamageTaken.Invoke(DamageSourceType.CollidingCharger, enemyLaserDamage);
                 TakeDamage(enemyLaserDamage);
-                break;
-
-            case Tags.ObstacleWallTag:
-                // TODO uncomment when these files are added
-                // audioSource.clip = WallObstacleDamageSound;
-                // audioSource.Play();
-                // WallObstacleDamageAnimation.Play();
-                // let the scoring script know about the damage taken
-                int obstacleWallDamage = other.gameObject.GetComponent<ObstacleWallController>().Damage;
-                EventManager.onDamageTaken.Invoke(DamageSourceType.CollidingObstacle, obstacleWallDamage);
-                TakeDamage(obstacleWallDamage);
-                break;
-
-            case Tags.VoidTag:
-                // TODO uncomment when these files are added
-                // audioSource.clip = VoidDamageSound;
-                // audioSource.Play();
-
-                // VoidDamageAnimation.Play();
-                TakeDamage(VoidDamage);
-                // TODO change when platforms become tubular
-                transform.position = new Vector3(lastPlatformCoordinates.position.x, lastPlatformCoordinates.position.y + RespawnHeight, lastPlatformCoordinates.position.z);
-                transform.eulerAngles = new Vector3(lastPlatformCoordinates.eulerAngles.x, lastPlatformCoordinates.eulerAngles.y, lastPlatformCoordinates.eulerAngles.z);
-                break;
-
-            case (Tags.PlatformTag):
-                lastPlatformCoordinates = other.gameObject.transform;
                 break;
 
             default:

@@ -193,8 +193,8 @@ Light:
   serializedVersion: 8
   m_Type: 2
   m_Color: {r: 0, g: 1, b: 0, a: 1}
-  m_Intensity: 2
-  m_Range: 300
+  m_Intensity: 0.5
+  m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -234,6 +234,7 @@ MonoBehaviour:
   DestroySound: {fileID: 8300000, guid: 55b0c4788364df1488110a46c7c37d0f, type: 3}
   ExplosionParticleSystem: {fileID: 1753248193243812, guid: 3850ae304315ee9499136e6271ecdb5a,
     type: 2}
+  Source: 0
   ProjectileSpeed: 2000
   FuseTime: 1
   Damage: 5

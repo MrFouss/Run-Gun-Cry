@@ -21,6 +21,8 @@ GameObject:
   - component: {fileID: 4288009483644028}
   - component: {fileID: 82529674376236520}
   - component: {fileID: 114960329010524154}
+  - component: {fileID: 114639672230348864}
+  - component: {fileID: 114836633610653850}
   - component: {fileID: 23112546676875606}
   - component: {fileID: 54171163386768098}
   - component: {fileID: 135181668844336686}
@@ -59,7 +61,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 935d9e703de26d0469e7bb6e28212b91, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -181,6 +183,34 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &114639672230348864
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1988730303334800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1199c88b817ed8b429a750fcbf0931d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Health: 100
+  Damage: 30
+  HitByLaserSound: {fileID: 0}
+  DestructionSound: {fileID: 0}
+  HitByLaserAnimation: {fileID: 0}
+  DestructionAnimation: {fileID: 0}
+--- !u!114 &114836633610653850
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1988730303334800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdae93a4c490fbf4885fdd3f42079c77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114960329010524154
 MonoBehaviour:
   m_ObjectHideFlags: 1

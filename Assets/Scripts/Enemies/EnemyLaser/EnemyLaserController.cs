@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyLaserBehavior : MonoBehaviour
+public class EnemyLaserController : MonoBehaviour
 {
     #region Public Functions
 

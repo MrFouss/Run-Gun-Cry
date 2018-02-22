@@ -14,14 +14,9 @@ public class BrokenObstacleWallController : MonoBehaviour {
     // Use this for initialization
     void Start () {
         startTime = Time.time + FadingStartDelay;
-        startColor = GetComponent<Renderer>().material.color;
-        endColor = GetComponent<Renderer>().material.color;
+        startColor = GetComponentInChildren<Renderer>().material.color;
+        endColor = GetComponentInChildren<Renderer>().material.color;
         endColor.a = 0.0f;
-
-        // for each cube, set the starting material (for fading)
-        foreach (Renderer child in GetComponentsInChildren<Renderer>()) {
-            child.material = GetComponent<Renderer>().material;
-        }
 
         Destroy(gameObject, FadingStartDelay + FadingDuration);
     }

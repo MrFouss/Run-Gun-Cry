@@ -20,7 +20,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4820187997050818}
   - component: {fileID: 82154739753036882}
-  - component: {fileID: 65122951718366364}
   - component: {fileID: 114530531877120438}
   - component: {fileID: 75155705150897726}
   - component: {fileID: 33653232551573142}
@@ -33,6 +32,8 @@ GameObject:
   - component: {fileID: 23260718210710876}
   - component: {fileID: 114080705545780442}
   - component: {fileID: 54870574589127810}
+  - component: {fileID: 114561295385388180}
+  - component: {fileID: 135022731399126872}
   m_Layer: 0
   m_Name: Mecha
   m_TagString: MechaBody
@@ -161,7 +162,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1188656232111112}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!54 &54870574589127810
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -169,26 +170,14 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1188656232111112}
   serializedVersion: 2
-  m_Mass: 100
+  m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 48
+  m_Constraints: 112
   m_CollisionDetection: 0
---- !u!65 &65122951718366364
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1188656232111112}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!75 &75155705150897726
 ConstantForce:
   m_ObjectHideFlags: 1
@@ -298,17 +287,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdd2a346e8b260740bde7b374b85f875, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JumpForce: 5
-  FrontAcceleration: 25
-  NeutralAcceleration: 2.5
-  BrakeAcceleration: 25
-  SidesAcceleration: 25
-  MaxNormalSpeedZ: 30
-  MaxZeroEnergySpeedZ: 20
-  MaxSpeedX: 50
-  MinSpeed: 5
+  ForwardForce: 20
+  SideForce: 20
+  JumpForce: 3
+  MaxSideSpeed: 5
+  MaxNormalForwardSpeed: 5
+  MaxZeroEnergyForwardSpeed: 20
   AirControlMultiplier: 0.25
-  TimeToStopStrafing: 0.5
 --- !u!114 &114184238518245382
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -333,10 +318,7 @@ MonoBehaviour:
   LowEnergySound: {fileID: 0}
   LowHealthAnimation: {fileID: 0}
   LowEnergyAnimation: {fileID: 0}
-  LaserDamage: 5
   VoidDamage: 30
-  EnemyCollisionDamage: 100
-  WallObstacleDamage: 50
   LaserDamageSound: {fileID: 0}
   VoidDamageSound: {fileID: 0}
   EnemyCollisionDamageSound: {fileID: 0}
@@ -390,6 +372,17 @@ MonoBehaviour:
   FireRateMissile: 1
   LaserEnergyConsumption: 1
   MissileEnergyConsumption: 10
+--- !u!114 &114561295385388180
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1188656232111112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9f260d334dd7af43a7941fa5017e995, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114755622769806526
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -414,7 +407,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62755de5bd0092f42a30a1277c9791f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravityFactor: -9.81
+  gravityFactor: -5
 --- !u!114 &114906491555783440
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -434,3 +427,15 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1975941108478194}
   m_Enabled: 1
+--- !u!135 &135022731399126872
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1188656232111112}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}

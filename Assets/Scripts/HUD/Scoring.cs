@@ -65,7 +65,7 @@ public class Scoring : MonoBehaviour {
 
 
     // Use this for initialization
-    void Start () {
+    void Awake () {
         EventManager.onEnemyDestruction.AddListener(OnEnemyDestruction);
         EventManager.onGunnerShot.AddListener(OnGunnerShot);
         EventManager.onShotHitting.AddListener(OnShotHitting);
@@ -119,7 +119,6 @@ public class Scoring : MonoBehaviour {
                     destroyedCowards++;
                     break;
                 default:
-                    Debug.Log("EnemyType Unknown");
                     break;
             }
         } else if (destructionType == DestructionType.Collided)
@@ -139,7 +138,6 @@ public class Scoring : MonoBehaviour {
                     collidedCowards ++;
                     break;
                 default:
-                    Debug.Log("EnemyType Unknown");
                     break;
             }
         }
@@ -195,7 +193,6 @@ public class Scoring : MonoBehaviour {
                 damageTakenFromLasers += damageTaken;
                 break;
             default:
-                Debug.Log("DamageSource Unknown");
                 break;
         }
     }
