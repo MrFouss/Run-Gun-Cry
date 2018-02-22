@@ -84,11 +84,8 @@ public class MechaController : MonoBehaviour
     // sound
     private AudioSource audioSource;
 
-    // damage properties
-    public int LaserDamage = 5;
+    // TODO Delete if Damages function works
     public int VoidDamage = 30;
-    public int EnemyCollisionDamage = 100;
-    public int WallObstacleDamage = 50;
 
     public AudioClip LaserDamageSound;
     public AudioClip VoidDamageSound;
@@ -180,26 +177,6 @@ public class MechaController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other) {
-
-        switch (other.gameObject.tag) {
-
-            case Tags.VoidTag:
-                // TODO uncomment when these files are added
-                // audioSource.clip = VoidDamageSound;
-                // audioSource.Play();
-                // VoidDamageAnimation.Play();
-                TakeDamage(VoidDamage);
-                // TODO change when platforms become tubular
-                transform.position = new Vector3(lastPlatformCoordinates.position.x, lastPlatformCoordinates.position.y + RespawnHeight, lastPlatformCoordinates.position.z);
-                transform.eulerAngles = new Vector3(lastPlatformCoordinates.eulerAngles.x, lastPlatformCoordinates.eulerAngles.y, lastPlatformCoordinates.eulerAngles.z);
-                break;
-
-            default:
-                break;
-        }
-    }
-
     void OnCollisionEnter(Collision other)
     {
         switch (other.gameObject.tag)
@@ -209,15 +186,32 @@ public class MechaController : MonoBehaviour
                 // audioSource.clip = LaserDamageSound;
                 // audioSource.Play();
                 // LaserDamageAnimation.Play();
-                TakeDamage(LaserDamage);
+                TakeDamage(0);
                 break;
-
+            
             case Tags.EnemyChargerTag:
                 // TODO uncomment when these files are added
                 // audioSource.clip = EnemyCollisionDamageSound;
                 // audioSource.Play();
                 // EnemyCollisionDamageAnimation.Play();
-                TakeDamage(EnemyCollisionDamage);
+                TakeDamage(other.gameObject.GetComponent<EnemyController>().Damage);
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        switch (other.gameObject.tag)
+        {
+            case Tags.EnemyLaserTag:
+                // TODO uncomment when these files are added
+                // audioSource.clip = LaserDamageSound;
+                // audioSource.Play();
+                // LaserDamageAnimation.Play();
+                TakeDamage(other.gameObject.GetComponent<ProjectileBehavior>().Damage);
                 break;
 
             case Tags.ObstacleWallTag:
@@ -225,7 +219,20 @@ public class MechaController : MonoBehaviour
                 // audioSource.clip = WallObstacleDamageSound;
                 // audioSource.Play();
                 // WallObstacleDamageAnimation.Play();
-                TakeDamage(WallObstacleDamage);
+
+                TakeDamage(other.gameObject.GetComponent<ObstacleWallController>().Damage);
+                break;
+
+            case Tags.VoidTag:
+                // TODO uncomment when these files are added
+                // audioSource.clip = VoidDamageSound;
+                // audioSource.Play();
+
+                // VoidDamageAnimation.Play();
+                TakeDamage(VoidDamage);
+                // TODO change when platforms become tubular
+                transform.position = new Vector3(lastPlatformCoordinates.position.x, lastPlatformCoordinates.position.y + RespawnHeight, lastPlatformCoordinates.position.z);
+                transform.eulerAngles = new Vector3(lastPlatformCoordinates.eulerAngles.x, lastPlatformCoordinates.eulerAngles.y, lastPlatformCoordinates.eulerAngles.z);
                 break;
 
             case (Tags.PlatformTag):

@@ -10,7 +10,6 @@ public class EnemyLaserBehavior : MonoBehaviour
     {
         this.transform.LookAt(PlayerTransform);
         this.GetComponentInChildren<EnemyCannonBehavior>().Fire();
-
     }
 
     #endregion
