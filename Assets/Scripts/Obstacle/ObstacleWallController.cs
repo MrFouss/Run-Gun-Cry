@@ -7,6 +7,9 @@ public class ObstacleWallController : MonoBehaviour {
     // Data about an obstacle
     public int StructurePoints = 100;
 
+    // Damage dealt on collision
+    public int Damage = 50;
+
     // Feedback sounds
     public AudioClip ObstacleHitSound;
     public AudioClip ObstacleDestroyedSound;

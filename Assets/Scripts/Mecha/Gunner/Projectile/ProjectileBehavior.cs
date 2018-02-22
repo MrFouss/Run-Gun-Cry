@@ -44,8 +44,10 @@ public class ProjectileBehavior : MonoBehaviour {
         }
         switch (other.gameObject.tag)
         {
+            case Tags.MechaBodyTag:
             case Tags.ObstacleWallTag:
             case Tags.EnemyChargerTag:
+            case Tags.EnemyLaserTag:
                 Explode();
                 break;
 

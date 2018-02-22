@@ -85,11 +85,8 @@ public class MechaController : MonoBehaviour
     // sound
     private AudioSource audioSource;
 
-    // damage properties
-    public int LaserDamage = 5;
+    // TODO Delete if Damages function works
     public int VoidDamage = 30;
-    public int EnemyCollisionDamage = 100;
-    public int WallObstacleDamage = 50;
 
     public AudioClip LaserDamageSound;
     public AudioClip VoidDamageSound;
@@ -101,6 +98,11 @@ public class MechaController : MonoBehaviour
     public Animation VoidDamageAnimation;
     public Animation EnemyCollisionDamageAnimation;
     public Animation WallObstacleDamageAnimation;
+
+    // heightRespawn after being positionned over a platform after falling into the void
+    public float RespawnHeight = 0.0f;
+
+    private Transform lastPlatformCoordinates;
 
     // Use this for initialization
     void Start()
@@ -184,7 +186,7 @@ public class MechaController : MonoBehaviour
                 break;
         }
     }
-
+    
     private void UpdateDistanceTravelled()
     {
         DistanceTravelled = (int)Mathf.Floor(gameObject.transform.position.z);
@@ -195,8 +197,26 @@ public class MechaController : MonoBehaviour
         EventManager.onShieldDataSending.Invoke(Shield);
     }
 
-
     void OnCollisionEnter(Collision other)
+    {
+        switch (other.gameObject.tag)
+        {
+            case Tags.EnemyChargerTag:
+                // TODO uncomment when these files are added
+                // audioSource.clip = EnemyCollisionDamageSound;
+                // audioSource.Play();
+                // let the scoring script know about the damage taken
+                EventManager.onDamageTaken.Invoke(DamageSourceType.FallingIntoVoid, VoidDamage);
+                // EnemyCollisionDamageAnimation.Play();
+                TakeDamage(other.gameObject.GetComponent<EnemyController>().Damage);
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
     {
         switch (other.gameObject.tag)
         {
@@ -205,29 +225,10 @@ public class MechaController : MonoBehaviour
                 // audioSource.clip = LaserDamageSound;
                 // audioSource.Play();
                 // LaserDamageAnimation.Play();
-                TakeDamage(LaserDamage);
                 // let the scoring script know about the damage taken
-                EventManager.onDamageTaken.Invoke(DamageSourceType.HitByEnemyLaser, LaserDamage);
-                break;
-
-            case Tags.VoidTag:
-                // TODO uncomment when these files are added
-                // audioSource.clip = VoidDamageSound;
-                // audioSource.Play();
-                // VoidDamageAnimation.Play();
-                TakeDamage(VoidDamage);
-                // let the scoring script know about the damage taken
-                EventManager.onDamageTaken.Invoke(DamageSourceType.FallingIntoVoid, VoidDamage);
-                break;
-
-            case Tags.EnemyChargerTag:
-                // TODO uncomment when these files are added
-                // audioSource.clip = EnemyCollisionDamageSound;
-                // audioSource.Play();
-                // EnemyCollisionDamageAnimation.Play();
-                TakeDamage(EnemyCollisionDamage);
-                // let the scoring script know about the damage taken
-                EventManager.onDamageTaken.Invoke(DamageSourceType.CollidingCharger, EnemyCollisionDamage);
+                int enemyLaserDamage = other.gameObject.GetComponent<ProjectileBehavior>().Damage;
+                EventManager.onDamageTaken.Invoke(DamageSourceType.CollidingCharger, enemyLaserDamage);
+                TakeDamage(enemyLaserDamage);
                 break;
 
             case Tags.ObstacleWallTag:
@@ -235,9 +236,26 @@ public class MechaController : MonoBehaviour
                 // audioSource.clip = WallObstacleDamageSound;
                 // audioSource.Play();
                 // WallObstacleDamageAnimation.Play();
-                TakeDamage(WallObstacleDamage);
                 // let the scoring script know about the damage taken
-                EventManager.onDamageTaken.Invoke(DamageSourceType.CollidingObstacle, WallObstacleDamage);
+                int obstacleWallDamage = other.gameObject.GetComponent<ObstacleWallController>().Damage;
+                EventManager.onDamageTaken.Invoke(DamageSourceType.CollidingObstacle, obstacleWallDamage);
+                TakeDamage(obstacleWallDamage);
+                break;
+
+            case Tags.VoidTag:
+                // TODO uncomment when these files are added
+                // audioSource.clip = VoidDamageSound;
+                // audioSource.Play();
+
+                // VoidDamageAnimation.Play();
+                TakeDamage(VoidDamage);
+                // TODO change when platforms become tubular
+                transform.position = new Vector3(lastPlatformCoordinates.position.x, lastPlatformCoordinates.position.y + RespawnHeight, lastPlatformCoordinates.position.z);
+                transform.eulerAngles = new Vector3(lastPlatformCoordinates.eulerAngles.x, lastPlatformCoordinates.eulerAngles.y, lastPlatformCoordinates.eulerAngles.z);
+                break;
+
+            case (Tags.PlatformTag):
+                lastPlatformCoordinates = other.gameObject.transform;
                 break;
 
             default:
@@ -249,4 +267,5 @@ public class MechaController : MonoBehaviour
     {
         SceneManager.LoadScene("GameOver");
     }
+
 }
