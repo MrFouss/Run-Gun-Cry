@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class Charger : MonoBehaviour
+public class EnemyChargerController : MonoBehaviour
 {
 
     public float MaxSpeed = 50f;
@@ -13,11 +13,12 @@ public class Charger : MonoBehaviour
 
     public float DetectionRange = 20f;
 
-    private int hp;
+    public int Health = 100;
     private bool startedCharge = false;
 
     private bool isInRange = false;
     private bool foundMecha = false;
+
     private GameObject mecha;
     private Rigidbody rb;
 
@@ -40,22 +41,16 @@ public class Charger : MonoBehaviour
     {
         mecha = GameObject.FindGameObjectWithTag(Tags.MechaBodyTag);
         foundMecha = (mecha != null);
-        hp = 100;
     }
 
     private void Update()
     {
-        if(hp <= 0)
+        if(Health <= 0)
         {
-            OnExplode();
+            Explode();
         }
         else
         {
-            if (!foundMecha)
-            {
-                mecha = GameObject.FindGameObjectWithTag(Tags.MechaBodyTag);
-                foundMecha = (mecha != null);
-            }
             if (foundMecha)
             {
                 if (!isInRange)
@@ -65,6 +60,11 @@ public class Charger : MonoBehaviour
                         isInRange = true;
                     }
                 }
+            }
+            else
+            {
+                mecha = GameObject.FindGameObjectWithTag(Tags.MechaBodyTag);
+                foundMecha = (mecha != null);
             }
         }
     }
@@ -96,16 +96,16 @@ public class Charger : MonoBehaviour
     {
         if(collision.gameObject.CompareTag(Tags.MechaBodyTag))
         {
-            OnExplode();
+            Explode();
         }
     }
 
-    public void RemoveHealth(int damage)
+    public void TakeDamage(int damage)
     {
-        hp -= damage;
+        Health -= damage;
     }
 
-    private void OnExplode()
+    private void Explode()
     {
         audioSource.Stop();
 
