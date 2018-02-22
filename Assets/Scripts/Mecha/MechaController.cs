@@ -67,28 +67,26 @@ public class MechaController : MonoBehaviour
         }
     }
 
-    private int _score;
-    public int Score
+
+    private int _distanceTravelled;
+    public int DistanceTravelled
     {
         set
         {
-            _score = Mathf.Max(0, value);
-            EventManager.onScoreChange.Invoke(_score);
+            _distanceTravelled = value;
+            EventManager.onDistanceTravelledChange.Invoke(_distanceTravelled);
         }
         get
         {
-            return _score;
+            return _distanceTravelled;
         }
     }
 
     // sound
     private AudioSource audioSource;
 
-    // damage properties
-    public int LaserDamage = 5;
+    // TODO Delete if Damages function works
     public int VoidDamage = 30;
-    public int EnemyCollisionDamage = 100;
-    public int WallObstacleDamage = 50;
 
     public AudioClip LaserDamageSound;
     public AudioClip VoidDamageSound;
@@ -116,10 +114,15 @@ public class MechaController : MonoBehaviour
         Health = MaxHealth;
         Shield = MaxShield;
         Energy = MaxEnergy;
-        Score = 0;
 
         // consume energy every second
         InvokeRepeating("ConsumeEnergyPassive", 1, 1);
+
+        // update distance travelled
+        InvokeRepeating("UpdateDistanceTravelled", 0.1f, 0.1f);
+
+        // inform the scoring of the shield amount every second
+        InvokeRepeating("SendShieldData", 1, 1);
     }
 
     public void TakeDamage(int damage)
@@ -173,44 +176,59 @@ public class MechaController : MonoBehaviour
         {
             case ReloadType.ENERGY:
                 Energy = Mathf.Min(MaxEnergy, Energy + multiplier * BaseEnergyReload);
+                // event for the scoring script
+                EventManager.onEngineerReload.Invoke(ReloadType.ENERGY, multiplier * BaseEnergyReload);
                 break;
             case ReloadType.SHIELD:
                 Shield = Mathf.Min(MaxShield, Shield + multiplier * BaseShieldReload);
+                // event for the scoring script
+                EventManager.onEngineerReload.Invoke(ReloadType.SHIELD, multiplier * BaseEnergyReload);
                 break;
         }
+    }
+    
+    private void UpdateDistanceTravelled()
+    {
+        DistanceTravelled = (int)Mathf.Floor(gameObject.transform.position.z);
+    }
+    
+    private void SendShieldData()
+    {
+        EventManager.onShieldDataSending.Invoke(Shield);
     }
 
     void OnCollisionEnter(Collision other)
     {
         switch (other.gameObject.tag)
         {
-
-            case Tags.VoidTag:
+            case Tags.EnemyChargerTag:
                 // TODO uncomment when these files are added
-                // audioSource.clip = VoidDamageSound;
+                // audioSource.clip = EnemyCollisionDamageSound;
                 // audioSource.Play();
-                // VoidDamageAnimation.Play();
-                TakeDamage(VoidDamage);
-                // TODO change when platforms become tubular
-                transform.position = new Vector3(lastPlatformCoordinates.position.x, lastPlatformCoordinates.position.y, lastPlatformCoordinates.position.z);
-                transform.eulerAngles = new Vector3(lastPlatformCoordinates.eulerAngles.x, lastPlatformCoordinates.eulerAngles.y, lastPlatformCoordinates.eulerAngles.z);
-                transform.Translate(Vector3.up, Space.Self);
+                // let the scoring script know about the damage taken
+                EventManager.onDamageTaken.Invoke(DamageSourceType.FallingIntoVoid, VoidDamage);
+                // EnemyCollisionDamageAnimation.Play();
+                TakeDamage(other.gameObject.GetComponent<EnemyController>().Damage);
                 break;
 
+            default:
+                break;
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        switch (other.gameObject.tag)
+        {
             case Tags.EnemyLaserTag:
                 // TODO uncomment when these files are added
                 // audioSource.clip = LaserDamageSound;
                 // audioSource.Play();
                 // LaserDamageAnimation.Play();
-                TakeDamage(LaserDamage);
-                break;
-
-            case Tags.EnemyChargerTag:
-                // TODO uncomment when these files are added
-                // audioSource.clip = EnemyCollisionDamageSound;
-                // audioSource.Play();
-                // EnemyCollisionDamageAnimation.Play();
-                TakeDamage(EnemyCollisionDamage);
+                // let the scoring script know about the damage taken
+                int enemyLaserDamage = other.gameObject.GetComponent<ProjectileBehavior>().Damage;
+                EventManager.onDamageTaken.Invoke(DamageSourceType.CollidingCharger, enemyLaserDamage);
+                TakeDamage(enemyLaserDamage);
                 break;
 
             case Tags.ObstacleWallTag:
@@ -218,7 +236,22 @@ public class MechaController : MonoBehaviour
                 // audioSource.clip = WallObstacleDamageSound;
                 // audioSource.Play();
                 // WallObstacleDamageAnimation.Play();
-                TakeDamage(WallObstacleDamage);
+                // let the scoring script know about the damage taken
+                int obstacleWallDamage = other.gameObject.GetComponent<ObstacleWallController>().Damage;
+                EventManager.onDamageTaken.Invoke(DamageSourceType.CollidingObstacle, obstacleWallDamage);
+                TakeDamage(obstacleWallDamage);
+                break;
+
+            case Tags.VoidTag:
+                // TODO uncomment when these files are added
+                // audioSource.clip = VoidDamageSound;
+                // audioSource.Play();
+
+                // VoidDamageAnimation.Play();
+                TakeDamage(VoidDamage);
+                // TODO change when platforms become tubular
+                transform.position = new Vector3(lastPlatformCoordinates.position.x, lastPlatformCoordinates.position.y + RespawnHeight, lastPlatformCoordinates.position.z);
+                transform.eulerAngles = new Vector3(lastPlatformCoordinates.eulerAngles.x, lastPlatformCoordinates.eulerAngles.y, lastPlatformCoordinates.eulerAngles.z);
                 break;
 
             case (Tags.PlatformTag):
