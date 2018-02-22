@@ -39,10 +39,14 @@ public class FilterSelector : MonoBehaviour {
         // Check scrollwheel
         if (Input.GetAxis("Mouse ScrollWheel") > 0f)
         {
+            // for the scoring script
+            EventManager.onGunnerConsumesEnergy.Invoke(EnergyConsumption);
             mechaController.ConsumeEnergy(EnergyConsumption);
             SelectedFilter = (FilterColor) ( ((int)SelectedFilter + 1) % 3);
         } else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
         {
+            // for the scoring script
+            EventManager.onGunnerConsumesEnergy.Invoke(EnergyConsumption);
             mechaController.ConsumeEnergy(EnergyConsumption);
             SelectedFilter = (FilterColor)(((int)SelectedFilter + 2) % 3);
         }

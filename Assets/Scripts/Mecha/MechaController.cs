@@ -67,17 +67,18 @@ public class MechaController : MonoBehaviour
         }
     }
 
-    private int _score;
-    public int Score
+
+    private int _distanceTravelled;
+    public int DistanceTravelled
     {
         set
         {
-            _score = Mathf.Max(0, value);
-            EventManager.onScoreChange.Invoke(_score);
+            _distanceTravelled = value;
+            EventManager.onDistanceTravelledChange.Invoke(_distanceTravelled);
         }
         get
         {
-            return _score;
+            return _distanceTravelled;
         }
     }
 
@@ -113,10 +114,15 @@ public class MechaController : MonoBehaviour
         Health = MaxHealth;
         Shield = MaxShield;
         Energy = MaxEnergy;
-        Score = 0;
 
         // consume energy every second
         InvokeRepeating("ConsumeEnergyPassive", 1, 1);
+
+        // update distance travelled
+        InvokeRepeating("UpdateDistanceTravelled", 0.1f, 0.1f);
+
+        // inform the scoring of the shield amount every second
+        InvokeRepeating("SendShieldData", 1, 1);
     }
 
     public void TakeDamage(int damage)
@@ -170,29 +176,37 @@ public class MechaController : MonoBehaviour
         {
             case ReloadType.ENERGY:
                 Energy = Mathf.Min(MaxEnergy, Energy + multiplier * BaseEnergyReload);
+                // event for the scoring script
+                EventManager.onEngineerReload.Invoke(ReloadType.ENERGY, multiplier * BaseEnergyReload);
                 break;
             case ReloadType.SHIELD:
                 Shield = Mathf.Min(MaxShield, Shield + multiplier * BaseShieldReload);
+                // event for the scoring script
+                EventManager.onEngineerReload.Invoke(ReloadType.SHIELD, multiplier * BaseEnergyReload);
                 break;
         }
+    }
+    
+    private void UpdateDistanceTravelled()
+    {
+        DistanceTravelled = (int)Mathf.Floor(gameObject.transform.position.z);
+    }
+
+    private void SendShieldData()
+    {
+        EventManager.onShieldDataSending.Invoke(Shield);
     }
 
     void OnCollisionEnter(Collision other)
     {
         switch (other.gameObject.tag)
         {
-            case Tags.EnemyLaserTag:
-                // TODO uncomment when these files are added
-                // audioSource.clip = LaserDamageSound;
-                // audioSource.Play();
-                // LaserDamageAnimation.Play();
-                TakeDamage(0);
-                break;
-            
             case Tags.EnemyChargerTag:
                 // TODO uncomment when these files are added
                 // audioSource.clip = EnemyCollisionDamageSound;
                 // audioSource.Play();
+                // let the scoring script know about the damage taken
+                EventManager.onDamageTaken.Invoke(DamageSourceType.FallingIntoVoid, VoidDamage);
                 // EnemyCollisionDamageAnimation.Play();
                 TakeDamage(other.gameObject.GetComponent<EnemyController>().Damage);
                 break;
@@ -211,7 +225,10 @@ public class MechaController : MonoBehaviour
                 // audioSource.clip = LaserDamageSound;
                 // audioSource.Play();
                 // LaserDamageAnimation.Play();
-                TakeDamage(other.gameObject.GetComponent<ProjectileBehavior>().Damage);
+                // let the scoring script know about the damage taken
+                int enemyLaserDamage = other.gameObject.GetComponent<ProjectileBehavior>().Damage;
+                EventManager.onDamageTaken.Invoke(DamageSourceType.CollidingCharger, enemyLaserDamage);
+                TakeDamage(enemyLaserDamage);
                 break;
 
             case Tags.ObstacleWallTag:
@@ -219,8 +236,10 @@ public class MechaController : MonoBehaviour
                 // audioSource.clip = WallObstacleDamageSound;
                 // audioSource.Play();
                 // WallObstacleDamageAnimation.Play();
-
-                TakeDamage(other.gameObject.GetComponent<ObstacleWallController>().Damage);
+                // let the scoring script know about the damage taken
+                int obstacleWallDamage = other.gameObject.GetComponent<ObstacleWallController>().Damage;
+                EventManager.onDamageTaken.Invoke(DamageSourceType.CollidingObstacle, obstacleWallDamage);
+                TakeDamage(obstacleWallDamage);
                 break;
 
             case Tags.VoidTag:
