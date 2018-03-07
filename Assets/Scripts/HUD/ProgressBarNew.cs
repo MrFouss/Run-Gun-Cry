@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[ExecuteInEditMode, System.Serializable]
+[ExecuteInEditMode]
 public class ProgressBarNew : MonoBehaviour {
 
     public enum Direction {LEFT, RIGHT, UP, DOWN};
     
+    // TODO naming convention
     public Direction direction = Direction.LEFT;
     public float ProgressPerSecond = 1;
     public float Progress = 1;
@@ -34,7 +35,7 @@ public class ProgressBarNew : MonoBehaviour {
         BarImage.color = BarColor;
         
         // update actual progress
-        if (Application.isEditor)
+        if (Application.isEditor && !Application.isPlaying)
         {
             ActualProgress = Progress;
         } else
