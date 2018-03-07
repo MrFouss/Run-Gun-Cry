@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class MainMenuController : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public void OnStartGamePress()
+    {
+
+    }
+
+    public void OnHighScorePress()
+    {
+
+    }
+
+    public void OnQuitGamePress()
+    {
+
+    }
 }
