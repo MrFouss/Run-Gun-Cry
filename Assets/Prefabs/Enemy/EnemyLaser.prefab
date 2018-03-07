@@ -325,7 +325,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Muzzle: {fileID: 4834594673966058}
-  LaserShot: {fileID: 1569945426386332, guid: 42344e5ba39c7a64faf1b70d3369b83d, type: 2}
+  LaserShot: {fileID: 1079405416700302, guid: 24991b0da394d3549b7399e58c992e9b, type: 2}
   FireRateLaser: 1
 --- !u!135 &135582376982127154
 SphereCollider:

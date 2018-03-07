@@ -365,8 +365,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Muzzle: {fileID: 4820187997050818}
-  LaserShot: {fileID: 1779170460631076, guid: 3fb6390608e58dc4492a9154c79d7dc0, type: 2}
-  MissileShot: {fileID: 1128944587546064, guid: 93aadd84080187345a14fb4ea8dd90b8,
+  LaserShot: {fileID: 1079405416700302, guid: b0b30a997d2b9524ea6f74b9522bbdc8, type: 2}
+  MissileShot: {fileID: 1079405416700302, guid: b685910d7a5f2414eb1abe67e62b2e0c,
     type: 2}
   FireRateLaser: 0.1
   FireRateMissile: 1
