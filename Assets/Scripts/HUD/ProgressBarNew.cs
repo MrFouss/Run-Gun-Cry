@@ -5,71 +5,89 @@ using UnityEngine.UI;
 
 [ExecuteInEditMode]
 public class ProgressBarNew : MonoBehaviour {
-
-    public enum Direction {LEFT, RIGHT, UP, DOWN};
     
-    // TODO naming convention
-    public Direction direction = Direction.LEFT;
-    public float ProgressPerSecond = 1;
-    public float Progress = 1;
-    [SerializeField]
-    private float ActualProgress = 1;
+    // progress bar advance towards this direction
+    public Direction Direction = Direction.LEFT;
 
+    // progress bar speed value change speed
+    // this induces a delay between the moment the progress is set and the moment it actually shows that progress
+    public float ProgressSpeedPerSecond = 1;
+
+    // target progress value (between 0 and 1)
+    public float Progress = 1;
+
+    // actual progress displayed (may be different from Progress due to progress speed)
+    [SerializeField]
+    private float _actualProgress = 1;
+
+    // a sprite of the shape of the progress bar (typically a white shape on a transparent background)
     public Sprite BarMask;
+
+    // the color of the progress bar
     public Color BarColor;
 
+    // the color of the progress bar background
+    public Color BackgroundColor;
+
+    // references to components
+
     [SerializeField]
-    private RectTransform ProgressMask;
+    private RectTransform _progressMaskRect;
     [SerializeField]
-    private RectTransform ProgressBar;
+    private RectTransform _progressBarRect;
     [SerializeField]
-    private Image BackgroundImage;
+    private Image _backgroundImage;
     [SerializeField]
-    private Image BarImage;
+    private Image _barImage;
 
     private void Update()
     {
-        // force sprite in editor
-        BackgroundImage.sprite = BarMask;
-        BarImage.sprite = BarMask;
-        BarImage.color = BarColor;
-        
+        // force sprite update
+        _backgroundImage.sprite = BarMask;
+        _backgroundImage.color = BackgroundColor;
+        _barImage.sprite = BarMask;
+        _barImage.color = BarColor;
+
         // update actual progress
-        if (Application.isEditor && !Application.isPlaying)
+        if (!Application.isPlaying)
         {
-            ActualProgress = Progress;
+            // synchronize actual progress and progress
+            _actualProgress = Progress;
         } else
         {
-            ActualProgress += Mathf.Clamp(Progress - ActualProgress, -Time.deltaTime * ProgressPerSecond, Time.deltaTime * ProgressPerSecond);
+            // take into account the progress speed
+            _actualProgress += Mathf.Clamp(Progress - _actualProgress, -Time.deltaTime * ProgressSpeedPerSecond, Time.deltaTime * ProgressSpeedPerSecond);
         }
 
         // reset progress bar to maximum size
-        ProgressMask.offsetMax = Vector2.zero;
-        ProgressMask.offsetMin = Vector2.zero;
-        ProgressBar.offsetMin = Vector2.zero;
-        ProgressBar.offsetMax = Vector2.zero;
+        _progressMaskRect.offsetMax = Vector2.zero;
+        _progressMaskRect.offsetMin = Vector2.zero;
+        _progressBarRect.offsetMin = Vector2.zero;
+        _progressBarRect.offsetMax = Vector2.zero;
 
         // get max bar size
-        Vector2 size = ProgressMask.rect.size;
+        Vector2 size = _progressMaskRect.rect.size;
 
         // update offsets
-        switch (direction)
+        // the progress mask is dimensionned to show the actual progress
+        // the progress bar's dimension is increased to counter its parent's (the mask's) reduced dimension 
+        switch (Direction)
         {
             case Direction.LEFT:
-                ProgressMask.offsetMin = new Vector2(size.x * (1 - ActualProgress), 0);
-                ProgressBar.offsetMin = new Vector2(-size.x * (1 - ActualProgress), 0);
+                _progressMaskRect.offsetMin = new Vector2(size.x * (1 - _actualProgress), 0);
+                _progressBarRect.offsetMin = new Vector2(-size.x * (1 - _actualProgress), 0);
                 break;
             case Direction.RIGHT:
-                ProgressMask.offsetMax = new Vector2(-size.x * (1 - ActualProgress), 0);
-                ProgressBar.offsetMax = new Vector2(size.x * (1 - ActualProgress), 0);
+                _progressMaskRect.offsetMax = new Vector2(-size.x * (1 - _actualProgress), 0);
+                _progressBarRect.offsetMax = new Vector2(size.x * (1 - _actualProgress), 0);
                 break;
             case Direction.UP:
-                ProgressMask.offsetMax = new Vector2(0, -size.y * (1 - ActualProgress));
-                ProgressBar.offsetMax = new Vector2(0, size.y * (1 - ActualProgress));
+                _progressMaskRect.offsetMax = new Vector2(0, -size.y * (1 - _actualProgress));
+                _progressBarRect.offsetMax = new Vector2(0, size.y * (1 - _actualProgress));
                 break;
             case Direction.DOWN:
-                ProgressMask.offsetMin = new Vector2(0, size.y * (1 - ActualProgress));
-                ProgressBar.offsetMin = new Vector2(0, -size.y * (1 - ActualProgress));
+                _progressMaskRect.offsetMin = new Vector2(0, size.y * (1 - _actualProgress));
+                _progressBarRect.offsetMin = new Vector2(0, -size.y * (1 - _actualProgress));
                 break;
         }
     }

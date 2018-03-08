@@ -6,7 +6,7 @@ using UnityEngine.UI;
 [ExecuteInEditMode]
 public class HudEyes : MonoBehaviour {
 
-    public enum EyeColor { RED, GREEN, BLUE };
+    // get references to assets
 
     [SerializeField]
     private Sprite _openRedEyeSprite;
@@ -22,12 +22,15 @@ public class HudEyes : MonoBehaviour {
     [SerializeField]
     private Sprite _closedBlueEyeSprite;
 
+    // get references to scene components
+
     [SerializeField]
     private Transform _redEyeTransform;
     [SerializeField]
     private Transform _greenEyeTransform;
     [SerializeField]
     private Transform _blueEyeTransform;
+
     [SerializeField]
     private Image _redEyeImage;
     [SerializeField]
@@ -35,101 +38,132 @@ public class HudEyes : MonoBehaviour {
     [SerializeField]
     private Image _blueEyeImage;
 
-    public EyeColor SelectedEye = EyeColor.RED;
-    public float SelectedAngle;
-    public float EyeToCenterDistance;
-    public float RotationSpeedPerSecond = 30;
-    private float _actualAngle;
+    // the eyes are placed around this game object's position
+    // each eye is 360/3 degree apart from the other eyes
 
-    private Queue<EyeColor> _eyeColors;
-    private Queue<Transform> _eyeTransforms;
-    private Queue<Image> _eyeImages;
+    // the angle at which the selected eye is positionned
+    public float SelectedEyeAngle = -120;
+
+    // distance between this game object's position and the eyes
+    public float EyeToCenterDistance = 35;
+
+    // number of degrees an eye can travel in 1 second
+    public float EyeAngularSpeedPerSecond = 180;
+
+    // the selected eye
+    public EyeColor SelectedEye = EyeColor.RED;
+
+    // gather information on each eye
+    private struct EyeData
+    {
+        public EyeData(EyeColor color, Transform transform, Image image)
+        {
+            Color = color;
+            Transform = transform;
+            Image = image;
+        }
+
+        public EyeColor Color;
+        public Transform Transform;
+        public Image Image;
+    };
+
+    // the list of eyes
+    // this queue is used to maintain an ordered list of eyes
+    // the first element (peek) is the selected eye
+    private Queue<EyeData> _eyeData;
 
     private void Awake()
     {
-        Debug.Log("Awake");
-        _eyeColors = new Queue<EyeColor>(new EyeColor[]{ EyeColor.RED, EyeColor.GREEN, EyeColor.BLUE });
-        _eyeTransforms = new Queue<Transform>(new Transform[] { _redEyeTransform, _greenEyeTransform, _blueEyeTransform });
-        _eyeImages = new Queue<Image>(new Image[] { _redEyeImage, _greenEyeImage, _blueEyeImage });
+        // create the eyes queue
+        _eyeData = new Queue<EyeData>
+        (
+            new EyeData[]
+            {
+                new EyeData(EyeColor.RED, _redEyeTransform, _redEyeImage),
+                new EyeData(EyeColor.GREEN, _greenEyeTransform, _greenEyeImage),
+                new EyeData(EyeColor.BLUE, _blueEyeTransform, _blueEyeImage)
+            }
+        );
     }
 
-    private void UpdateLists()
+    // rotate list until the first eye data (peek) is the selected eye
+    private void UpdateEyeDataQueue()
     {
-        while(_eyeColors.Peek() != SelectedEye)
+        while(_eyeData.Peek().Color != SelectedEye)
         {
-            RotateLists();
+            RotateEyeDataQueue();
         }
     }
 
-    private void RotateLists()
+    // rotate eye data queue (dequeue and enqueue)
+    private void RotateEyeDataQueue()
     {
-        _eyeColors.Enqueue(_eyeColors.Dequeue());
-        _eyeTransforms.Enqueue(_eyeTransforms.Dequeue());
-        _eyeImages.Enqueue(_eyeImages.Dequeue());
+        _eyeData.Enqueue(_eyeData.Dequeue());
     }
 
     private void Update () {
-        UpdateLists();
+        UpdateEyeDataQueue();
 
-        // get selected eye
-        Transform eye = _eyeTransforms.Peek();
+        // get selected eye transform
+        Transform eye = _eyeData.Peek().Transform;
 
-        // compute selected eye rotation
+        // compute the angle between the selected eye and its desired position
         Vector2 centerToEye = (eye.position - transform.position).normalized;
-        Vector2 centerToSelection = Quaternion.Euler(0, 0, SelectedAngle) * new Vector2(0, 1);
-        //Debug.Log("selection vector " + centerToSelection);
+        Vector2 centerToSelection = Quaternion.Euler(0, 0, SelectedEyeAngle) * new Vector2(0, 1);
         float eyeToSelectionAngle = Vector2.SignedAngle(centerToEye, centerToSelection);
-        //Debug.Log("angle to selection " + eyeToSelectionAngle);
         if (Application.isPlaying)
         {
-            //Debug.Log("non clamp " + eyeToSelectionAngle);
+            // take into account the angular speed if playing
             eyeToSelectionAngle = Mathf.Clamp(eyeToSelectionAngle,
-                -Time.deltaTime * RotationSpeedPerSecond, Time.deltaTime * RotationSpeedPerSecond);
-            //Debug.Log("clamp " + eyeToSelectionAngle);
+                -Time.deltaTime * EyeAngularSpeedPerSecond, Time.deltaTime * EyeAngularSpeedPerSecond);
         }
-
-        // position eyes relative to the selected eye rotation
+        
         int i = 0;
         do
         {
-            Vector3 eyeTranslation = Quaternion.AngleAxis(eyeToSelectionAngle + i*360.0f/3, new Vector3(0, 0, 1)) * centerToEye;
+            // update eyes positions relative to the selected eye's
+            Vector3 translationFromCenter = Quaternion.AngleAxis(eyeToSelectionAngle + i*360.0f/3, new Vector3(0, 0, 1)) * centerToEye * EyeToCenterDistance;
+            _eyeData.Peek().Transform.position = transform.position + translationFromCenter;
 
-            //Debug.Log("eye translation " + eyeTranslation + " from " + centerToEye + " to " + centerToSelection);
-            eyeTranslation = eyeTranslation * EyeToCenterDistance;
-            _eyeTransforms.Peek().position = transform.position + eyeTranslation;
-
-            if (_eyeColors.Peek() == SelectedEye)
+            // update eye sprite
+            switch (_eyeData.Peek().Color)
             {
-                switch (_eyeColors.Peek())
-                {
-                    case EyeColor.RED:
-                        _eyeImages.Peek().sprite = _openRedEyeSprite;
-                        break;
-                    case EyeColor.GREEN:
-                        _eyeImages.Peek().sprite = _openGreenEyeSprite;
-                        break;
-                    case EyeColor.BLUE:
-                        _eyeImages.Peek().sprite = _openBlueEyeSprite;
-                        break;
-                }
-            } else
-            {
-                switch (_eyeColors.Peek())
-                {
-                    case EyeColor.RED:
-                        _eyeImages.Peek().sprite = _closedRedEyeSprite;
-                        break;
-                    case EyeColor.GREEN:
-                        _eyeImages.Peek().sprite = _closedGreenEyeSprite;
-                        break;
-                    case EyeColor.BLUE:
-                        _eyeImages.Peek().sprite = _closedBlueEyeSprite;
-                        break;
-                }
+                case EyeColor.RED:
+                    if (_eyeData.Peek().Color == SelectedEye)
+                    {
+                        _eyeData.Peek().Image.sprite = _openRedEyeSprite;
+                    }
+                    else
+                    {
+                        _eyeData.Peek().Image.sprite = _closedRedEyeSprite;
+                    }
+                    break;
+                case EyeColor.GREEN:
+                    if (_eyeData.Peek().Color == SelectedEye)
+                    {
+                        _eyeData.Peek().Image.sprite = _openGreenEyeSprite;
+                    }
+                    else
+                    {
+                        _eyeData.Peek().Image.sprite = _closedGreenEyeSprite;
+                    }
+                    break;
+                case EyeColor.BLUE:
+                    if (_eyeData.Peek().Color == SelectedEye)
+                    {
+                        _eyeData.Peek().Image.sprite = _openBlueEyeSprite;
+                    }
+                    else
+                    {
+                        _eyeData.Peek().Image.sprite = _closedBlueEyeSprite;
+                    }
+                    break;
             }
 
+            // rotate eye data queue
             i++;
-            RotateLists();
-        } while (_eyeColors.Peek() != SelectedEye);
+            RotateEyeDataQueue();
+        } while (_eyeData.Peek().Color != SelectedEye);
     }
 }
