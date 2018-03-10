@@ -104,7 +104,6 @@ public class EngineerLetterTyper : MonoBehaviour
         // randomly init current and next letters
 
         currLetter = (char)Random.Range('A', 'Z');
-        //EventManager.onCurrentLetterChange.Invoke(currLetter);
         EventManager.Instance.OnCurrentLetterChange.Invoke(currLetter.ToString());
 
         for (int i = 0; i < NextLettersNumber; ++i)
@@ -148,7 +147,6 @@ public class EngineerLetterTyper : MonoBehaviour
 
                 // update curr letter
                 currLetter = nextLetters[0];
-                //EventManager.onCurrentLetterChange.Invoke(currLetter);
                 EventManager.Instance.OnCurrentLetterChange.Invoke(currLetter.ToString());
 
                 // update next letters

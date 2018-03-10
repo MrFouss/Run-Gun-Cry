@@ -69,7 +69,6 @@ public class Scoring : MonoBehaviour {
         EventManager.onEnemyDestruction.AddListener(OnEnemyDestruction);
         EventManager.onGunnerShot.AddListener(OnGunnerShot);
         EventManager.onShotHitting.AddListener(OnShotHitting);
-        //EventManager.onLetterTyped.AddListener(OnLetterTyped);
         EventManager.onDamageTaken.AddListener(OnDamageTaken);
         EventManager.onDistanceTravelledChange.AddListener(OnDistanceTravelledChange);
         EventManager.onEngineerReload.AddListener(OnEngineerReload);

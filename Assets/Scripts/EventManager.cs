@@ -63,7 +63,7 @@ public class EventManager : MonoBehaviour {
 
     // note : percentages are floats between 0 and 1
     
-        // when the current letter changes (for UI) <letter>
+    // when the current letter changes (for UI) <letter>
     public CustomEventString OnCurrentLetterChange;
 
     // when next letters list changes (for UI) <nextLetters>
