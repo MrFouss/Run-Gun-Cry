@@ -16,26 +16,26 @@ public class HudManager : MonoBehaviour {
 
     private void Awake()
     {
-        EventManager.onShieldChange.AddListener(shield => ShieldBar.Progress = shield);
-        EventManager.onHealthChange.AddListener(health => HealthBar.Progress = health);
-        EventManager.onEnergyChange.AddListener(energy => EnergyBar.Progress = energy);
-        EventManager.onScoreChange.AddListener(score => ScoreText.text = score.ToString());
+        //EventManager.OnShieldChange.AddListener(shield => ShieldBar.Progress = shield);
+        //EventManager.OnHealthChange.AddListener(health => HealthBar.Progress = health);
+        //EventManager.OnEnergyChange.AddListener(energy => EnergyBar.Progress = energy);
+        //EventManager.OnScoreChange.AddListener(score => ScoreText.text = score.ToString());
 
-        EventManager.onFilterSelected.AddListener(UpdateFilter);
+        EventManager.Instance.OnFilterSelected.AddListener(UpdateFilter);
         EventManager.onCrosshairPositionChange.AddListener(pos => Crosshair.GetComponent<RectTransform>().position = pos);
     }
 
-    private void UpdateFilter(FilterSelector.FilterColor color)
+    private void UpdateFilter(FilterColor color)
     {
         switch (color)
         {
-            case FilterSelector.FilterColor.RED:
+            case FilterColor.RED:
                 FilterImage.color = new Color(1, 0, 0);
                 break;
-            case FilterSelector.FilterColor.GREEN:
+            case FilterColor.GREEN:
                 FilterImage.color = new Color(0, 1, 0);
                 break;
-            case FilterSelector.FilterColor.BLUE:
+            case FilterColor.BLUE:
                 FilterImage.color = new Color(0, 0, 1);
                 break;
         }

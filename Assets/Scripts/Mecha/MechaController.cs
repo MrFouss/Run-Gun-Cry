@@ -31,7 +31,7 @@ public class MechaController : MonoBehaviour
         set
         {
             _health = Mathf.Min(value, MaxHealth);
-            EventManager.onHealthChange.Invoke((float)_health/MaxHealth);
+            EventManager.Instance.OnHealthChange.Invoke((float)_health/MaxHealth);
         }
         get
         {
@@ -45,7 +45,7 @@ public class MechaController : MonoBehaviour
         set
         {
             _shield = Mathf.Min(value, MaxShield);
-            EventManager.onShieldChange.Invoke((float)_shield/MaxHealth);
+            EventManager.Instance.OnShieldChange.Invoke((float)_shield/MaxHealth);
         }
         get
         {
@@ -59,7 +59,7 @@ public class MechaController : MonoBehaviour
         set
         {
             _energy = Mathf.Min(value, MaxEnergy);
-            EventManager.onEnergyChange.Invoke((float)_energy/MaxEnergy);
+            EventManager.Instance.OnEnergyChange.Invoke((float)_energy/MaxEnergy);
         }
         get
         {

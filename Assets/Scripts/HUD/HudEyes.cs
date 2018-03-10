@@ -51,19 +51,30 @@ public class HudEyes : MonoBehaviour {
     public float EyeAngularSpeedPerSecond = 180;
 
     // the selected eye
-    public EyeColor SelectedEye = EyeColor.RED;
+    [SerializeField]
+    private FilterColor _selectedEye = FilterColor.RED;
+    public FilterColor SelectedEye {
+        get
+        {
+            return _selectedEye;
+        }
+        set
+        {
+            _selectedEye = value;
+        }
+    }
 
     // gather information on each eye
     private struct EyeData
     {
-        public EyeData(EyeColor color, Transform transform, Image image)
+        public EyeData(FilterColor color, Transform transform, Image image)
         {
             Color = color;
             Transform = transform;
             Image = image;
         }
 
-        public EyeColor Color;
+        public FilterColor Color;
         public Transform Transform;
         public Image Image;
     };
@@ -80,9 +91,9 @@ public class HudEyes : MonoBehaviour {
         (
             new EyeData[]
             {
-                new EyeData(EyeColor.RED, _redEyeTransform, _redEyeImage),
-                new EyeData(EyeColor.GREEN, _greenEyeTransform, _greenEyeImage),
-                new EyeData(EyeColor.BLUE, _blueEyeTransform, _blueEyeImage)
+                new EyeData(FilterColor.RED, _redEyeTransform, _redEyeImage),
+                new EyeData(FilterColor.GREEN, _greenEyeTransform, _greenEyeImage),
+                new EyeData(FilterColor.BLUE, _blueEyeTransform, _blueEyeImage)
             }
         );
     }
@@ -90,6 +101,11 @@ public class HudEyes : MonoBehaviour {
     // rotate list until the first eye data (peek) is the selected eye
     private void UpdateEyeDataQueue()
     {
+        if (_eyeData == null)
+        {
+            // TODO find why the editor does not call awake and causes this methode to raise an error
+            Awake();
+        }
         while(_eyeData.Peek().Color != SelectedEye)
         {
             RotateEyeDataQueue();
@@ -129,7 +145,7 @@ public class HudEyes : MonoBehaviour {
             // update eye sprite
             switch (_eyeData.Peek().Color)
             {
-                case EyeColor.RED:
+                case FilterColor.RED:
                     if (_eyeData.Peek().Color == SelectedEye)
                     {
                         _eyeData.Peek().Image.sprite = _openRedEyeSprite;
@@ -139,7 +155,7 @@ public class HudEyes : MonoBehaviour {
                         _eyeData.Peek().Image.sprite = _closedRedEyeSprite;
                     }
                     break;
-                case EyeColor.GREEN:
+                case FilterColor.GREEN:
                     if (_eyeData.Peek().Color == SelectedEye)
                     {
                         _eyeData.Peek().Image.sprite = _openGreenEyeSprite;
@@ -149,7 +165,7 @@ public class HudEyes : MonoBehaviour {
                         _eyeData.Peek().Image.sprite = _closedGreenEyeSprite;
                     }
                     break;
-                case EyeColor.BLUE:
+                case FilterColor.BLUE:
                     if (_eyeData.Peek().Color == SelectedEye)
                     {
                         _eyeData.Peek().Image.sprite = _openBlueEyeSprite;

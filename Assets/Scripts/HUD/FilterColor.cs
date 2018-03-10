@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-public enum EyeColor
+public enum FilterColor
 {
     RED,
     GREEN,

@@ -16,7 +16,7 @@ public class EngineerCombo : MonoBehaviour {
         set
         {
             _remainingTimeSec = value;
-            EventManager.onComboRemainingTimeChange.Invoke(Mathf.Max(0, _remainingTimeSec/TimeOutSec));
+            EventManager.Instance.OnComboRemainingTimeChange.Invoke(Mathf.Max(0, _remainingTimeSec/TimeOutSec));
         }
         get
         {
@@ -36,7 +36,7 @@ public class EngineerCombo : MonoBehaviour {
         {
             _combo = value;
 
-            EventManager.onComboChange.Invoke(_combo);
+            EventManager.Instance.onComboChange.Invoke(_combo.ToString());
 
             // compute multiplier
 
@@ -73,7 +73,7 @@ public class EngineerCombo : MonoBehaviour {
         set
         {
             _multiplier = value;
-            EventManager.onComboMultiplierChange.Invoke(_multiplier);
+            EventManager.Instance.OnComboMultiplierChange.Invoke("x" + _multiplier);
         }
     }
 
@@ -82,7 +82,7 @@ public class EngineerCombo : MonoBehaviour {
     void Awake()
     {
         mechaController = GetComponent<MechaController>();
-        EventManager.onLetterTyped.AddListener(OnLetterTyped);
+        //EventManager.onLetterTyped.AddListener(OnLetterTyped);
     }
 
     void Start()

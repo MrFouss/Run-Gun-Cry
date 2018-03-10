@@ -21,12 +21,12 @@ public class LettersDisplay : MonoBehaviour {
 
     // Use this for initialization
     void Awake () {
-        EventManager.onCurrentLetterChange.AddListener(UpdateCurrentLetter);
-        EventManager.onNextLettersChange.AddListener(UpdateNextLetters);
-        EventManager.onPastLettersChange.AddListener(UpdatePastLetters);
-        EventManager.onComboMultiplierChange.AddListener(UpdateComboMultiplier);
-        EventManager.onComboChange.AddListener(UpdateCombo);
-        EventManager.onComboRemainingTimeChange.AddListener(UpdateComboRemainingTime);
+        EventManager.Instance.OnCurrentLetterChange.AddListener(UpdateCurrentLetter);
+        EventManager.Instance.OnNextLettersChange.AddListener(UpdateNextLetters);
+        //EventManager.Instance.onPastLettersChange.AddListener(UpdatePastLetters);
+        EventManager.Instance.OnComboMultiplierChange.AddListener(UpdateComboMultiplier);
+        EventManager.Instance.onComboChange.AddListener(UpdateCombo);
+        EventManager.Instance.OnComboRemainingTimeChange.AddListener(UpdateComboRemainingTime);
     }
 
     private void UpdateComboRemainingTime(float remainingPercentage)
@@ -40,24 +40,24 @@ public class LettersDisplay : MonoBehaviour {
         }
     }
 
-    private void UpdateComboMultiplier(int multiplier)
+    private void UpdateComboMultiplier(string multiplier)
     {
         multiplierText.text = "x" + multiplier;
     }
 
-    private void UpdateCombo(long combo)
+    private void UpdateCombo(string combo)
     {
         // combo might be greater than comboTopValue
-        Color color = Color.HSVToRGB((float)0.9f * Mathf.Min(combo, comboTopValue) / comboTopValue, 1f, 0.8f);
-        comboText.text = "<color=#" + ColorUtility.ToHtmlStringRGB(color) + ">Combo x" + combo + "</color>";
+        //Color color = Color.HSVToRGB((float)0.9f * Mathf.Min(combo, comboTopValue) / comboTopValue, 1f, 0.8f);
+        //comboText.text = "<color=#" + ColorUtility.ToHtmlStringRGB(color) + ">Combo x" + combo + "</color>";
     }
 
-    private void UpdateCurrentLetter(char newLetter)
+    private void UpdateCurrentLetter(string newLetter)
     {
         currentLetterText.text = newLetter.ToString();
     }
 
-    private void UpdateNextLetters(char[] nextLetters)
+    private void UpdateNextLetters(string nextLetters)
     {
         string tmp = "";
 
@@ -69,23 +69,23 @@ public class LettersDisplay : MonoBehaviour {
         nextLettersText.text = tmp;
     }
 
-    private void UpdatePastLetters(char[] pastLetters, bool[] success)
-    {
-        string tmp = "";
+    //private void UpdatePastLetters(char[] pastLetters, bool[] success)
+    //{
+    //    string tmp = "";
 
-        for (int i = 0; i < pastLetters.Length; ++i)
-        {
-            if (success[i])
-            {
-                tmp += "<color=#" + ColorUtility.ToHtmlStringRGB(successfulLettersColor) + ">" + pastLetters[i] + "</color>";
-            }
-            else
-            {
-                tmp += pastLetters[i];
-            }
-        }
+    //    for (int i = 0; i < pastLetters.Length; ++i)
+    //    {
+    //        if (success[i])
+    //        {
+    //            tmp += "<color=#" + ColorUtility.ToHtmlStringRGB(successfulLettersColor) + ">" + pastLetters[i] + "</color>";
+    //        }
+    //        else
+    //        {
+    //            tmp += pastLetters[i];
+    //        }
+    //    }
 
-        previousLettersText.text = tmp;
-    }
+    //    previousLettersText.text = tmp;
+    //}
 
 }

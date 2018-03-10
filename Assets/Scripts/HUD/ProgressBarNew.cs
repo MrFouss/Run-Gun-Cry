@@ -13,8 +13,20 @@ public class ProgressBarNew : MonoBehaviour {
     // this induces a delay between the moment the progress is set and the moment it actually shows that progress
     public float ProgressSpeedPerSecond = 1;
 
+    [SerializeField]
+    private float _progress = 1;
     // target progress value (between 0 and 1)
-    public float Progress = 1;
+    public float Progress
+    {
+        get
+        {
+            return _progress;
+        }
+        set
+        {
+            _progress = value;
+        }
+    }
 
     // actual progress displayed (may be different from Progress due to progress speed)
     [SerializeField]
@@ -39,6 +51,11 @@ public class ProgressBarNew : MonoBehaviour {
     private Image _backgroundImage;
     [SerializeField]
     private Image _barImage;
+
+    public void UpdateProgress(float f)
+    {
+        Progress = f;
+    }
 
     private void Update()
     {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FilterSelector : MonoBehaviour {
 
-    public enum FilterColor { RED=0, GREEN=1, BLUE=2 };
+    //public enum FilterColor { RED=0, GREEN=1, BLUE=2 };
 
     private FilterColor _selectedFilter;
     public FilterColor SelectedFilter
@@ -12,7 +12,7 @@ public class FilterSelector : MonoBehaviour {
         set
         {
             _selectedFilter = value;
-            EventManager.onFilterSelected.Invoke(_selectedFilter);
+            EventManager.Instance.OnFilterSelected.Invoke(_selectedFilter);
         }
         get
         {
