@@ -52,11 +52,6 @@ public class ProgressBar : MonoBehaviour {
     [SerializeField]
     private Image _barImage;
 
-    public void UpdateProgress(float f)
-    {
-        Progress = f;
-    }
-
     private void Update()
     {
         // force sprite update

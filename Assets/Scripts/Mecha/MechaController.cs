@@ -7,7 +7,32 @@ public class MechaController : MonoBehaviour
 {
     public enum ReloadType {ENERGY, SHIELD};
 
-    public ReloadType ReloadedResource = ReloadType.ENERGY;
+    private ReloadType _reloadedResource = ReloadType.ENERGY;
+    public ReloadType ReloadedResource
+    {
+        get
+        {
+            return _reloadedResource;
+        }
+        set
+        {
+            switch (value)
+            {
+                case ReloadType.ENERGY:
+                    EventManager.Instance.OnEnergyReloadChange.Invoke(1);
+                    EventManager.Instance.OnShieldReloadChange.Invoke(0);
+                    break;
+                case ReloadType.SHIELD:
+                    EventManager.Instance.OnEnergyReloadChange.Invoke(0);
+                    EventManager.Instance.OnShieldReloadChange.Invoke(1);
+                    break;
+            }
+
+            _reloadedResource = value;
+        }
+    }
+
+
     public int BaseShieldReload = 1;
     public int BaseEnergyReload = 1;
 
@@ -24,7 +49,7 @@ public class MechaController : MonoBehaviour
 
     public Animation LowHealthAnimation;
     public Animation LowEnergyAnimation;
-
+    
     private int _health;
     public int Health
     {
@@ -38,7 +63,7 @@ public class MechaController : MonoBehaviour
             return _health;
         }
     }
-
+    
     private int _shield;
     public int Shield
     {
@@ -114,6 +139,8 @@ public class MechaController : MonoBehaviour
         Health = MaxHealth;
         Shield = MaxShield;
         Energy = MaxEnergy;
+
+        ReloadedResource = ReloadType.ENERGY;
 
         // consume energy every second
         InvokeRepeating("ConsumeEnergyPassive", 1, 1);

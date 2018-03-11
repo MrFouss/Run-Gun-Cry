@@ -96,6 +96,9 @@ public class EventManager : MonoBehaviour {
     // when the target crosshair position should change <position in screen space> (for UI)
     public CustomEventVector2 OnCrosshairPositionChange;
 
+    // when we change from reloading energy [shield] to reloading shield [energie] <percentage of reload> (for UI)
+    public CustomEventFloat OnEnergyReloadChange;
+    public CustomEventFloat OnShieldReloadChange;
 
 
     // TODO remove static fields
