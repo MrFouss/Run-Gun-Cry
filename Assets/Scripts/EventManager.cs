@@ -22,6 +22,9 @@ public class CustomEventFilterColor : UnityEvent<FilterColor> { }
 public class CustomEventVector2 : UnityEvent<Vector2> { }
 
 [System.Serializable]
+public class CustomEventBool : UnityEvent<bool> { }
+
+[System.Serializable]
 public class CustomEvent2<T1, T2> : UnityEvent<T1, T2> { }
 
 public enum EnemyType { Obstacle, Shooter, Charger, Coward };
@@ -99,6 +102,10 @@ public class EventManager : MonoBehaviour {
     // when we change from reloading energy [shield] to reloading shield [energie] <percentage of reload> (for UI)
     public CustomEventFloat OnEnergyReloadChange;
     public CustomEventFloat OnShieldReloadChange;
+
+    // when the energy level is low / high <is low> (for UI)
+    public CustomEventBool OnEnergyLow;
+    public CustomEventBool OnHealthLow;
 
 
     // TODO remove static fields

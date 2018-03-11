@@ -172,6 +172,7 @@ public class MechaController : MonoBehaviour
             //audioSource.Play();
             //LowHealthAnimation.Play();
         }
+        EventManager.Instance.OnHealthLow.Invoke(Health <= HealthThreshold && Shield == 0);
     }
 
     // Passive energy consumption (every second)
@@ -190,6 +191,7 @@ public class MechaController : MonoBehaviour
             //audioSource.Play();
             //LowEnergyAnimation.Play();
         }
+        EventManager.Instance.OnEnergyLow.Invoke(Energy <= EnergyThreshold);
     }
 
     public bool CanConsumeEnergy(int consumption)

@@ -37,6 +37,26 @@ public class ProgressBar : MonoBehaviour {
 
     // the color of the progress bar
     public Color BarColor;
+    public Color AltBarColor;
+
+    // alternate between base and alternative bar color at a certain rate
+    [SerializeField]
+    private bool _blinkingColor = false;
+    public bool BlinkingColor
+    {
+        set
+        {
+            _blinkingColor = value;
+        }
+        get
+        {
+            return _blinkingColor;
+        }
+    }
+    public float BlinkingDuration = 0.5f;
+
+    // keep track of the blinking state
+    private bool _currentlyBlinking = false;
 
     // the color of the progress bar background
     public Color BackgroundColor;
@@ -52,14 +72,66 @@ public class ProgressBar : MonoBehaviour {
     [SerializeField]
     private Image _barImage;
 
+    private void SetBarColor()
+    {
+        // decide what to do
+        if (BlinkingColor && !_currentlyBlinking)
+        {
+            // should start blinking
+            _currentlyBlinking = true;
+            SetBarAltColor();
+        }
+        else if (!BlinkingColor && _currentlyBlinking)
+        {
+            // should stop blinking
+            _currentlyBlinking = false;
+            SetBarBaseColor();
+        }
+        else if (BlinkingColor && _currentlyBlinking)
+        {
+            // in blinking mode
+            // don't do anything
+        }
+        else if (!BlinkingColor && !_currentlyBlinking)
+        {
+            // out of blinking mode
+            SetBarBaseColor();
+        }
+    }
+
+    private void SetBarBaseColor()
+    {
+        // set base color
+        _barImage.color = BarColor;
+        if (_currentlyBlinking && Application.isPlaying)
+        {
+            // continue blinking in x seconds
+            Invoke("SetBarAltColor", BlinkingDuration);
+        }
+    }
+
+    private void SetBarAltColor()
+    {
+        if (_currentlyBlinking && Application.isPlaying)
+        {
+            // change color and continue invocations only if in blinking mode
+            _barImage.color = AltBarColor;
+            Invoke("SetBarBaseColor", BlinkingDuration);
+        }
+        else if (_currentlyBlinking)
+        {
+            _barImage.color = AltBarColor;
+        }
+    }
+
     private void Update()
     {
-        // force sprite update
+        // blink color or base color
+        SetBarColor();
+        _barImage.sprite = BarMask;
         _backgroundImage.sprite = BarMask;
         _backgroundImage.color = BackgroundColor;
-        _barImage.sprite = BarMask;
-        _barImage.color = BarColor;
-
+        
         // update actual progress
         if (!Application.isPlaying)
         {
