@@ -19,6 +19,9 @@ public class CustomEventFloat : UnityEvent<float> { }
 public class CustomEventFilterColor : UnityEvent<FilterColor> { }
 
 [System.Serializable]
+public class CustomEventVector2 : UnityEvent<Vector2> { }
+
+[System.Serializable]
 public class CustomEvent2<T1, T2> : UnityEvent<T1, T2> { }
 
 public enum EnemyType { Obstacle, Shooter, Charger, Coward };
@@ -87,11 +90,16 @@ public class EventManager : MonoBehaviour {
     public CustomEventFloat OnEnergyChange;
     public CustomEventString OnScoreChange;
 
-    // when selected filter change <filter color>
+    // when selected filter change <filter color> (for UI)
     public CustomEventFilterColor OnFilterSelected;
     
+    // when the target crosshair position should change <position in screen space> (for UI)
+    public CustomEventVector2 OnCrosshairPositionChange;
+
+
+
     // TODO remove static fields
-    
+
     // scoring
 
     // when an enemy is destroyed by the player <EnemyType, DestructionType>
@@ -111,7 +119,4 @@ public class EventManager : MonoBehaviour {
     // every second, shield data must be sent to calculate average shield
     public static readonly UnityEvent<int> onShieldDataSending = new CustomEvent1<int>();
     
-    // stats
-
-    public static readonly UnityEvent<Vector3> onCrosshairPositionChange = new CustomEvent1<Vector3>();
 }

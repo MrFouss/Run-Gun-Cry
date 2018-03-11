@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class FilterSelector : MonoBehaviour {
 
-    //public enum FilterColor { RED=0, GREEN=1, BLUE=2 };
-
+    [SerializeField]
     private FilterColor _selectedFilter;
     public FilterColor SelectedFilter
     {
