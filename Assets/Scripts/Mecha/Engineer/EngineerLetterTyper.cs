@@ -118,6 +118,22 @@ public class EngineerLetterTyper : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // check if toggling reloaded resource
+        if (Input.GetButtonDown("ToggleReloadedResource"))
+        {
+            switch (mechaController.ReloadedResource)
+            {
+                case MechaController.ReloadType.ENERGY:
+                    mechaController.ReloadedResource = MechaController.ReloadType.SHIELD;
+                    break;
+                case MechaController.ReloadType.SHIELD:
+                    mechaController.ReloadedResource = MechaController.ReloadType.ENERGY;
+                    break;
+            }
+        }
+
+
+        // check letters typed
         foreach (char c in Input.inputString)
         {
             char upperC = char.ToUpper(c);
