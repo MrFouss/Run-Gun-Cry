@@ -196,6 +196,16 @@ Prefab:
     m_Modifications:
     - target: {fileID: 114223930444585144, guid: 79dada54cb026234bbc68a079e9929b5,
         type: 2}
+      propertyPath: OnEnergyLow.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114223930444585144, guid: 79dada54cb026234bbc68a079e9929b5,
+        type: 2}
+      propertyPath: OnHealthLow.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114223930444585144, guid: 79dada54cb026234bbc68a079e9929b5,
+        type: 2}
       propertyPath: OnEnergyReloadChange.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -339,6 +349,66 @@ Prefab:
     - target: {fileID: 114223930444585144, guid: 79dada54cb026234bbc68a079e9929b5,
         type: 2}
       propertyPath: OnShieldReloadChange.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 114223930444585144, guid: 79dada54cb026234bbc68a079e9929b5,
+        type: 2}
+      propertyPath: OnEnergyLow.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1322365010}
+    - target: {fileID: 114223930444585144, guid: 79dada54cb026234bbc68a079e9929b5,
+        type: 2}
+      propertyPath: OnEnergyLow.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: set_BlinkingColor
+      objectReference: {fileID: 0}
+    - target: {fileID: 114223930444585144, guid: 79dada54cb026234bbc68a079e9929b5,
+        type: 2}
+      propertyPath: OnEnergyLow.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114223930444585144, guid: 79dada54cb026234bbc68a079e9929b5,
+        type: 2}
+      propertyPath: OnEnergyLow.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 114223930444585144, guid: 79dada54cb026234bbc68a079e9929b5,
+        type: 2}
+      propertyPath: OnHealthLow.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1111573546}
+    - target: {fileID: 114223930444585144, guid: 79dada54cb026234bbc68a079e9929b5,
+        type: 2}
+      propertyPath: OnHealthLow.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1365452181}
+    - target: {fileID: 114223930444585144, guid: 79dada54cb026234bbc68a079e9929b5,
+        type: 2}
+      propertyPath: OnHealthLow.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: set_BlinkingColor
+      objectReference: {fileID: 0}
+    - target: {fileID: 114223930444585144, guid: 79dada54cb026234bbc68a079e9929b5,
+        type: 2}
+      propertyPath: OnHealthLow.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114223930444585144, guid: 79dada54cb026234bbc68a079e9929b5,
+        type: 2}
+      propertyPath: OnHealthLow.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 114223930444585144, guid: 79dada54cb026234bbc68a079e9929b5,
+        type: 2}
+      propertyPath: OnHealthLow.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: set_BlinkingColor
+      objectReference: {fileID: 0}
+    - target: {fileID: 114223930444585144, guid: 79dada54cb026234bbc68a079e9929b5,
+        type: 2}
+      propertyPath: OnHealthLow.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114223930444585144, guid: 79dada54cb026234bbc68a079e9929b5,
+        type: 2}
+      propertyPath: OnHealthLow.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -2486,17 +2556,17 @@ Prefab:
     - target: {fileID: 114106744297836148, guid: dde6c1ddd160e04458ddb5c52a3ce539,
         type: 2}
       propertyPath: AltBarColor.r
-      value: 1
+      value: 0.9338235
       objectReference: {fileID: 0}
     - target: {fileID: 114106744297836148, guid: dde6c1ddd160e04458ddb5c52a3ce539,
         type: 2}
       propertyPath: AltBarColor.g
-      value: 0
+      value: 0.534
       objectReference: {fileID: 0}
     - target: {fileID: 114106744297836148, guid: dde6c1ddd160e04458ddb5c52a3ce539,
         type: 2}
       propertyPath: AltBarColor.b
-      value: 0
+      value: 0.52870893
       objectReference: {fileID: 0}
     - target: {fileID: 114106744297836148, guid: dde6c1ddd160e04458ddb5c52a3ce539,
         type: 2}
@@ -2507,6 +2577,11 @@ Prefab:
         type: 2}
       propertyPath: _blinkingColor
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114106744297836148, guid: dde6c1ddd160e04458ddb5c52a3ce539,
+        type: 2}
+      propertyPath: BlinkingDuration
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dde6c1ddd160e04458ddb5c52a3ce539, type: 2}
@@ -2966,6 +3041,36 @@ Prefab:
         type: 2}
       propertyPath: Direction
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114106744297836148, guid: dde6c1ddd160e04458ddb5c52a3ce539,
+        type: 2}
+      propertyPath: _actualProgress
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114106744297836148, guid: dde6c1ddd160e04458ddb5c52a3ce539,
+        type: 2}
+      propertyPath: AltBarColor.r
+      value: 0.5994809
+      objectReference: {fileID: 0}
+    - target: {fileID: 114106744297836148, guid: dde6c1ddd160e04458ddb5c52a3ce539,
+        type: 2}
+      propertyPath: AltBarColor.g
+      value: 0.403
+      objectReference: {fileID: 0}
+    - target: {fileID: 114106744297836148, guid: dde6c1ddd160e04458ddb5c52a3ce539,
+        type: 2}
+      propertyPath: AltBarColor.b
+      value: 0.89386755
+      objectReference: {fileID: 0}
+    - target: {fileID: 114106744297836148, guid: dde6c1ddd160e04458ddb5c52a3ce539,
+        type: 2}
+      propertyPath: AltBarColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114106744297836148, guid: dde6c1ddd160e04458ddb5c52a3ce539,
+        type: 2}
+      propertyPath: BlinkingDuration
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dde6c1ddd160e04458ddb5c52a3ce539, type: 2}
@@ -3834,6 +3939,41 @@ Prefab:
       propertyPath: Direction
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114106744297836148, guid: dde6c1ddd160e04458ddb5c52a3ce539,
+        type: 2}
+      propertyPath: _actualProgress
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114106744297836148, guid: dde6c1ddd160e04458ddb5c52a3ce539,
+        type: 2}
+      propertyPath: AltBarColor.r
+      value: 0.5994809
+      objectReference: {fileID: 0}
+    - target: {fileID: 114106744297836148, guid: dde6c1ddd160e04458ddb5c52a3ce539,
+        type: 2}
+      propertyPath: AltBarColor.g
+      value: 0.403
+      objectReference: {fileID: 0}
+    - target: {fileID: 114106744297836148, guid: dde6c1ddd160e04458ddb5c52a3ce539,
+        type: 2}
+      propertyPath: AltBarColor.b
+      value: 0.89386755
+      objectReference: {fileID: 0}
+    - target: {fileID: 114106744297836148, guid: dde6c1ddd160e04458ddb5c52a3ce539,
+        type: 2}
+      propertyPath: AltBarColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114106744297836148, guid: dde6c1ddd160e04458ddb5c52a3ce539,
+        type: 2}
+      propertyPath: _blinkingColor
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114106744297836148, guid: dde6c1ddd160e04458ddb5c52a3ce539,
+        type: 2}
+      propertyPath: BlinkingDuration
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dde6c1ddd160e04458ddb5c52a3ce539, type: 2}
   m_IsPrefabParent: 0
@@ -4376,12 +4516,45 @@ MonoBehaviour:
       PublicKeyToken=null
   OnEnergyLow:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1322365010}
+        m_MethodName: set_BlinkingColor
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: CustomEventBool, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   OnHealthLow:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1111573546}
+        m_MethodName: set_BlinkingColor
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1365452181}
+        m_MethodName: set_BlinkingColor
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: CustomEventBool, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
 --- !u!224 &2141409412 stripped

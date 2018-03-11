@@ -74,36 +74,49 @@ public class ProgressBar : MonoBehaviour {
 
     private void SetBarColor()
     {
-        // decide what to do
-        if (BlinkingColor && !_currentlyBlinking)
+        if (Application.isPlaying)
         {
-            // should start blinking
-            _currentlyBlinking = true;
-            SetBarAltColor();
-        }
-        else if (!BlinkingColor && _currentlyBlinking)
+            // decide what to do
+            if (BlinkingColor && !_currentlyBlinking)
+            {
+                // should start blinking
+                _currentlyBlinking = true;
+                SetBarAltColor();
+            }
+            else if (!BlinkingColor && _currentlyBlinking)
+            {
+                // should stop blinking
+                _currentlyBlinking = false;
+            }
+            else if (BlinkingColor && _currentlyBlinking)
+            {
+                // in blinking mode
+                // do nothing
+            }
+            else if (!BlinkingColor && !_currentlyBlinking)
+            {
+                // out of blinking mode
+                SetBarBaseColor();
+            }
+        } else
         {
-            // should stop blinking
-            _currentlyBlinking = false;
-            SetBarBaseColor();
+            // force colors in editor
+            if (BlinkingColor)
+            {
+                _barImage.color = AltBarColor;
+            } else
+            {
+                _barImage.color = BarColor;
+            }
         }
-        else if (BlinkingColor && _currentlyBlinking)
-        {
-            // in blinking mode
-            // don't do anything
-        }
-        else if (!BlinkingColor && !_currentlyBlinking)
-        {
-            // out of blinking mode
-            SetBarBaseColor();
-        }
+
     }
 
     private void SetBarBaseColor()
     {
         // set base color
         _barImage.color = BarColor;
-        if (_currentlyBlinking && Application.isPlaying)
+        if (_currentlyBlinking)
         {
             // continue blinking in x seconds
             Invoke("SetBarAltColor", BlinkingDuration);
@@ -112,15 +125,11 @@ public class ProgressBar : MonoBehaviour {
 
     private void SetBarAltColor()
     {
-        if (_currentlyBlinking && Application.isPlaying)
+        if (_currentlyBlinking)
         {
             // change color and continue invocations only if in blinking mode
             _barImage.color = AltBarColor;
             Invoke("SetBarBaseColor", BlinkingDuration);
-        }
-        else if (_currentlyBlinking)
-        {
-            _barImage.color = AltBarColor;
         }
     }
 
