@@ -81,4 +81,7 @@ public class EventManager {
     public static readonly UnityEvent<FilterSelector.FilterColor> onFilterSelected = new CustomEvent1<FilterSelector.FilterColor>();
 
     public static readonly UnityEvent<Vector3> onCrosshairPositionChange = new CustomEvent1<Vector3>();
+
+    // when speed/firepower balance changes
+    public static readonly UnityEvent<int> onSpeedFirePowerBalanceChange = new CustomEvent1<int>();
 }

@@ -9,6 +9,22 @@ public class PilotController : MonoBehaviour
 
     // number of grounds currently in collision with the rigid body
     private int grounds = 0;
+
+    // state of the speed/firepower balance
+    private int _speedFirePowerBalance;
+    public int SpeedFirePowerBalance
+    {
+        set
+        {
+            _speedFirePowerBalance = value;
+            EventManager.onSpeedFirePowerBalanceChange.Invoke(_speedFirePowerBalance);
+        }
+        get
+        {
+            return _speedFirePowerBalance;
+        }
+    }
+    private float[] maxSpeedValues = new float[5] { 12, 8, 5, 3, 1 };
     
     private float maxForwardSpeed; // depend on the situation
     public float ForwardForce = 20f;
@@ -19,10 +35,17 @@ public class PilotController : MonoBehaviour
     public float MaxZeroEnergyForwardSpeed = 20f;
     public float AirControlMultiplier = 0.25f;
 
+    // used to avoid having two consecutive frames reduce speed when holding buttons
+    private bool speedIncreasedLastFrame = false;
+    private bool speedDecreasedLastFrame = false;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         mechaController = GetComponent<MechaController>();
+        // initialize speed/firepower balance
+        SpeedFirePowerBalance = 2;
+        EventManager.onSpeedFirePowerBalanceChange.AddListener(OnSpeedFirePowerBalanceChange);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -80,6 +103,39 @@ public class PilotController : MonoBehaviour
         {
             rb.velocity -= sideSpeed.normalized * (sideSpeed.magnitude - MaxSideSpeed);
         }
+
+        if (!Input.GetButton("IncreaseSpeed"))
+        {
+            speedIncreasedLastFrame = false;
+        }
+        if (!speedIncreasedLastFrame && Input.GetButton("IncreaseSpeed"))
+        {
+            if (SpeedFirePowerBalance > 0)
+            {
+                SpeedFirePowerBalance--;
+                EventManager.onSpeedFirePowerBalanceChange.Invoke(SpeedFirePowerBalance);
+                speedIncreasedLastFrame = true;
+            }
+        }
+
+        if (!Input.GetButton("IncreaseFirePower"))
+        {
+            speedDecreasedLastFrame = false;
+        }
+        if (!speedDecreasedLastFrame && Input.GetButton("IncreaseFirePower"))
+        {
+            if (SpeedFirePowerBalance < 4)
+            {
+                SpeedFirePowerBalance++;
+                EventManager.onSpeedFirePowerBalanceChange.Invoke(SpeedFirePowerBalance);
+                speedDecreasedLastFrame = true;
+            }
+        }
+    }
+
+    private void OnSpeedFirePowerBalanceChange(int balanceValue)
+    {
+        MaxNormalForwardSpeed = maxSpeedValues[balanceValue];
     }
 
 }

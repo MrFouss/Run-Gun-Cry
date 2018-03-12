@@ -15,7 +15,8 @@ public class MechaController : MonoBehaviour
     public int MaxHealth = 100;
     public int MaxShield = 100;
     public int MaxEnergy = 70;
-    public int EnergyConsumptionPerSecond = 1;
+    public int EnergyConsumptionPerSecond;
+    public int[] ConsumptionValues = new int[5] { 5, 4, 3, 2, 1 };
     public int HealthThreshold = 10;
     public int EnergyThreshold = 10;
 
@@ -123,6 +124,9 @@ public class MechaController : MonoBehaviour
 
         // inform the scoring of the shield amount every second
         InvokeRepeating("SendShieldData", 1, 1);
+
+        // listens to speed/firepower balance changes for energy consumption
+        EventManager.onSpeedFirePowerBalanceChange.AddListener(OnSpeedFirePowerBalanceChange);
     }
 
     public void TakeDamage(int damage)
@@ -267,6 +271,11 @@ public class MechaController : MonoBehaviour
     public void GameOver()
     {
         SceneManager.LoadScene("GameOver");
+    }
+
+    private void OnSpeedFirePowerBalanceChange(int balanceValue)
+    {
+        EnergyConsumptionPerSecond = ConsumptionValues[balanceValue];
     }
 
 }
