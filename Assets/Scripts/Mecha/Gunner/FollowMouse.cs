@@ -72,10 +72,10 @@ public class FollowMouse : MonoBehaviour {
                 desiredCrosshairOutOfBoundaries = (!arrayMask[(int)desiredPos.x,(int)desiredPos.y]);
             }
             // Put the cursor on the found desired position
-            EventManager.onCrosshairPositionChange.Invoke(desiredPos);
+            EventManager.Instance.OnCrosshairPositionChange.Invoke(desiredPos);
         } else
         {
-            EventManager.onCrosshairPositionChange.Invoke(pos);
+            EventManager.Instance.OnCrosshairPositionChange.Invoke(pos);
         }
         
 	}

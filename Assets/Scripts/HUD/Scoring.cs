@@ -10,7 +10,7 @@ public class Scoring : MonoBehaviour {
         set
         {
             _score = Mathf.Max(0, value);
-            EventManager.onScoreChange.Invoke(_score);
+            EventManager.Instance.OnScoreChange.Invoke(_score.ToString());
         }
         get
         {
@@ -69,7 +69,6 @@ public class Scoring : MonoBehaviour {
         EventManager.onEnemyDestruction.AddListener(OnEnemyDestruction);
         EventManager.onGunnerShot.AddListener(OnGunnerShot);
         EventManager.onShotHitting.AddListener(OnShotHitting);
-        EventManager.onLetterTyped.AddListener(OnLetterTyped);
         EventManager.onDamageTaken.AddListener(OnDamageTaken);
         EventManager.onDistanceTravelledChange.AddListener(OnDistanceTravelledChange);
         EventManager.onEngineerReload.AddListener(OnEngineerReload);
@@ -165,7 +164,7 @@ public class Scoring : MonoBehaviour {
         }
     }
 
-    private void OnLetterTyped(char letter, bool success)
+    public void OnLetterTyped(char letter, bool success)
     {
         if (success)
         {
