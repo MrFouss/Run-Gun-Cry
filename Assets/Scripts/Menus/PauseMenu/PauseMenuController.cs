@@ -9,11 +9,13 @@ public class PauseMenuController : MonoBehaviour {
     public GameObject PauseMenu;
     public GameObject Mecha;
 
-    private Slider slider;
+    private Slider volumeSlider;
+    private Text volumeValueText;
 
     void Start()
     {
-        slider = PauseMenu.GetComponentInChildren<Slider>();
+        volumeSlider = PauseMenu.GetComponentInChildren<Slider>();
+        volumeValueText = volumeSlider.GetComponentInChildren<Text>();
     }
 
 	// Update is called once per frame
@@ -46,6 +48,10 @@ public class PauseMenuController : MonoBehaviour {
         Mecha.GetComponent<CannonBehavior>().enabled = false;
         Mecha.GetComponent<EngineerLetterTyper>().enabled = false;
         Mecha.GetComponent<FollowMouse>().enabled = false;
+
+        // Correctly load the volume slider
+        volumeSlider.value = AudioListener.volume;
+        volumeValueText.text = (volumeSlider.value * 100.0f).ToString();
     }
 
     public void BackToMainMenu()
@@ -68,8 +74,16 @@ public class PauseMenuController : MonoBehaviour {
         Mecha.GetComponent<FollowMouse>().enabled = true;
     }
 
+    public void ExitGame() {
+        Application.Quit();
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #endif
+    }
+
     public void UpdateVolume()
     {
-        AudioListener.volume = slider.value;
+        AudioListener.volume = volumeSlider.value;
+        volumeValueText.text = (volumeSlider.value * 100.0f).ToString();
     }
 }
