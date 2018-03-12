@@ -6,6 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class EventsDebriefing : MonoBehaviour {
 
+    public void Awake() {
+        Cursor.visible = true;
+    }
+
     public void OnMainMenuPress()
     {
         SceneManager.LoadScene("MainMenu");
