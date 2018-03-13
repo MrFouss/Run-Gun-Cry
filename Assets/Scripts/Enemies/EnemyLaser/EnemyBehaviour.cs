@@ -78,15 +78,11 @@ public class EnemyBehaviour : MonoBehaviour
                     Stop();
                 }
             }
-
-            //d <= 5   5 >= d > 15
-
             else
             {
                 if (isInRange)
                 {
                     float distance = Vector3.Distance(transform.position, mecha.position);
-                    Debug.Log("distance = " + distance);
                     if (distance <= MinRange)
                     {
                         rb.AddForce(Vector3.forward * MoveForce);
@@ -100,7 +96,6 @@ public class EnemyBehaviour : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log("stop bro");
                         Stop();
                     }
                     if (rb.velocity.magnitude > MaxSpeed)
