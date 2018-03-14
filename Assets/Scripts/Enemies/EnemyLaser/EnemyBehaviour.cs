@@ -106,10 +106,7 @@ public class EnemyBehaviour : MonoBehaviour
                 else
                 {
                     float distance = Vector3.Distance(transform.position, mecha.position);
-                    if (distance <= DetectionRange)
-                    {
-                        isInRange = true;
-                    }
+                    isInRange = distance <= DetectionRange;
                 }
             }
         }
