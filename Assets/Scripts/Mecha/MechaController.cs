@@ -151,11 +151,6 @@ public class MechaController : MonoBehaviour
 
         // inform the scoring of the shield amount every second
         InvokeRepeating("SendShieldData", 1, 1);
-
-        // listens to speed/firepower balance changes for energy consumption
-
-        // TODO Esia
-        // EventManager.onSpeedFirePowerBalanceChange.AddListener(OnSpeedFirePowerBalanceChange);
     }
 
     public void TakeDamage(int damage)
@@ -304,7 +299,7 @@ public class MechaController : MonoBehaviour
         SceneManager.LoadScene("GameOver");
     }
 
-    private void OnSpeedFirePowerBalanceChange(int balanceValue)
+    public void OnSpeedFirePowerBalanceChange(int balanceValue)
     {
         EnergyConsumptionPerSecond = ConsumptionValues[balanceValue];
     }

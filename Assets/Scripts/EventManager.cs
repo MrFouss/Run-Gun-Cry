@@ -107,6 +107,10 @@ public class EventManager : MonoBehaviour {
     public CustomEventBool OnEnergyLow;
     public CustomEventBool OnHealthLow;
 
+    // when balance between fire and speed changes <percentage> (for UI)
+    public CustomEventFloat OnSpeedBalanceChange;
+    public CustomEventFloat OnFirePowerBalanceChange;
+
 
     // TODO remove static fields
 

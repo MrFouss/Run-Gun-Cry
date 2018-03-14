@@ -23,9 +23,6 @@ public class CannonBehavior : MonoBehaviour {
         FireRateLaser = FireRateLaserValues[2];
         FireRateMissile = FireRateMissileValues[2];
         mechaController = GetComponent<MechaController>();
-
-        // TODO Esia
-        // EventManager.onSpeedFirePowerBalanceChange.AddListener(OnSpeedFirePowerBalanceChange);
     }
 
     void Update () 
@@ -51,7 +48,7 @@ public class CannonBehavior : MonoBehaviour {
         }
     }	
 
-    private void OnSpeedFirePowerBalanceChange(int balanceValue)
+    public void OnSpeedFirePowerBalanceChange(int balanceValue)
     {
         FireRateLaser = FireRateLaserValues[balanceValue];
         FireRateMissile = FireRateMissileValues[balanceValue];
