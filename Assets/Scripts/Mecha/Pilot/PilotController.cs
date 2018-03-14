@@ -18,10 +18,11 @@ public class PilotController : MonoBehaviour
     {
         set
         {
-            _speedFirePowerBalance = Mathf.Clamp(value, 0, 3);
+            _speedFirePowerBalance = Mathf.Clamp(value, 0, 4);
 
-            EventManager.Instance.OnSpeedBalanceChange.Invoke(3 - _speedFirePowerBalance / 3);
-            EventManager.Instance.OnFirePowerBalanceChange.Invoke(_speedFirePowerBalance / 3);
+            EventManager.Instance.OnSpeedBalanceChange.Invoke((4.0f - _speedFirePowerBalance) / 4.0f);
+            EventManager.Instance.OnFirePowerBalanceChange.Invoke(_speedFirePowerBalance / 4.0f);
+
             mechaController.OnSpeedFirePowerBalanceChange(_speedFirePowerBalance);
             canon.OnSpeedFirePowerBalanceChange(_speedFirePowerBalance);
             OnSpeedFirePowerBalanceChange(_speedFirePowerBalance);
