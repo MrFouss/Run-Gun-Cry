@@ -23,7 +23,9 @@ public class CannonBehavior : MonoBehaviour {
         FireRateLaser = FireRateLaserValues[2];
         FireRateMissile = FireRateMissileValues[2];
         mechaController = GetComponent<MechaController>();
-        EventManager.onSpeedFirePowerBalanceChange.AddListener(OnSpeedFirePowerBalanceChange);
+
+        // TODO Esia
+        // EventManager.onSpeedFirePowerBalanceChange.AddListener(OnSpeedFirePowerBalanceChange);
     }
 
     void Update () 

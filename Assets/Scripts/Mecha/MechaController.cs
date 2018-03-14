@@ -153,7 +153,9 @@ public class MechaController : MonoBehaviour
         InvokeRepeating("SendShieldData", 1, 1);
 
         // listens to speed/firepower balance changes for energy consumption
-        EventManager.onSpeedFirePowerBalanceChange.AddListener(OnSpeedFirePowerBalanceChange);
+
+        // TODO Esia
+        // EventManager.onSpeedFirePowerBalanceChange.AddListener(OnSpeedFirePowerBalanceChange);
     }
 
     public void TakeDamage(int damage)
