@@ -108,28 +108,22 @@ public class PilotController : MonoBehaviour
         {
             speedIncreasedLastFrame = false;
         }
-        if (!speedIncreasedLastFrame && Input.GetButton("IncreaseSpeed"))
+        else if (!speedIncreasedLastFrame && Input.GetButton("IncreaseSpeed") && SpeedFirePowerBalance > 0)
         {
-            if (SpeedFirePowerBalance > 0)
-            {
-                SpeedFirePowerBalance--;
-                EventManager.onSpeedFirePowerBalanceChange.Invoke(SpeedFirePowerBalance);
-                speedIncreasedLastFrame = true;
-            }
+            SpeedFirePowerBalance--;
+            EventManager.onSpeedFirePowerBalanceChange.Invoke(SpeedFirePowerBalance);
+            speedIncreasedLastFrame = true;
         }
 
         if (!Input.GetButton("IncreaseFirePower"))
         {
             speedDecreasedLastFrame = false;
         }
-        if (!speedDecreasedLastFrame && Input.GetButton("IncreaseFirePower"))
+        else if (!speedDecreasedLastFrame && Input.GetButton("IncreaseFirePower") && SpeedFirePowerBalance < 4)
         {
-            if (SpeedFirePowerBalance < 4)
-            {
-                SpeedFirePowerBalance++;
-                EventManager.onSpeedFirePowerBalanceChange.Invoke(SpeedFirePowerBalance);
-                speedDecreasedLastFrame = true;
-            }
+            SpeedFirePowerBalance++;
+            EventManager.onSpeedFirePowerBalanceChange.Invoke(SpeedFirePowerBalance);
+            speedDecreasedLastFrame = true;
         }
     }
 
