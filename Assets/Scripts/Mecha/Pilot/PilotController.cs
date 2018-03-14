@@ -17,7 +17,9 @@ public class PilotController : MonoBehaviour
         set
         {
             _speedFirePowerBalance = value;
-            EventManager.onSpeedFirePowerBalanceChange.Invoke(_speedFirePowerBalance);
+
+            // TODO Esia
+            // EventManager.onSpeedFirePowerBalanceChange.Invoke(_speedFirePowerBalance);
         }
         get
         {
@@ -47,7 +49,7 @@ public class PilotController : MonoBehaviour
         SpeedFirePowerBalance = 2;
 
         // TODO Esia
-        EventManager.onSpeedFirePowerBalanceChange.AddListener(OnSpeedFirePowerBalanceChange);
+        // EventManager.onSpeedFirePowerBalanceChange.AddListener(OnSpeedFirePowerBalanceChange);
     }
 
     private void OnCollisionEnter(Collision collision)
