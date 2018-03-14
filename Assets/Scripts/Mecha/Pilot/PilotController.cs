@@ -45,6 +45,8 @@ public class PilotController : MonoBehaviour
         mechaController = GetComponent<MechaController>();
         // initialize speed/firepower balance
         SpeedFirePowerBalance = 2;
+
+        // TODO Esia
         EventManager.onSpeedFirePowerBalanceChange.AddListener(OnSpeedFirePowerBalanceChange);
     }
 
@@ -111,7 +113,9 @@ public class PilotController : MonoBehaviour
         else if (!speedIncreasedLastFrame && Input.GetButton("IncreaseSpeed") && SpeedFirePowerBalance > 0)
         {
             SpeedFirePowerBalance--;
-            EventManager.onSpeedFirePowerBalanceChange.Invoke(SpeedFirePowerBalance);
+
+            // TODO Esia
+            // EventManager.onSpeedFirePowerBalanceChange.Invoke(SpeedFirePowerBalance);
             speedIncreasedLastFrame = true;
         }
 
@@ -122,7 +126,9 @@ public class PilotController : MonoBehaviour
         else if (!speedDecreasedLastFrame && Input.GetButton("IncreaseFirePower") && SpeedFirePowerBalance < 4)
         {
             SpeedFirePowerBalance++;
-            EventManager.onSpeedFirePowerBalanceChange.Invoke(SpeedFirePowerBalance);
+
+            // TODO Esia
+            // EventManager.onSpeedFirePowerBalanceChange.Invoke(SpeedFirePowerBalance);
             speedDecreasedLastFrame = true;
         }
     }
