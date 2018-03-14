@@ -128,5 +128,4 @@ public class EventManager : MonoBehaviour {
     public static readonly UnityEvent<MechaController.ReloadType, int> onEngineerReload = new CustomEvent2<MechaController.ReloadType, int>();
     // every second, shield data must be sent to calculate average shield
     public static readonly UnityEvent<int> onShieldDataSending = new CustomEvent1<int>();
-    
 }
