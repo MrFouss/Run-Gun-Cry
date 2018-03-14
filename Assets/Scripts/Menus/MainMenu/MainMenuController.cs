@@ -11,7 +11,7 @@ public class MainMenuController : MonoBehaviour {
 
     public void OnStartGamePress()
     {
-        SceneManager.LoadScene("TestScene");    
+        SceneManager.LoadScene("MainGameScene");
     }
 
     public void OnHighScorePress()
