@@ -9,7 +9,7 @@ public class EnemyFilterSelector : MonoBehaviour {
     // The EnemyVisualizer will take care of displaying the right ones
     private FilterColor requiredFilter;
 
-	void Awake() {
+	void Start() {
         requiredFilter = (FilterColor) Random.Range(0, 3);
         EventManager.Instance.OnFilterSelected.AddListener(Display);
 	}

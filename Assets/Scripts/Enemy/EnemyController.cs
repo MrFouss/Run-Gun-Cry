@@ -43,7 +43,7 @@ public class EnemyController : MonoBehaviour {
         {
             case Tags.MechaLaserTag:
             case Tags.MechaMissileTag:
-                TakeDamage(other.gameObject.GetComponent<ProjectileBehavior>().Damage);
+                TakeDamage(other.gameObject.GetComponentInParent<ProjectileBehavior>().Damage);
                 //HitByLaserAnimation.Play(); 
                 // TODO uncomment when these files are added
                 //audioSource.clip = HitByLaserSound;

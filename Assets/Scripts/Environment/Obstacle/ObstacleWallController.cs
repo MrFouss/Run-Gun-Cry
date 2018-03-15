@@ -52,7 +52,7 @@ public class ObstacleWallController : MonoBehaviour {
         switch (other.gameObject.tag) {
             case Tags.MechaLaserTag:
             case Tags.MechaMissileTag:
-                int damage = other.GetComponent<ProjectileBehavior>().Damage;
+                int damage = other.GetComponentInParent<ProjectileBehavior>().Damage;
                 TakeDamage(damage, other.gameObject);
                 break;
 
@@ -86,7 +86,7 @@ public class ObstacleWallController : MonoBehaviour {
     }
 
     private void SpawnParticles(GameObject otherObject) {
-        Rigidbody rb = otherObject.GetComponent<Rigidbody>();
+        Rigidbody rb = otherObject.GetComponentInParent<Rigidbody>();
         Quaternion particleSystemRotation = Quaternion.FromToRotation(Vector3.forward, -rb.velocity);
         GameObject particleSystemInstance = Instantiate(ParticleSystemPrefab, otherObject.transform.position, particleSystemRotation);
         Destroy(particleSystemInstance, 1.0f);
