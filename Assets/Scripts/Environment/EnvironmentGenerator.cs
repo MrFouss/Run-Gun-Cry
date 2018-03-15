@@ -7,9 +7,11 @@ public class EnvironmentGenerator : MonoBehaviour {
     public Transform PlayerTransform;
     public GameObject[] EnvironmentPrefabPool;
     public GameObject[] PreInstantiatedEnvironmentPrefabs;
-    private List<GameObject> InstantiatedEnvironmentPrefabs = new List<GameObject>();
+    
     public float DistanceToDisappearingObject = 20.0f;
     public float PrefabHorizontalSpacing = 10.0f;
+
+    private List<GameObject> InstantiatedEnvironmentPrefabs = new List<GameObject>();
 
     // Use this for initialization
     void Start () {
@@ -27,7 +29,7 @@ public class EnvironmentGenerator : MonoBehaviour {
             GameObject chosenPrefab = EnvironmentPrefabPool[Random.Range(0, EnvironmentPrefabPool.Length)];
             Vector3 instantiationPosition = InstantiatedEnvironmentPrefabs[InstantiatedEnvironmentPrefabs.Count - 1].transform.position;
             instantiationPosition += (Vector3.forward * PrefabHorizontalSpacing);
-            InstantiatedEnvironmentPrefabs.Add(Instantiate(chosenPrefab, instantiationPosition, new Quaternion()));
+            InstantiatedEnvironmentPrefabs.Add(Instantiate(chosenPrefab, instantiationPosition, Quaternion.Euler(0, 0, Random.Range(0.0f, 360.0f))));
         }
 	}
 }

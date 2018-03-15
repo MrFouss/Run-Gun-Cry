@@ -33,25 +33,22 @@ public class PilotController : MonoBehaviour
         }
     }
     private float[] maxSpeedValues = new float[5] { 12, 8, 5, 3, 1 };
-    
+    private float maxZeroEnergyForwardSpeed;
+
     private float maxForwardSpeed; // depend on the situation
     public float ForwardForce = 20f;
     public float SideForce = 20f;
     public float JumpForce = 25f;
     public float MaxSideSpeed = 25f;
     public float MaxNormalForwardSpeed = 30f;
-    public float MaxZeroEnergyForwardSpeed = 20f;
     public float AirControlMultiplier = 0.25f;
-
-    // used to avoid having two consecutive frames reduce speed when holding buttons
-    private bool speedIncreasedLastFrame = false;
-    private bool speedDecreasedLastFrame = false;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         mechaController = GetComponent<MechaController>();
         canon = GetComponent<CannonBehavior>();
+        maxZeroEnergyForwardSpeed = maxSpeedValues[4];
     }
 
     private void Start()
@@ -81,7 +78,7 @@ public class PilotController : MonoBehaviour
         // change max speed depending on the energy
         if (mechaController.Energy == 0)
         {
-            maxForwardSpeed = MaxZeroEnergyForwardSpeed;
+            maxForwardSpeed = maxZeroEnergyForwardSpeed;
         }
         else
         {
@@ -89,8 +86,8 @@ public class PilotController : MonoBehaviour
         }
 
         // move forward
+        // TODO fix to avoid stoping on the side of platforms
         rb.AddRelativeForce(Vector3.forward * ForwardForce);
-
         
         // jump
         if (grounds > 0 && Input.GetButtonDown("Jump"))
@@ -116,24 +113,14 @@ public class PilotController : MonoBehaviour
             rb.velocity -= sideSpeed.normalized * (sideSpeed.magnitude - MaxSideSpeed);
         }
 
-        if (!Input.GetButton("IncreaseSpeed"))
-        {
-            speedIncreasedLastFrame = false;
-        }
-        else if (!speedIncreasedLastFrame && Input.GetButton("IncreaseSpeed"))
+        if (Input.GetButtonDown("IncreaseSpeed"))
         {
             SpeedFirePowerBalance--;
-            speedIncreasedLastFrame = true;
         }
 
-        if (!Input.GetButton("IncreaseFirePower"))
-        {
-            speedDecreasedLastFrame = false;
-        }
-        else if (!speedDecreasedLastFrame && Input.GetButton("IncreaseFirePower"))
+        if (Input.GetButtonDown("IncreaseFirePower"))
         {
             SpeedFirePowerBalance++;
-            speedDecreasedLastFrame = true;
         }
     }
 
