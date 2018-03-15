@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1236876561457698}
+  m_IsPrefabParent: 1
+--- !u!1 &1236876561457698
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4831999186961988}
+  - component: {fileID: 114172074096286584}
+  m_Layer: 0
+  m_Name: EnvironmentGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4831999186961988
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1236876561457698}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114172074096286584
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1236876561457698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2c33924f403be5409d981224a69cb8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerTransform: {fileID: 0}
+  EnvironmentPrefabPool:
+  - {fileID: 1151659555856266, guid: bec02156f752b9d468bd364ad190749b, type: 2}
+  - {fileID: 1524664140030808, guid: 97d9d0561c2a0114888af93101e93fd8, type: 2}
+  - {fileID: 1944651090659606, guid: f18465abddd35314db668d7f560a3829, type: 2}
+  - {fileID: 1742247116059092, guid: 387522626cce30340baa41bec36549d8, type: 2}
+  - {fileID: 1055581901864210, guid: 9d6dc2fb6e504d147bb728eb7f073d4f, type: 2}
+  - {fileID: 1527342363419300, guid: 5ac9a2d417f20c74d84dff2cde82c502, type: 2}
+  - {fileID: 1585113417466370, guid: 8c89feb9ea80b3541aa60bc3d95ea64e, type: 2}
+  - {fileID: 1214015693370266, guid: 9293d10a53e381045a737e266b49fb73, type: 2}
+  - {fileID: 1324503343535322, guid: 04f3122c496258c4b904c47cc12de9af, type: 2}
+  - {fileID: 1315574541816380, guid: df30039b9e8153d448e563b12d6ed040, type: 2}
+  - {fileID: 1364497656869726, guid: ac09d48e7ccaa40428697a0ca3ace379, type: 2}
+  - {fileID: 1056956382040864, guid: 0704a1a88e92f244e999aee248073251, type: 2}
+  - {fileID: 1043364817867658, guid: e331ad2c82663e948946ba9d3fced87b, type: 2}
+  - {fileID: 1946971162307272, guid: 40e3c0d269c95ec469969a832f43725e, type: 2}
+  - {fileID: 1900383326956646, guid: 7d6419c1c3ff1044e9e2e744ae467e45, type: 2}
+  - {fileID: 1967097199858572, guid: c71a2fd5b6a28ab4a96424693a3ae55a, type: 2}
+  - {fileID: 1580175838333530, guid: 207b47edb10cc404a83aedd66e21b35d, type: 2}
+  - {fileID: 1804459214142678, guid: f30e12b0c44f30549bf1080e175a9284, type: 2}
+  PreInstantiatedEnvironmentPrefabs:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  DistanceToDisappearingObject: 20
+  PrefabHorizontalSpacing: 10

@@ -24,7 +24,6 @@ GameObject:
   - component: {fileID: 75155705150897726}
   - component: {fileID: 33653232551573142}
   - component: {fileID: 114821899070583094}
-  - component: {fileID: 114755622769806526}
   - component: {fileID: 114186245485220146}
   - component: {fileID: 114906491555783440}
   - component: {fileID: 114476120437109418}
@@ -52,6 +51,7 @@ GameObject:
   - component: {fileID: 20396028999924880}
   - component: {fileID: 124683252935287432}
   - component: {fileID: 81266540399630398}
+  - component: {fileID: 114375372736738642}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -305,13 +305,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e505ebab5dc4f06488a9141c8aa18619, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ReloadedResource: 0
   BaseShieldReload: 1
   BaseEnergyReload: 1
   MaxHealth: 100
   MaxShield: 100
   MaxEnergy: 70
   EnergyConsumptionPerSecond: 1
+  ConsumptionValues: 0500000004000000030000000200000001000000
   HealthThreshold: 10
   EnergyThreshold: 10
   LowHealthSound: {fileID: 0}
@@ -339,8 +339,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 872cf0a86b9b55542b53ea6f21ee5ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MaxMultiplier: 4
+  TimeOutSec: 1
   NextLettersNumber: 5
   PastLettersNumber: 5
+--- !u!114 &114375372736738642
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1975941108478194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profile: {fileID: 11400000, guid: 463a4b07f36e48f4aaf6422003b2c3de, type: 2}
 --- !u!114 &114476120437109418
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -365,11 +379,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Muzzle: {fileID: 4820187997050818}
-  LaserShot: {fileID: 1779170460631076, guid: 3fb6390608e58dc4492a9154c79d7dc0, type: 2}
-  MissileShot: {fileID: 1128944587546064, guid: 93aadd84080187345a14fb4ea8dd90b8,
+  LaserShot: {fileID: 1079405416700302, guid: b0b30a997d2b9524ea6f74b9522bbdc8, type: 2}
+  MissileShot: {fileID: 1079405416700302, guid: b685910d7a5f2414eb1abe67e62b2e0c,
     type: 2}
   FireRateLaser: 0.1
+  FireRateLaserValues:
+  - 0.7
+  - 0.4
+  - 0.2
+  - 0.1
+  - 0.05
   FireRateMissile: 1
+  FireRateMissileValues:
+  - 2
+  - 1.5
+  - 1
+  - 0.7
+  - 0.4
   LaserEnergyConsumption: 1
   MissileEnergyConsumption: 10
 --- !u!114 &114561295385388180
@@ -383,19 +409,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9f260d334dd7af43a7941fa5017e995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114755622769806526
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1188656232111112}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 551cb5b2246e0c342b4bb784fcef8282, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxMultiplier: 4
-  TimeOutSec: 1
 --- !u!114 &114821899070583094
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -419,6 +432,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 340de0dda6ddfa54fa4d4f47aef01287, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _selectedFilter: 0
   EnergyConsumption: 1
 --- !u!124 &124683252935287432
 Behaviour:

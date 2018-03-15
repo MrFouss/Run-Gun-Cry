@@ -108,6 +108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StructurePoints: 100
+  Damage: 50
   ObstacleHitSound: {fileID: 8300000, guid: 23fde0db8293b624ca5186e7af7fe8b0, type: 3}
   ObstacleDestroyedSound: {fileID: 8300000, guid: 2021b08f31132ca4782838c452283762,
     type: 3}

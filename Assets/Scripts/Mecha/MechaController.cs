@@ -7,7 +7,32 @@ public class MechaController : MonoBehaviour
 {
     public enum ReloadType {ENERGY, SHIELD};
 
-    public ReloadType ReloadedResource = ReloadType.ENERGY;
+    private ReloadType _reloadedResource = ReloadType.ENERGY;
+    public ReloadType ReloadedResource
+    {
+        get
+        {
+            return _reloadedResource;
+        }
+        set
+        {
+            switch (value)
+            {
+                case ReloadType.ENERGY:
+                    EventManager.Instance.OnEnergyReloadChange.Invoke(1);
+                    EventManager.Instance.OnShieldReloadChange.Invoke(0);
+                    break;
+                case ReloadType.SHIELD:
+                    EventManager.Instance.OnEnergyReloadChange.Invoke(0);
+                    EventManager.Instance.OnShieldReloadChange.Invoke(1);
+                    break;
+            }
+
+            _reloadedResource = value;
+        }
+    }
+
+
     public int BaseShieldReload = 1;
     public int BaseEnergyReload = 1;
 
@@ -15,7 +40,8 @@ public class MechaController : MonoBehaviour
     public int MaxHealth = 100;
     public int MaxShield = 100;
     public int MaxEnergy = 70;
-    public int EnergyConsumptionPerSecond = 1;
+    public int EnergyConsumptionPerSecond;
+    public int[] ConsumptionValues = new int[5] { 5, 4, 3, 2, 1 };
     public int HealthThreshold = 10;
     public int EnergyThreshold = 10;
 
@@ -24,28 +50,28 @@ public class MechaController : MonoBehaviour
 
     public Animation LowHealthAnimation;
     public Animation LowEnergyAnimation;
-
+    
     private int _health;
     public int Health
     {
         set
         {
             _health = Mathf.Min(value, MaxHealth);
-            EventManager.onHealthChange.Invoke((float)_health/MaxHealth);
+            EventManager.Instance.OnHealthChange.Invoke((float)_health/MaxHealth);
         }
         get
         {
             return _health;
         }
     }
-
+    
     private int _shield;
     public int Shield
     {
         set
         {
             _shield = Mathf.Min(value, MaxShield);
-            EventManager.onShieldChange.Invoke((float)_shield/MaxHealth);
+            EventManager.Instance.OnShieldChange.Invoke((float)_shield/MaxHealth);
         }
         get
         {
@@ -59,7 +85,7 @@ public class MechaController : MonoBehaviour
         set
         {
             _energy = Mathf.Min(value, MaxEnergy);
-            EventManager.onEnergyChange.Invoke((float)_energy/MaxEnergy);
+            EventManager.Instance.OnEnergyChange.Invoke((float)_energy/MaxEnergy);
         }
         get
         {
@@ -115,6 +141,8 @@ public class MechaController : MonoBehaviour
         Shield = MaxShield;
         Energy = MaxEnergy;
 
+        ReloadedResource = ReloadType.ENERGY;
+
         // consume energy every second
         InvokeRepeating("ConsumeEnergyPassive", 1, 1);
 
@@ -145,6 +173,7 @@ public class MechaController : MonoBehaviour
             //audioSource.Play();
             //LowHealthAnimation.Play();
         }
+        EventManager.Instance.OnHealthLow.Invoke(Health <= HealthThreshold && Shield == 0);
     }
 
     // Passive energy consumption (every second)
@@ -163,6 +192,7 @@ public class MechaController : MonoBehaviour
             //audioSource.Play();
             //LowEnergyAnimation.Play();
         }
+        EventManager.Instance.OnEnergyLow.Invoke(Energy <= EnergyThreshold);
     }
 
     public bool CanConsumeEnergy(int consumption)
@@ -218,7 +248,6 @@ public class MechaController : MonoBehaviour
 
                 // VoidDamageAnimation.Play();
                 TakeDamage(VoidDamage);
-                // TODO change when platforms become tubular
                 transform.position = new Vector3(lastPlatformCoordinates.position.x, lastPlatformCoordinates.position.y, lastPlatformCoordinates.position.z);
                 transform.eulerAngles = new Vector3(lastPlatformCoordinates.eulerAngles.x, lastPlatformCoordinates.eulerAngles.y, lastPlatformCoordinates.eulerAngles.z);
                 transform.Translate(Vector3.up, Space.Self);
@@ -254,7 +283,7 @@ public class MechaController : MonoBehaviour
                 // audioSource.Play();
                 // LaserDamageAnimation.Play();
                 // let the scoring script know about the damage taken
-                int enemyLaserDamage = other.gameObject.GetComponent<ProjectileBehavior>().Damage;
+                int enemyLaserDamage = other.gameObject.GetComponentInParent<ProjectileBehavior>().Damage;
                 EventManager.onDamageTaken.Invoke(DamageSourceType.CollidingCharger, enemyLaserDamage);
                 TakeDamage(enemyLaserDamage);
                 break;
@@ -267,6 +296,11 @@ public class MechaController : MonoBehaviour
     public void GameOver()
     {
         SceneManager.LoadScene("GameOver");
+    }
+
+    public void OnSpeedFirePowerBalanceChange(int balanceValue)
+    {
+        EnergyConsumptionPerSecond = ConsumptionValues[balanceValue];
     }
 
 }

@@ -6,8 +6,10 @@ public class CannonBehavior : MonoBehaviour {
 	public Transform Muzzle;
 	public GameObject LaserShot;
     public GameObject MissileShot;
-    public float FireRateLaser = 0.1f;
-    public float FireRateMissile = 1.0f;
+    public float FireRateLaser;
+    public float[] FireRateLaserValues = new float[5] { 0.7f, 0.4f, 0.2f, 0.1f, 0.05f};
+    public float FireRateMissile;
+    public float[] FireRateMissileValues = new float[5] { 2f, 1.5f, 1f, 0.7f, 0.4f };
 
     public int LaserEnergyConsumption = 1;
     public int MissileEnergyConsumption = 10;
@@ -18,6 +20,8 @@ public class CannonBehavior : MonoBehaviour {
 
     private void Awake()
     {
+        FireRateLaser = FireRateLaserValues[2];
+        FireRateMissile = FireRateMissileValues[2];
         mechaController = GetComponent<MechaController>();
     }
 
@@ -43,4 +47,10 @@ public class CannonBehavior : MonoBehaviour {
             mechaController.ConsumeEnergy(MissileEnergyConsumption);
         }
     }	
+
+    public void OnSpeedFirePowerBalanceChange(int balanceValue)
+    {
+        FireRateLaser = FireRateLaserValues[balanceValue];
+        FireRateMissile = FireRateMissileValues[balanceValue];
+    }
 }
