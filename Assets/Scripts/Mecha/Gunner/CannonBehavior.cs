@@ -14,6 +14,8 @@ public class CannonBehavior : MonoBehaviour {
     public int LaserEnergyConsumption = 1;
     public int MissileEnergyConsumption = 10;
 
+    public float aimRange = Mathf.Infinity;
+
     private MechaController mechaController;
 
     private float nextFire;
@@ -23,18 +25,20 @@ public class CannonBehavior : MonoBehaviour {
         FireRateLaser = FireRateLaserValues[2];
         FireRateMissile = FireRateMissileValues[2];
         mechaController = GetComponent<MechaController>();
+        
     }
 
     void Update () 
 	{
-		if (mechaController.CanConsumeEnergy(LaserEnergyConsumption) && Input.GetButton("FireLaser") && Time.time > nextFire)
+        if (mechaController.CanConsumeEnergy(LaserEnergyConsumption) && Input.GetButton("FireLaser") && Time.time > nextFire)
 		{
             nextFire = Time.time + FireRateLaser;
             EventManager.onGunnerShot.Invoke(ShotType.Laser);
             // for the scoring script
             EventManager.onGunnerConsumesEnergy.Invoke(LaserEnergyConsumption);
-			Instantiate(LaserShot, Muzzle.position, Muzzle.rotation);
+			GameObject projectile = Instantiate(LaserShot, Muzzle.position, Muzzle.rotation);
             mechaController.ConsumeEnergy(LaserEnergyConsumption);
+            AimToTarget(projectile);
 		}
 
         if (mechaController.CanConsumeEnergy(MissileEnergyConsumption) && Input.GetButton("FireMissile") && Time.time > nextFire)
@@ -43,8 +47,9 @@ public class CannonBehavior : MonoBehaviour {
             EventManager.onGunnerShot.Invoke(ShotType.Missile);
             // for the scoring script
             EventManager.onGunnerConsumesEnergy.Invoke(MissileEnergyConsumption);
-            Instantiate(MissileShot, Muzzle.position, Muzzle.rotation);
+            GameObject projectile = Instantiate(MissileShot, Muzzle.position, Muzzle.rotation);
             mechaController.ConsumeEnergy(MissileEnergyConsumption);
+            AimToTarget(projectile);
         }
     }	
 
@@ -52,5 +57,24 @@ public class CannonBehavior : MonoBehaviour {
     {
         FireRateLaser = FireRateLaserValues[balanceValue];
         FireRateMissile = FireRateMissileValues[balanceValue];
+    }
+
+    private Ray GetRay()
+    {
+        return Camera.main.ScreenPointToRay(Input.mousePosition);
+    }
+
+    private void AimToTarget(GameObject projectile)
+    {
+        RaycastHit hitInfo;
+        if (Physics.Raycast(GetRay(), out hitInfo, aimRange))
+        {
+            Vector3 transformToAim = hitInfo.point;
+            projectile.transform.LookAt(transformToAim);
+        }
+        else
+        {
+            // projectile.transform.LookAt(GetRay().direction);
+        }
     }
 }
