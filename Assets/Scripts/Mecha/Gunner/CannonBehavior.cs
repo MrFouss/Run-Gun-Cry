@@ -14,26 +14,34 @@ public class CannonBehavior : MonoBehaviour {
     public int LaserEnergyConsumption = 1;
     public int MissileEnergyConsumption = 10;
 
+    public float aimRange = Mathf.Infinity;
+    public Camera cam;
+
     private MechaController mechaController;
 
     private float nextFire;
+
+    private RaycastHit hitInfo;
+    private GameObject projectile;
+    private Vector3 transformToAim;
 
     private void Awake()
     {
         FireRateLaser = FireRateLaserValues[2];
         FireRateMissile = FireRateMissileValues[2];
         mechaController = GetComponent<MechaController>();
+        
     }
 
     void Update () 
 	{
-		if (mechaController.CanConsumeEnergy(LaserEnergyConsumption) && Input.GetButton("FireLaser") && Time.time > nextFire)
+        if (mechaController.CanConsumeEnergy(LaserEnergyConsumption) && Input.GetButton("FireLaser") && Time.time > nextFire)
 		{
             nextFire = Time.time + FireRateLaser;
             EventManager.onGunnerShot.Invoke(ShotType.Laser);
             // for the scoring script
             EventManager.onGunnerConsumesEnergy.Invoke(LaserEnergyConsumption);
-			Instantiate(LaserShot, Muzzle.position, Muzzle.rotation);
+			projectile = Instantiate(LaserShot, Muzzle.position, Muzzle.rotation);
             mechaController.ConsumeEnergy(LaserEnergyConsumption);
 		}
 
@@ -43,9 +51,29 @@ public class CannonBehavior : MonoBehaviour {
             EventManager.onGunnerShot.Invoke(ShotType.Missile);
             // for the scoring script
             EventManager.onGunnerConsumesEnergy.Invoke(MissileEnergyConsumption);
-            Instantiate(MissileShot, Muzzle.position, Muzzle.rotation);
+            projectile = Instantiate(MissileShot, Muzzle.position, Muzzle.rotation);
             mechaController.ConsumeEnergy(MissileEnergyConsumption);
         }
+
+        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+       
+        if (Physics.Raycast(ray, out hitInfo, aimRange))
+        {
+            transformToAim = hitInfo.point;
+        }
+        else
+        {
+            transformToAim = Vector3.zero;
+        }
+      
+        if (!(transformToAim == Vector3.zero) && projectile != null)
+        {
+            projectile.transform.LookAt(transformToAim);
+        }
+
+        projectile = null;
+        
+    
     }	
 
     public void OnSpeedFirePowerBalanceChange(int balanceValue)
