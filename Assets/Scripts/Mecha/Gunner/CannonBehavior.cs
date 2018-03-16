@@ -15,15 +15,12 @@ public class CannonBehavior : MonoBehaviour {
     public int MissileEnergyConsumption = 10;
 
     public float aimRange = Mathf.Infinity;
-    public Camera cam;
+
+    private GameObject projectile = null;
 
     private MechaController mechaController;
 
     private float nextFire;
-
-    private RaycastHit hitInfo;
-    private GameObject projectile;
-    private Vector3 transformToAim;
 
     private void Awake()
     {
@@ -35,6 +32,9 @@ public class CannonBehavior : MonoBehaviour {
 
     void Update () 
 	{
+        
+        
+
         if (mechaController.CanConsumeEnergy(LaserEnergyConsumption) && Input.GetButton("FireLaser") && Time.time > nextFire)
 		{
             nextFire = Time.time + FireRateLaser;
@@ -43,6 +43,7 @@ public class CannonBehavior : MonoBehaviour {
             EventManager.onGunnerConsumesEnergy.Invoke(LaserEnergyConsumption);
 			projectile = Instantiate(LaserShot, Muzzle.position, Muzzle.rotation);
             mechaController.ConsumeEnergy(LaserEnergyConsumption);
+            AimToTarget();
 		}
 
         if (mechaController.CanConsumeEnergy(MissileEnergyConsumption) && Input.GetButton("FireMissile") && Time.time > nextFire)
@@ -53,25 +54,10 @@ public class CannonBehavior : MonoBehaviour {
             EventManager.onGunnerConsumesEnergy.Invoke(MissileEnergyConsumption);
             projectile = Instantiate(MissileShot, Muzzle.position, Muzzle.rotation);
             mechaController.ConsumeEnergy(MissileEnergyConsumption);
+            AimToTarget();
         }
 
-        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-       
-        if (Physics.Raycast(ray, out hitInfo, aimRange))
-        {
-            transformToAim = hitInfo.point;
-        }
-        else
-        {
-            transformToAim = Vector3.zero;
-        }
-      
-        if (!(transformToAim == Vector3.zero) && projectile != null)
-        {
-            projectile.transform.LookAt(transformToAim);
-        }
-
-        projectile = null;
+        
         
     
     }	
@@ -80,5 +66,31 @@ public class CannonBehavior : MonoBehaviour {
     {
         FireRateLaser = FireRateLaserValues[balanceValue];
         FireRateMissile = FireRateMissileValues[balanceValue];
+    }
+
+    private Ray GetRay()
+    {
+        return Camera.main.ScreenPointToRay(Input.mousePosition);
+    }
+
+    private void AimToTarget()
+    {
+        RaycastHit hitInfo;
+        Vector3 transformToAim;
+        if (Physics.Raycast(GetRay(), out hitInfo, aimRange))
+        {
+            transformToAim = hitInfo.point;
+        }
+        else
+        {
+            transformToAim = Vector3.zero;
+        }
+
+        if (projectile != null)
+        {
+            projectile.transform.LookAt(transformToAim);
+        }
+
+        projectile = null;
     }
 }
