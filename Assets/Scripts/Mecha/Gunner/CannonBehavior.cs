@@ -16,8 +16,6 @@ public class CannonBehavior : MonoBehaviour {
 
     public float aimRange = Mathf.Infinity;
 
-    private GameObject projectile = null;
-
     private MechaController mechaController;
 
     private float nextFire;
@@ -32,18 +30,15 @@ public class CannonBehavior : MonoBehaviour {
 
     void Update () 
 	{
-        
-        
-
         if (mechaController.CanConsumeEnergy(LaserEnergyConsumption) && Input.GetButton("FireLaser") && Time.time > nextFire)
 		{
             nextFire = Time.time + FireRateLaser;
             EventManager.onGunnerShot.Invoke(ShotType.Laser);
             // for the scoring script
             EventManager.onGunnerConsumesEnergy.Invoke(LaserEnergyConsumption);
-			projectile = Instantiate(LaserShot, Muzzle.position, Muzzle.rotation);
+			GameObject projectile = Instantiate(LaserShot, Muzzle.position, Muzzle.rotation);
             mechaController.ConsumeEnergy(LaserEnergyConsumption);
-            AimToTarget();
+            AimToTarget(projectile);
 		}
 
         if (mechaController.CanConsumeEnergy(MissileEnergyConsumption) && Input.GetButton("FireMissile") && Time.time > nextFire)
@@ -52,14 +47,10 @@ public class CannonBehavior : MonoBehaviour {
             EventManager.onGunnerShot.Invoke(ShotType.Missile);
             // for the scoring script
             EventManager.onGunnerConsumesEnergy.Invoke(MissileEnergyConsumption);
-            projectile = Instantiate(MissileShot, Muzzle.position, Muzzle.rotation);
+            GameObject projectile = Instantiate(MissileShot, Muzzle.position, Muzzle.rotation);
             mechaController.ConsumeEnergy(MissileEnergyConsumption);
-            AimToTarget();
+            AimToTarget(projectile);
         }
-
-        
-        
-    
     }	
 
     public void OnSpeedFirePowerBalanceChange(int balanceValue)
@@ -73,24 +64,17 @@ public class CannonBehavior : MonoBehaviour {
         return Camera.main.ScreenPointToRay(Input.mousePosition);
     }
 
-    private void AimToTarget()
+    private void AimToTarget(GameObject projectile)
     {
         RaycastHit hitInfo;
-        Vector3 transformToAim;
         if (Physics.Raycast(GetRay(), out hitInfo, aimRange))
         {
-            transformToAim = hitInfo.point;
+            Vector3 transformToAim = hitInfo.point;
+            projectile.transform.LookAt(transformToAim);
         }
         else
         {
-            transformToAim = Vector3.zero;
+            // projectile.transform.LookAt(GetRay().direction);
         }
-
-        if (projectile != null)
-        {
-            projectile.transform.LookAt(transformToAim);
-        }
-
-        projectile = null;
     }
 }
