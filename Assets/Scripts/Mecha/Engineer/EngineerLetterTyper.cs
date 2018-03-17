@@ -103,12 +103,12 @@ public class EngineerLetterTyper : MonoBehaviour
 
         // randomly init current and next letters
 
-        currLetter = (char)Random.Range('A', 'Z');
+        currLetter = (char)Random.Range('A', 'D' + 1);
         EventManager.Instance.OnCurrentLetterChange.Invoke(currLetter.ToString());
 
         for (int i = 0; i < NextLettersNumber; ++i)
         {
-            nextLetters.Add((char)Random.Range('A', 'Z'));
+            nextLetters.Add((char)Random.Range('A', 'D' + 1));
         }
         EventManager.Instance.OnNextLettersChange.Invoke(new string(nextLetters.ToArray()));
 
@@ -167,7 +167,7 @@ public class EngineerLetterTyper : MonoBehaviour
 
                 // update next letters
                 nextLetters.RemoveAt(0);
-                nextLetters.Add((char)Random.Range('A', 'Z'));
+                nextLetters.Add((char)Random.Range('A', 'D' + 1));
                 EventManager.Instance.OnNextLettersChange.Invoke(new string(nextLetters.ToArray()));
             }
         }

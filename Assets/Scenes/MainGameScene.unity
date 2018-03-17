@@ -1774,13 +1774,17 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 4866606382361252, guid: a6e44acc150964e4eab7f3c0dff0384b, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 100
+    - target: {fileID: 114080705545780442, guid: a6e44acc150964e4eab7f3c0dff0384b,
+        type: 2}
+      propertyPath: SideForce
+      value: 30
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 23295305386405544, guid: a6e44acc150964e4eab7f3c0dff0384b, type: 2}
-    - {fileID: 33603089182557418, guid: a6e44acc150964e4eab7f3c0dff0384b, type: 2}
+    - target: {fileID: 114080705545780442, guid: a6e44acc150964e4eab7f3c0dff0384b,
+        type: 2}
+      propertyPath: ForwardForce
+      value: 30
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a6e44acc150964e4eab7f3c0dff0384b, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &987459428 stripped
@@ -4642,6 +4646,11 @@ Prefab:
       value: 
       objectReference: {fileID: 1988730303334800, guid: 64bc922a9fea68b4cb6219d9f075af0a,
         type: 2}
+    - target: {fileID: 114172074096286584, guid: 5cb35fbf290c7f343b1973f5d9401ef2,
+        type: 2}
+      propertyPath: DistanceToDisappearingObject
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5cb35fbf290c7f343b1973f5d9401ef2, type: 2}
   m_IsPrefabParent: 0
