@@ -8,7 +8,7 @@ public class PlayerDetector : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "MechaBody")
+        if (other.tag == Tags.MechaBodyTag)
         {
             GetComponentInParent<EnemyLaserController>().LockNLoad(other.transform);
         }

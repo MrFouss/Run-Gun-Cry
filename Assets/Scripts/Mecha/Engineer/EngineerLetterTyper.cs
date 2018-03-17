@@ -103,12 +103,12 @@ public class EngineerLetterTyper : MonoBehaviour
 
         // randomly init current and next letters
 
-        currLetter = (char)Random.Range('A', 'D' + 1);
+        currLetter = GenerateRandomCharacter();
         EventManager.Instance.OnCurrentLetterChange.Invoke(currLetter.ToString());
 
         for (int i = 0; i < NextLettersNumber; ++i)
         {
-            nextLetters.Add((char)Random.Range('A', 'D' + 1));
+            nextLetters.Add(GenerateRandomCharacter());
         }
         EventManager.Instance.OnNextLettersChange.Invoke(new string(nextLetters.ToArray()));
 
@@ -167,7 +167,7 @@ public class EngineerLetterTyper : MonoBehaviour
 
                 // update next letters
                 nextLetters.RemoveAt(0);
-                nextLetters.Add((char)Random.Range('A', 'D' + 1));
+                nextLetters.Add(GenerateRandomCharacter());
                 EventManager.Instance.OnNextLettersChange.Invoke(new string(nextLetters.ToArray()));
             }
         }
@@ -195,6 +195,22 @@ public class EngineerLetterTyper : MonoBehaviour
         {
             Combo = 0;
             RemainingTimeSec = 0;
+        }
+    }
+
+    private char GenerateRandomCharacter() {
+        int i = Random.Range(0, 4);
+        switch (i) {
+            case 0:
+                return 'Q';
+            case 1:
+                return 'W';
+            case 2:
+                return 'O';
+            case 3:
+                return 'P';
+            default:
+                throw new KeyNotFoundException();
         }
     }
 }

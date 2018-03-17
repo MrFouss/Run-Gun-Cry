@@ -6,10 +6,10 @@ public class EnemyLaserController : MonoBehaviour
 {
     #region Public Functions
 
-    public void LockNLoad(Transform PlayerTransform)
+    public void LockNLoad(Transform playerTransform)
     {
-        this.transform.LookAt(PlayerTransform);
-        this.GetComponentInChildren<EnemyCannonBehavior>().Fire();
+        transform.LookAt(playerTransform);
+        GetComponentInChildren<EnemyCannonBehavior>().Fire();
     }
 
     #endregion

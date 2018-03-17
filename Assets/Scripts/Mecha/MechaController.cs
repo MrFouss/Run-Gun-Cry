@@ -128,7 +128,8 @@ public class MechaController : MonoBehaviour
     // heightRespawn after being positionned over a platform after falling into the void
     public float RespawnHeight = 0.0f;
 
-    private Transform lastPlatformCoordinates;
+    private Vector3 lastPlatformPosition;
+    private Quaternion lastPlatformRotation;
 
     // Use this for initialization
     void Start()
@@ -248,8 +249,8 @@ public class MechaController : MonoBehaviour
 
                 // VoidDamageAnimation.Play();
                 TakeDamage(VoidDamage);
-                transform.position = new Vector3(lastPlatformCoordinates.position.x, lastPlatformCoordinates.position.y, lastPlatformCoordinates.position.z);
-                transform.eulerAngles = new Vector3(lastPlatformCoordinates.eulerAngles.x, lastPlatformCoordinates.eulerAngles.y, lastPlatformCoordinates.eulerAngles.z);
+                transform.position = new Vector3(lastPlatformPosition.x, lastPlatformPosition.y, lastPlatformPosition.z);
+                transform.eulerAngles = new Vector3(lastPlatformRotation.eulerAngles.x, lastPlatformRotation.eulerAngles.y, lastPlatformRotation.eulerAngles.z);
                 transform.Translate(Vector3.up, Space.Self);
                 break;
 
@@ -265,7 +266,11 @@ public class MechaController : MonoBehaviour
                 break;
 
             case (Tags.PlatformTag):
-                lastPlatformCoordinates = other.gameObject.transform;
+                Vector3 oldPosition = other.gameObject.transform.position;
+                lastPlatformPosition = new Vector3(oldPosition.x, oldPosition.y, oldPosition.z);
+
+                Quaternion oldRotation = other.gameObject.transform.rotation;
+                lastPlatformRotation = new Quaternion(oldRotation.x, oldRotation.y, oldRotation.z, oldRotation.w);
                 break;
 
             default:

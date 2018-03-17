@@ -23,8 +23,8 @@ GameObject:
   - component: {fileID: 114002498438376236}
   - component: {fileID: 54005615798186496}
   m_Layer: 0
-  m_Name: EnemyLaserProjectile 1
-  m_TagString: Untagged
+  m_Name: EnemyLaserProjectile
+  m_TagString: EnemyLaser
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -54,7 +54,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1079405416700302}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.6771426, y: -4.41, z: -3.147}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4748124048643060}
