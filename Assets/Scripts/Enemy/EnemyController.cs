@@ -42,7 +42,10 @@ public class EnemyController : MonoBehaviour {
         switch (other.gameObject.tag)
         {
             case Tags.MechaLaserTag:
+                EventManager.onShotHitting.Invoke(ShotType.Laser);
+                break;
             case Tags.MechaMissileTag:
+                EventManager.onShotHitting.Invoke(ShotType.Missile);
                 TakeDamage(other.gameObject.GetComponentInParent<ProjectileBehavior>().Damage);
                 //HitByLaserAnimation.Play(); 
                 // TODO uncomment when these files are added

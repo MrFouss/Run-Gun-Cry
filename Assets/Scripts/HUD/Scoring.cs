@@ -83,7 +83,6 @@ public class Scoring : MonoBehaviour {
 
     private void OnDestroy()
     {
-        
         PilotDamageTaken = GetDamageFromPilotMistakes();
         PilotDistanceTravelled = GetDistanceTravelled();
         GunnerAccuracy = GetGunnerAccuracy();
@@ -241,7 +240,7 @@ public class Scoring : MonoBehaviour {
     // For the gunner :
     public float GetGunnerAccuracy()
     {
-        return ((laserHits + missilesHit) / Mathf.Max(1, laserShots + missilesShot));
+        return ((laserHits + missilesHit) / Mathf.Max(1, laserShots + missilesShot))*100;
     }
 
     public int GetDamageFromGunnerMistakes()
