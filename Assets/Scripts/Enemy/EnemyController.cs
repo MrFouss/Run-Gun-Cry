@@ -32,19 +32,10 @@ public class EnemyController : MonoBehaviour {
             case Tags.MechaBodyTag:
                 TakeDamage(Health);
                 break;
-            default:
-                break;
-        }
-    }
-
-    protected void OnTriggerEnter(Collider other)
-    {
-        switch (other.gameObject.tag)
-        {
             case Tags.MechaLaserTag:
             case Tags.MechaMissileTag:
-                TakeDamage(other.gameObject.GetComponentInParent<ProjectileBehavior>().Damage);
-                //HitByLaserAnimation.Play(); 
+                TakeDamage(collision.gameObject.GetComponentInParent<ProjectileBehavior>().Damage);
+                //HitByLaserAnimation.Play();
                 // TODO uncomment when these files are added
                 //audioSource.clip = HitByLaserSound;
                 //audioSource.Play();
