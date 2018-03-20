@@ -32,10 +32,11 @@ public class ProjectileBehavior : MonoBehaviour {
         Invoke("Explode", FuseTime); 
     }
 
-    private void OnTriggerEnter(Collider other) {
+    private void OnCollisionEnter(Collision collision)
+    {
         if (Source == ProjectileSource.MECHA) {
             // when a projectile shot from mecha hits an enemy or an obstacle, create an event for the score to calculate accuracy later on
-            if (other.gameObject.tag == Tags.EnemyChargerTag || other.gameObject.tag == Tags.ObstacleWallTag) {
+            if (collision.gameObject.tag == Tags.EnemyChargerTag || collision.gameObject.tag == Tags.ObstacleWallTag) {
                 if (gameObject.tag == Tags.MechaLaserTag) {
                     EventManager.onShotHitting.Invoke(ShotType.Laser);
                 }
@@ -43,7 +44,7 @@ public class ProjectileBehavior : MonoBehaviour {
                     EventManager.onShotHitting.Invoke(ShotType.Missile);
                 }
             }
-            switch (other.gameObject.tag) {
+            switch (collision.gameObject.tag) {
                 case Tags.ObstacleWallTag:
                 case Tags.EnemyChargerTag:
                 case Tags.EnemyLaserTag:
@@ -56,7 +57,7 @@ public class ProjectileBehavior : MonoBehaviour {
 
         } else if (Source == ProjectileSource.ENEMY_LASER) {
 
-            switch (other.gameObject.tag) {
+            switch (collision.gameObject.tag) {
                 case Tags.MechaBodyTag:
                     Explode();
                     break;
