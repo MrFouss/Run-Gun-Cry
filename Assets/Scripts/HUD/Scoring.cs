@@ -197,6 +197,7 @@ public class Scoring : MonoBehaviour {
             default:
                 break;
         }
+        
     }
 
     private void OnDistanceTravelledChange(int distance)
