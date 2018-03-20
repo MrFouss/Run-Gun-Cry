@@ -1660,16 +1660,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 114080705545780442, guid: a6e44acc150964e4eab7f3c0dff0384b,
-        type: 2}
-      propertyPath: SideForce
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 114080705545780442, guid: a6e44acc150964e4eab7f3c0dff0384b,
-        type: 2}
-      propertyPath: ForwardForce
-      value: 30
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a6e44acc150964e4eab7f3c0dff0384b, type: 2}
   m_IsPrefabParent: 0
@@ -3048,6 +3038,11 @@ Prefab:
         type: 2}
       propertyPath: OnFirePowerBalanceChange.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 114309088031509408, guid: 79dada54cb026234bbc68a079e9929b5,
+        type: 2}
+      propertyPath: m_VerticalAxis
+      value: Vertical
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 79dada54cb026234bbc68a079e9929b5, type: 2}
