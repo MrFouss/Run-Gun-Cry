@@ -30,10 +30,10 @@ public class Scoring : MonoBehaviour {
     private int destroyedShooters = 0;
     private int destroyedCowards = 0;
 
-    private int laserShots = 0;
-    private int missilesShot = 0;
-    private int laserHits = 0;
-    private int missilesHit = 0;
+    private float laserShots = 0;
+    private float missilesShot = 0;
+    private float laserHits = 0;
+    private float missilesHit = 0;
 
     private float lettersCorrect = 0;
     private float lettersFailed = 0;
@@ -44,9 +44,9 @@ public class Scoring : MonoBehaviour {
     private int damageTakenFromObstacles = 0;
 
     private int shieldReloaded = 0;
-    private int energyReloaded = 0;
+    private float energyReloaded = 0;
 
-    private int energyConsumedByGunner = 0;
+    private float energyConsumedByGunner = 0;
 
     private List<int> shieldAmounts = new List<int>();
 
@@ -59,7 +59,7 @@ public class Scoring : MonoBehaviour {
     public static float GunnerEnergyConsumption;
     public static float EngineerAccuracy;
     public static int EngineerShieldGenerated;
-    public static int EngineerEnergyGenerated;
+    public static float EngineerEnergyGenerated;
     public static int EngineerTimeWithoutEnergy;
     public static float EngineerAverageEnergy;
 
@@ -250,7 +250,7 @@ public class Scoring : MonoBehaviour {
 
     public float GetGunnerEnergyConsumption()
     {
-        return (energyConsumedByGunner / Mathf.Max(1,energyReloaded));
+        return (energyConsumedByGunner);
     }
 
     // For the engineer
@@ -264,7 +264,7 @@ public class Scoring : MonoBehaviour {
         return shieldReloaded;
     }
 
-    public int GetEnergyGeneratedByEngineer()
+    public float GetEnergyGeneratedByEngineer()
     {
         return energyReloaded;
     }
