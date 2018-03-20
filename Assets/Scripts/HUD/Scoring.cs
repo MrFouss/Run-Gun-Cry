@@ -35,8 +35,8 @@ public class Scoring : MonoBehaviour {
     private int laserHits = 0;
     private int missilesHit = 0;
 
-    private int lettersTyped = 0;
-    private int lettersFailed = 0;
+    private float lettersCorrect = 0;
+    private float lettersFailed = 0;
 
     private int damageTakenFromChargers = 0;
     private int damageTakenFromLasers = 0;
@@ -83,6 +83,7 @@ public class Scoring : MonoBehaviour {
 
     private void OnDestroy()
     {
+        
         PilotDamageTaken = GetDamageFromPilotMistakes();
         PilotDistanceTravelled = GetDistanceTravelled();
         GunnerAccuracy = GetGunnerAccuracy();
@@ -93,6 +94,8 @@ public class Scoring : MonoBehaviour {
         EngineerEnergyGenerated = GetEnergyGeneratedByEngineer();
         EngineerTimeWithoutEnergy = GetTimeSpentWithoutEnergy();
         EngineerAverageEnergy = GetAverageEnergy();
+        
+
     }
 
     private void OnEnemyDestruction(EnemyType enemyType, DestructionType destructionType)
@@ -164,11 +167,11 @@ public class Scoring : MonoBehaviour {
         }
     }
 
-    public void OnLetterTyped(char letter, bool success)
+    public void OnLetterTyped(bool success)
     {
         if (success)
         {
-            lettersTyped++;
+            lettersCorrect++;
         } else
         {
             lettersFailed++;
@@ -253,7 +256,7 @@ public class Scoring : MonoBehaviour {
     // For the engineer
     public float GetEngineerAccuracy()
     {
-        return (lettersTyped / Mathf.Max(1, lettersTyped + lettersFailed));
+        return (lettersCorrect / (lettersCorrect+lettersFailed))*100;
     }
 
     public int GetShieldGeneratedByEngineer()
