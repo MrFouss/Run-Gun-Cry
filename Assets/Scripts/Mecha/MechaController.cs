@@ -273,15 +273,6 @@ public class MechaController : MonoBehaviour
                 lastPlatformRotation = new Quaternion(oldRotation.x, oldRotation.y, oldRotation.z, oldRotation.w);
                 break;
 
-            default:
-                break;
-        }
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        switch (other.gameObject.tag)
-        {
             case Tags.EnemyLaserTag:
                 // TODO uncomment when these files are added
                 // audioSource.clip = LaserDamageSound;
