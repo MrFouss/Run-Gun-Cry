@@ -21,10 +21,10 @@ GameObject:
   - component: {fileID: 4613958629000596}
   - component: {fileID: 82864467910488724}
   - component: {fileID: 114002498438376236}
-  - component: {fileID: 54046441767753010}
+  - component: {fileID: 54746210521403768}
   m_Layer: 0
   m_Name: MissileProjectile
-  m_TagString: Untagged
+  m_TagString: MechaMissile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -115,7 +115,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1263691178593478}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &54046441767753010
+--- !u!54 &54746210521403768
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -236,7 +236,7 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1263691178593478}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 2

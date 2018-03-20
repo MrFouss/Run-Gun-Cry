@@ -33,7 +33,9 @@ public class EnvironmentGenerator : MonoBehaviour {
             InstantiatedEnvironmentPrefabs.Add(Instantiate(chosenPrefab, instantiationPosition, Quaternion.Euler(0, 0, Random.Range(0.0f, 360.0f))));
 
             if (Random.Range(0, 2) == 0)
+            {
                 Instantiate(EnemiesPool[Random.Range(0, EnemiesPool.Length)], instantiationPosition, new Quaternion());
+            }
         }
 	}
 }

@@ -17,7 +17,6 @@ public class CannonBehavior : MonoBehaviour {
     public float aimRange = Mathf.Infinity;
 
     private MechaController mechaController;
-
     private float nextFire;
 
     private void Awake()
@@ -25,7 +24,6 @@ public class CannonBehavior : MonoBehaviour {
         FireRateLaser = FireRateLaserValues[2];
         FireRateMissile = FireRateMissileValues[2];
         mechaController = GetComponent<MechaController>();
-        
     }
 
     void Update () 
@@ -37,6 +35,7 @@ public class CannonBehavior : MonoBehaviour {
             // for the scoring script
             EventManager.onGunnerConsumesEnergy.Invoke(LaserEnergyConsumption);
 			GameObject projectile = Instantiate(LaserShot, Muzzle.position, Muzzle.rotation);
+            Physics.IgnoreCollision(projectile.GetComponentInChildren<Collider>(), GetComponent<Collider>());
             mechaController.ConsumeEnergy(LaserEnergyConsumption);
             AimToTarget(projectile);
 		}
@@ -48,6 +47,7 @@ public class CannonBehavior : MonoBehaviour {
             // for the scoring script
             EventManager.onGunnerConsumesEnergy.Invoke(MissileEnergyConsumption);
             GameObject projectile = Instantiate(MissileShot, Muzzle.position, Muzzle.rotation);
+            Physics.IgnoreCollision(projectile.GetComponentInChildren<Collider>(), GetComponent<Collider>());
             mechaController.ConsumeEnergy(MissileEnergyConsumption);
             AimToTarget(projectile);
         }
