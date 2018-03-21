@@ -237,7 +237,7 @@ public class MechaController : MonoBehaviour
                 // audioSource.clip = EnemyCollisionDamageSound;
                 // audioSource.Play();
                 // let the scoring script know about the damage taken
-                EventManager.onDamageTaken.Invoke(DamageSourceType.FallingIntoVoid, VoidDamage);
+                EventManager.onDamageTaken.Invoke(DamageSourceType.CollidingCharger, VoidDamage);
                 // EnemyCollisionDamageAnimation.Play();
                 TakeDamage(other.gameObject.GetComponent<EnemyController>().Damage);
                 break;
@@ -280,7 +280,7 @@ public class MechaController : MonoBehaviour
                 // LaserDamageAnimation.Play();
                 // let the scoring script know about the damage taken
                 int enemyLaserDamage = other.gameObject.GetComponentInParent<ProjectileBehavior>().Damage;
-                EventManager.onDamageTaken.Invoke(DamageSourceType.CollidingCharger, enemyLaserDamage);
+                EventManager.onDamageTaken.Invoke(DamageSourceType.HitByEnemyLaser, enemyLaserDamage);
                 TakeDamage(enemyLaserDamage);
                 break;
 

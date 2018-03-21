@@ -33,10 +33,18 @@ public class EnemyController : MonoBehaviour {
                 TakeDamage(Health);
                 break;
             case Tags.MechaLaserTag:
+				EventManager.onShotHitting.Invoke(ShotType.Laser);
+				TakeDamage(collision.gameObject.GetComponentInParent<ProjectileBehavior>().Damage);
+				// TODO uncomment when these files are added
+				//HitByLaserAnimation.Play();
+				//audioSource.clip = HitByLaserSound;
+				//audioSource.Play();
+                break;
             case Tags.MechaMissileTag:
-                TakeDamage(collision.gameObject.GetComponentInParent<ProjectileBehavior>().Damage);
+				EventManager.onShotHitting.Invoke(ShotType.Missile);
+				TakeDamage(collision.gameObject.GetComponentInParent<ProjectileBehavior>().Damage);
+				// TODO uncomment when these files are added
                 //HitByLaserAnimation.Play();
-                // TODO uncomment when these files are added
                 //audioSource.clip = HitByLaserSound;
                 //audioSource.Play();
                 break;

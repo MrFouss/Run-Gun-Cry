@@ -22,12 +22,13 @@ public class StatsDisplay : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        
         PilotDamageText.text = "Dégâts subis par collisions : " + Scoring.PilotDamageTaken.ToString();
         PilotDistanceText.text = "Distance parcourue : " + Scoring.PilotDistanceTravelled.ToString();
-        GunnerAccuracyText.text = "Précision : " + Scoring.GunnerAccuracy.ToString();
-        GunnerDamageText.text = "Dégâts subis par lasers : " + Scoring.GunnerDamageTaken.ToString();
+        GunnerAccuracyText.text = "Précision : " + Scoring.GunnerAccuracy.ToString() + "%";
+        GunnerDamageText.text = "Dégâts subis par ennemis : " + Scoring.GunnerDamageTaken.ToString();
         GunnerConsumptionText.text = "Consommation d'énergie : " + Scoring.GunnerEnergyConsumption.ToString();
-        EngineerAccuracyText.text = "Précision : " + Scoring.EngineerAccuracy.ToString();
+        EngineerAccuracyText.text = "Précision : " + Scoring.EngineerAccuracy.ToString() + "%";
         EngineerShieldText.text = "Bouclier généré : " + Scoring.EngineerShieldGenerated.ToString();
         EngineerEnergyText.text = "Énergie générée : " + Scoring.EngineerEnergyGenerated.ToString();
         EngineerTimeWithoutEnergyText.text = "Secondes passées sans énergie : " + Scoring.EngineerTimeWithoutEnergy.ToString();

@@ -11,7 +11,7 @@ public class CannonBehavior : MonoBehaviour {
     public float FireRateMissile;
     public float BaseFireRateMissileValue = 0.5f;
 
-    public int LaserEnergyConsumption = 1;
+    public int LaserEnergyConsumption = 2;
     public int MissileEnergyConsumption = 10;
 
     public float aimRange = Mathf.Infinity;
