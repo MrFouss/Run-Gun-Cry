@@ -45,14 +45,8 @@ public class ObstacleWallController : MonoBehaviour {
                 break;
 
 			case Tags.MechaLaserTag:
-				damage = other.gameObject.GetComponentInParent<ProjectileBehavior>().Damage;
-				EventManager.onShotHitting.Invoke(ShotType.Laser);
-				TakeDamage(damage, other.gameObject);
-				break;
-
             case Tags.MechaMissileTag:
                 damage = other.gameObject.GetComponentInParent<ProjectileBehavior>().Damage;
-				EventManager.onShotHitting.Invoke(ShotType.Missile);
                 TakeDamage(damage, other.gameObject);
                 break;
 

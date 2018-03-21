@@ -162,7 +162,7 @@ public class Scoring : MonoBehaviour {
         {
             laserHits++;
         }
-		else
+		else if (shotType == ShotType.Missile)
         {
             missilesHit++;
         }
@@ -242,7 +242,7 @@ public class Scoring : MonoBehaviour {
     // For the gunner :
     public float GetGunnerAccuracy()
     {
-        return ((laserHits + missilesHit) / Mathf.Max(1, laserShots + missilesShot))*100;
+        return ((laserHits + missilesHit) / Mathf.Max(1.0f, laserShots + missilesShot)) * 100.0f;
     }
 
     public int GetDamageFromGunnerMistakes()
@@ -258,7 +258,7 @@ public class Scoring : MonoBehaviour {
     // For the engineer
     public float GetEngineerAccuracy()
     {
-		return (lettersCorrect / Mathf.Max(1, lettersCorrect + lettersFailed))*100;
+		return (lettersCorrect / Mathf.Max(1.0f, lettersCorrect + lettersFailed)) * 100.0f;
     }
 
     public int GetShieldGeneratedByEngineer()
