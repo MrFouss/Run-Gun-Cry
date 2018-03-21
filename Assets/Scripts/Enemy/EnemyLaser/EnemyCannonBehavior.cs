@@ -30,7 +30,8 @@ public class EnemyCannonBehavior : MonoBehaviour
         if (Time.time > nextFire)
         {
             nextFire = Time.time + FireRateLaser;
-            Instantiate(LaserShot, Muzzle.position, Muzzle.rotation);
+            GameObject projectile = Instantiate(LaserShot, Muzzle.position, Muzzle.rotation);
+            Physics.IgnoreCollision(projectile.GetComponentInChildren<Collider>(), GetComponentInParent<Collider>());
         }
         
     }

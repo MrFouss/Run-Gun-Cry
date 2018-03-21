@@ -14,4 +14,9 @@ public class EventsDebriefing : MonoBehaviour {
     {
         SceneManager.LoadScene("MainMenu");
     }
+
+    public void OnRestartPress()
+    {
+        SceneManager.LoadScene("MainGameScene");
+    }
 }

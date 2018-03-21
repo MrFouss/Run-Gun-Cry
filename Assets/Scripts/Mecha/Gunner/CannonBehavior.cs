@@ -7,25 +7,23 @@ public class CannonBehavior : MonoBehaviour {
 	public GameObject LaserShot;
     public GameObject MissileShot;
     public float FireRateLaser;
-    public float[] FireRateLaserValues = new float[5] { 0.7f, 0.4f, 0.2f, 0.1f, 0.05f};
+    public float BaseFireRateLaserValue = 0.1f;
     public float FireRateMissile;
-    public float[] FireRateMissileValues = new float[5] { 2f, 1.5f, 1f, 0.7f, 0.4f };
+    public float BaseFireRateMissileValue = 0.5f;
 
-    public int LaserEnergyConsumption = 1;
+    public int LaserEnergyConsumption = 2;
     public int MissileEnergyConsumption = 10;
 
     public float aimRange = Mathf.Infinity;
 
     private MechaController mechaController;
-
     private float nextFire;
 
     private void Awake()
     {
-        FireRateLaser = FireRateLaserValues[2];
-        FireRateMissile = FireRateMissileValues[2];
+        FireRateLaser = BaseFireRateLaserValue * 1.8f;
+        FireRateMissile = BaseFireRateMissileValue * 1.8f;
         mechaController = GetComponent<MechaController>();
-        
     }
 
     void Update () 
@@ -37,6 +35,7 @@ public class CannonBehavior : MonoBehaviour {
             // for the scoring script
             EventManager.onGunnerConsumesEnergy.Invoke(LaserEnergyConsumption);
 			GameObject projectile = Instantiate(LaserShot, Muzzle.position, Muzzle.rotation);
+            Physics.IgnoreCollision(projectile.GetComponentInChildren<Collider>(), GetComponent<Collider>());
             mechaController.ConsumeEnergy(LaserEnergyConsumption);
             AimToTarget(projectile);
 		}
@@ -48,15 +47,16 @@ public class CannonBehavior : MonoBehaviour {
             // for the scoring script
             EventManager.onGunnerConsumesEnergy.Invoke(MissileEnergyConsumption);
             GameObject projectile = Instantiate(MissileShot, Muzzle.position, Muzzle.rotation);
+            Physics.IgnoreCollision(projectile.GetComponentInChildren<Collider>(), GetComponent<Collider>());
             mechaController.ConsumeEnergy(MissileEnergyConsumption);
             AimToTarget(projectile);
         }
     }	
 
-    public void OnSpeedFirePowerBalanceChange(int balanceValue)
+    public void OnSpeedFirePowerBalanceChange(float balanceValue)
     {
-        FireRateLaser = FireRateLaserValues[balanceValue];
-        FireRateMissile = FireRateMissileValues[balanceValue];
+        FireRateLaser = (Mathf.Pow(balanceValue * 2.0f + 3.0f, 2.0f) / 5.0f) * BaseFireRateLaserValue;
+        FireRateMissile = (Mathf.Pow(balanceValue * 2.0f + 3.0f, 2.0f) / 5.0f) * BaseFireRateMissileValue;
     }
 
     private Ray GetRay()

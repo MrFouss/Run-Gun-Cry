@@ -41,7 +41,7 @@ public class MechaController : MonoBehaviour
     public int MaxShield = 100;
     public int MaxEnergy = 70;
     public int EnergyConsumptionPerSecond;
-    public int[] ConsumptionValues = new int[5] { 5, 4, 3, 2, 1 };
+    public int BaseConsumptionValue = 3;
     public int HealthThreshold = 10;
     public int EnergyThreshold = 10;
 
@@ -237,7 +237,7 @@ public class MechaController : MonoBehaviour
                 // audioSource.clip = EnemyCollisionDamageSound;
                 // audioSource.Play();
                 // let the scoring script know about the damage taken
-                EventManager.onDamageTaken.Invoke(DamageSourceType.FallingIntoVoid, VoidDamage);
+                EventManager.onDamageTaken.Invoke(DamageSourceType.CollidingCharger, VoidDamage);
                 // EnemyCollisionDamageAnimation.Play();
                 TakeDamage(other.gameObject.GetComponent<EnemyController>().Damage);
                 break;
@@ -273,15 +273,6 @@ public class MechaController : MonoBehaviour
                 lastPlatformRotation = new Quaternion(oldRotation.x, oldRotation.y, oldRotation.z, oldRotation.w);
                 break;
 
-            default:
-                break;
-        }
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        switch (other.gameObject.tag)
-        {
             case Tags.EnemyLaserTag:
                 // TODO uncomment when these files are added
                 // audioSource.clip = LaserDamageSound;
@@ -289,7 +280,7 @@ public class MechaController : MonoBehaviour
                 // LaserDamageAnimation.Play();
                 // let the scoring script know about the damage taken
                 int enemyLaserDamage = other.gameObject.GetComponentInParent<ProjectileBehavior>().Damage;
-                EventManager.onDamageTaken.Invoke(DamageSourceType.CollidingCharger, enemyLaserDamage);
+                EventManager.onDamageTaken.Invoke(DamageSourceType.HitByEnemyLaser, enemyLaserDamage);
                 TakeDamage(enemyLaserDamage);
                 break;
 
@@ -303,9 +294,9 @@ public class MechaController : MonoBehaviour
         SceneManager.LoadScene("GameOver");
     }
 
-    public void OnSpeedFirePowerBalanceChange(int balanceValue)
+    public void OnSpeedFirePowerBalanceChange(float balanceValue)
     {
-        EnergyConsumptionPerSecond = ConsumptionValues[balanceValue];
+        EnergyConsumptionPerSecond = (int) ((balanceValue + 2.0f) * BaseConsumptionValue);
     }
 
 }

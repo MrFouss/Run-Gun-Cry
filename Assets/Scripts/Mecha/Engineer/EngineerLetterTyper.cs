@@ -205,7 +205,7 @@ public class EngineerLetterTyper : MonoBehaviour
 
     private void OnLetterTyped(char letter, bool successful)
     {
-        scoring.OnLetterTyped(letter, successful);
+        scoring.OnLetterTyped(successful);
         // increment combo count
         if (successful)
         {
