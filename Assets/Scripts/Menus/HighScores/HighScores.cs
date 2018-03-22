@@ -6,9 +6,16 @@ using UnityEditor;
 
 public class HighScores : MonoBehaviour
 {
-    public HighScoresEntry[] RunnerEntries = new HighScoresEntry[3];
-    public HighScoresEntry[] GunnerEntries = new HighScoresEntry[3];
-    public HighScoresEntry[] EngineerEntries = new HighScoresEntry[3];
+    public HighScoresEntry[] RunnerEntries;
+    public HighScoresEntry[] GunnerEntries;
+    public HighScoresEntry[] EngineerEntries;
+
+    private void Awake()
+    {
+        RunnerEntries = new HighScoresEntry[3];
+        GunnerEntries = new HighScoresEntry[3];
+        EngineerEntries = new HighScoresEntry[3];
+    }
 
     public static HighScores LoadHighScores(string saveFile)
     {
