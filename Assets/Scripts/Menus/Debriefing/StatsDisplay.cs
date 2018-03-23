@@ -7,6 +7,8 @@ public class StatsDisplay : MonoBehaviour {
 
     // To be attached to a canvas as seen in the GameOver Scene
 
+    public Text TeamScoreText;
+
     public Text PilotDamageText;
     public Text PilotDistanceText;
 
@@ -39,6 +41,7 @@ public class StatsDisplay : MonoBehaviour {
         EngineerEnergyText.text = "Énergie générée : " + Scoring.EngineerEnergyGenerated.ToString();
         EngineerTimeWithoutEnergyText.text = "Secondes passées sans énergie : " + Scoring.EngineerTimeWithoutEnergy.ToString();
         EngineerAverageEnergyText.text = "Énergie moyenne : " + Scoring.EngineerAverageEnergy.ToString();
+        TeamScoreText.text = Scoring.TeamScore.ToString();
 
         HighScores highScores = HighScores.LoadHighScores();
 
