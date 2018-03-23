@@ -20,8 +20,14 @@ public class StatsDisplay : MonoBehaviour {
     public Text EngineerTimeWithoutEnergyText;
     public Text EngineerAverageEnergyText;
 
-	// Use this for initialization
-	void Start () {
+    public GameObject NewHighScoreGameObject;
+
+    public InputField RunnerNameText;
+    public InputField GunnerNameText;
+    public InputField EngineerNameText;
+
+    // Use this for initialization
+    void Start () {
         
         PilotDamageText.text = "Dégâts subis par collisions : " + Scoring.PilotDamageTaken.ToString();
         PilotDistanceText.text = "Distance parcourue : " + Scoring.PilotDistanceTravelled.ToString();
@@ -33,10 +39,28 @@ public class StatsDisplay : MonoBehaviour {
         EngineerEnergyText.text = "Énergie générée : " + Scoring.EngineerEnergyGenerated.ToString();
         EngineerTimeWithoutEnergyText.text = "Secondes passées sans énergie : " + Scoring.EngineerTimeWithoutEnergy.ToString();
         EngineerAverageEnergyText.text = "Énergie moyenne : " + Scoring.EngineerAverageEnergy.ToString();
+
+        HighScores highScores = HighScores.LoadHighScores();
+
+        if (Scoring.TeamScore > highScores.Entries[2].TeamScore)
+        {
+            NewHighScoreGameObject.SetActive(true);
+        }
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    private void OnDestroy()
+    {
+        HighScores highScores = HighScores.LoadHighScores();
+        if (NewHighScoreGameObject.activeSelf)
+        {
+            HighScoresEntry newEntry = new HighScoresEntry
+            {
+                EngineerName = EngineerNameText.text,
+                GunnerName = GunnerNameText.text,
+                RunnerName = RunnerNameText.text,
+                TeamScore = Scoring.TeamScore            
+            };
+            highScores.Insert(newEntry);
+            HighScores.SaveHighScores(highScores);
+        }
+    }
 }
