@@ -54,7 +54,6 @@ public class EnemyCowardController : MonoBehaviour
         mousePosInScreen.z = Vector3.Distance(transform.position, Camera.main.transform.position);
         mousePos = Camera.main.ScreenToWorldPoint(mousePosInScreen);
         Vector3 direction = transform.position - mousePos;
-        Debug.Log("transform = " + transform.position + " -- mousepos = " + mousePos + " --  is in safe zone = " + (Vector3.SqrMagnitude(direction) > safeDistanceSqr));
         if (Vector3.SqrMagnitude(direction) <= safeDistanceSqr)
         {
             rb.velocity += direction.normalized * Acceleration * Time.fixedDeltaTime;

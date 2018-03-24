@@ -54,7 +54,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4068466662896818}
   - component: {fileID: 82532389867446248}
-  - component: {fileID: 33486654907317380}
   - component: {fileID: 114834570521812324}
   - component: {fileID: 114223782583664264}
   - component: {fileID: 114297677725453382}
@@ -62,6 +61,7 @@ GameObject:
   - component: {fileID: 64923971136816250}
   - component: {fileID: 23616778655333280}
   - component: {fileID: 54606576487509340}
+  - component: {fileID: 33486654907317380}
   m_Layer: 0
   m_Name: EnemyLaser
   m_TagString: EnemyLaser
