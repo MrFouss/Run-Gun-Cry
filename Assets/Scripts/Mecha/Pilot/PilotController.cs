@@ -95,6 +95,12 @@ public class PilotController : MonoBehaviour
             rb.AddRelativeForce(Vector3.up * JumpForce, ForceMode.Impulse);
         }
 
+        //Return to ground
+        if (grounds == 0 && Input.GetButtonDown("ReturnToGround"))
+        {
+            rb.AddRelativeForce(Vector3.down * 10, ForceMode.Impulse);
+        }
+
         // move left and right
         float sideInput = Input.GetAxis("Horizontal");
         rb.AddRelativeForce(Vector3.right * SideForce * sideInput * (grounds > 0 ? 1f : AirControlMultiplier));
