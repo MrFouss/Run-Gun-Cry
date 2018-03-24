@@ -44,7 +44,7 @@ public class HighScores
 
     public static HighScores LoadHighScores()
     {
-        string saveFilePath = Application.dataPath + _highScoreSaveFile;
+        string saveFilePath = Application.dataPath + Path.DirectorySeparatorChar + _highScoreSaveFile;
 
         if (File.Exists(saveFilePath))
         {
@@ -58,6 +58,6 @@ public class HighScores
 
     public static void SaveHighScores(HighScores data)
     {
-        File.WriteAllText(Application.dataPath + _highScoreSaveFile, JsonUtility.ToJson(data));
+        File.WriteAllText(Application.dataPath + Path.DirectorySeparatorChar + _highScoreSaveFile, JsonUtility.ToJson(data));
     }
 }
