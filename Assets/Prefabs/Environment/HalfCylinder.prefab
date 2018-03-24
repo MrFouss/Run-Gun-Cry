@@ -1042,7 +1042,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1055581901864210}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 30}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4669765701048136}
@@ -2352,7 +2352,7 @@ BoxCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1304190827820808}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 36a6a2fe8ac097841aa3b010ba78f3f4, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -2376,7 +2376,7 @@ BoxCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1205944833535112}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 36a6a2fe8ac097841aa3b010ba78f3f4, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -2436,7 +2436,7 @@ BoxCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1396387268547878}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 36a6a2fe8ac097841aa3b010ba78f3f4, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -2484,7 +2484,7 @@ BoxCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1028893056654496}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 36a6a2fe8ac097841aa3b010ba78f3f4, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -2604,7 +2604,7 @@ BoxCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1603055276939698}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 36a6a2fe8ac097841aa3b010ba78f3f4, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -2700,7 +2700,7 @@ BoxCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1658349979179424}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 36a6a2fe8ac097841aa3b010ba78f3f4, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -2717,7 +2717,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
-  m_Range: 15
+  m_Range: 30
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:

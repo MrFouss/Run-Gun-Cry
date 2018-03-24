@@ -2593,7 +2593,7 @@ BoxCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1288050190538918}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 36a6a2fe8ac097841aa3b010ba78f3f4, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -2605,7 +2605,7 @@ BoxCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1809125611933934}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 36a6a2fe8ac097841aa3b010ba78f3f4, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -2701,7 +2701,7 @@ BoxCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1211707154385200}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 36a6a2fe8ac097841aa3b010ba78f3f4, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -2761,7 +2761,7 @@ BoxCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1903940882539472}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 36a6a2fe8ac097841aa3b010ba78f3f4, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -2773,7 +2773,7 @@ BoxCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1248328553630246}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 36a6a2fe8ac097841aa3b010ba78f3f4, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -2821,7 +2821,7 @@ BoxCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1544677828039418}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 36a6a2fe8ac097841aa3b010ba78f3f4, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
