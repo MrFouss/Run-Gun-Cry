@@ -119,7 +119,7 @@ public class PilotController : MonoBehaviour
             rb.velocity -= sideSpeed.normalized * (sideSpeed.magnitude - MaxSideSpeed);
         }
 
-        SpeedFirePowerBalance = Input.GetAxis("Vertical");
+        SpeedFirePowerBalance = -1.0f * Input.GetAxis("Vertical");
     }
 
     private void OnSpeedFirePowerBalanceChange(float balanceValue)

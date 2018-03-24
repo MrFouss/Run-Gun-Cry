@@ -4158,18 +4158,6 @@ Prefab:
       propertyPath: PlayerTransform
       value: 
       objectReference: {fileID: 987459428}
-    - target: {fileID: 114172074096286584, guid: 5cb35fbf290c7f343b1973f5d9401ef2,
-        type: 2}
-      propertyPath: EnemiesPool.Array.data[1]
-      value: 
-      objectReference: {fileID: 1747274108200822, guid: 1ff796433a241b042b7bf2eefe8eb3ac,
-        type: 2}
-    - target: {fileID: 114172074096286584, guid: 5cb35fbf290c7f343b1973f5d9401ef2,
-        type: 2}
-      propertyPath: EnemiesPool.Array.data[0]
-      value: 
-      objectReference: {fileID: 1747274108200822, guid: 1ff796433a241b042b7bf2eefe8eb3ac,
-        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5cb35fbf290c7f343b1973f5d9401ef2, type: 2}
   m_IsPrefabParent: 0
