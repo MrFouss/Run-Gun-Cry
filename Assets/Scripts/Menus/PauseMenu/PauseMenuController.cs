@@ -50,8 +50,8 @@ public class PauseMenuController : MonoBehaviour {
         Mecha.GetComponent<FollowMouse>().enabled = false;
 
         // Correctly load the volume slider
-        volumeSlider.value = AudioListener.volume;
-        volumeValueText.text = (volumeSlider.value * 100.0f).ToString();
+        volumeSlider.value = (int) (AudioListener.volume * 100.0f);
+        volumeValueText.text = volumeSlider.value.ToString();
     }
 
     public void BackToMainMenu()
@@ -83,7 +83,7 @@ public class PauseMenuController : MonoBehaviour {
 
     public void UpdateVolume()
     {
-        AudioListener.volume = volumeSlider.value;
-        volumeValueText.text = (volumeSlider.value * 100.0f).ToString();
+        AudioListener.volume = volumeSlider.value / 100.0f;
+        volumeValueText.text = volumeSlider.value.ToString();
     }
 }
