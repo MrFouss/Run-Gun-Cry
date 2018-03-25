@@ -15,8 +15,6 @@ public class CustomEventString : UnityEvent<string> { }
 [System.Serializable]
 public class CustomEventFloat : UnityEvent<float> { }
 
-[System.Serializable]
-public class CustomEventFilterColor : UnityEvent<FilterColor> { }
 
 [System.Serializable]
 public class CustomEventVector2 : UnityEvent<Vector2> { }
@@ -93,8 +91,6 @@ public class EventManager : MonoBehaviour {
     public CustomEventFloat OnEnergyChange;
     public CustomEventString OnScoreChange;
 
-    // when selected filter change <filter color> (for UI)
-    public CustomEventFilterColor OnFilterSelected;
     
     // when the target crosshair position should change <position in screen space> (for UI)
     public CustomEventVector2 OnCrosshairPositionChange;
@@ -132,4 +128,6 @@ public class EventManager : MonoBehaviour {
     public static readonly UnityEvent<MechaController.ReloadType, int> onEngineerReload = new CustomEvent2<MechaController.ReloadType, int>();
     // every second, shield data must be sent to calculate average shield
     public static readonly UnityEvent<int> onShieldDataSending = new CustomEvent1<int>();
+
+
 }

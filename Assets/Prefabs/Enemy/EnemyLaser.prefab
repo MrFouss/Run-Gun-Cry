@@ -57,7 +57,6 @@ GameObject:
   - component: {fileID: 33486654907317380}
   - component: {fileID: 114834570521812324}
   - component: {fileID: 114223782583664264}
-  - component: {fileID: 114297677725453382}
   - component: {fileID: 114174761745137768}
   - component: {fileID: 64923971136816250}
   - component: {fileID: 23616778655333280}
@@ -306,17 +305,6 @@ MonoBehaviour:
   DestructionSound: {fileID: 0}
   HitByLaserAnimation: {fileID: 0}
   DestructionAnimation: {fileID: 0}
---- !u!114 &114297677725453382
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1998099787259262}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdae93a4c490fbf4885fdd3f42079c77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114749783949843178
 MonoBehaviour:
   m_ObjectHideFlags: 1
