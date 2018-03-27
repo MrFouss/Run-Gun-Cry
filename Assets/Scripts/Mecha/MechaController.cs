@@ -41,7 +41,7 @@ public class MechaController : MonoBehaviour
     public int MaxShield = 100;
     public int MaxEnergy = 70;
     public int EnergyConsumptionPerSecond;
-    public int[] ConsumptionValues = new int[5] { 5, 4, 3, 2, 1 };
+    public int BaseConsumptionValue = 3;
     public int HealthThreshold = 10;
     public int EnergyThreshold = 10;
 
@@ -128,7 +128,8 @@ public class MechaController : MonoBehaviour
     // heightRespawn after being positionned over a platform after falling into the void
     public float RespawnHeight = 0.0f;
 
-    private Transform lastPlatformCoordinates;
+    private Vector3 lastPlatformPosition;
+    private Quaternion lastPlatformRotation;
 
     // Use this for initialization
     void Start()
@@ -236,7 +237,7 @@ public class MechaController : MonoBehaviour
                 // audioSource.clip = EnemyCollisionDamageSound;
                 // audioSource.Play();
                 // let the scoring script know about the damage taken
-                EventManager.onDamageTaken.Invoke(DamageSourceType.FallingIntoVoid, VoidDamage);
+                EventManager.onDamageTaken.Invoke(DamageSourceType.CollidingCharger, VoidDamage);
                 // EnemyCollisionDamageAnimation.Play();
                 TakeDamage(other.gameObject.GetComponent<EnemyController>().Damage);
                 break;
@@ -248,8 +249,8 @@ public class MechaController : MonoBehaviour
 
                 // VoidDamageAnimation.Play();
                 TakeDamage(VoidDamage);
-                transform.position = new Vector3(lastPlatformCoordinates.position.x, lastPlatformCoordinates.position.y, lastPlatformCoordinates.position.z);
-                transform.eulerAngles = new Vector3(lastPlatformCoordinates.eulerAngles.x, lastPlatformCoordinates.eulerAngles.y, lastPlatformCoordinates.eulerAngles.z);
+                transform.position = new Vector3(lastPlatformPosition.x, lastPlatformPosition.y, lastPlatformPosition.z);
+                transform.eulerAngles = new Vector3(lastPlatformRotation.eulerAngles.x, lastPlatformRotation.eulerAngles.y, lastPlatformRotation.eulerAngles.z);
                 transform.Translate(Vector3.up, Space.Self);
                 break;
 
@@ -265,18 +266,13 @@ public class MechaController : MonoBehaviour
                 break;
 
             case (Tags.PlatformTag):
-                lastPlatformCoordinates = other.gameObject.transform;
+                Vector3 oldPosition = other.gameObject.transform.position;
+                lastPlatformPosition = new Vector3(oldPosition.x, oldPosition.y, oldPosition.z);
+
+                Quaternion oldRotation = other.gameObject.transform.rotation;
+                lastPlatformRotation = new Quaternion(oldRotation.x, oldRotation.y, oldRotation.z, oldRotation.w);
                 break;
 
-            default:
-                break;
-        }
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        switch (other.gameObject.tag)
-        {
             case Tags.EnemyLaserTag:
                 // TODO uncomment when these files are added
                 // audioSource.clip = LaserDamageSound;
@@ -284,7 +280,7 @@ public class MechaController : MonoBehaviour
                 // LaserDamageAnimation.Play();
                 // let the scoring script know about the damage taken
                 int enemyLaserDamage = other.gameObject.GetComponentInParent<ProjectileBehavior>().Damage;
-                EventManager.onDamageTaken.Invoke(DamageSourceType.CollidingCharger, enemyLaserDamage);
+                EventManager.onDamageTaken.Invoke(DamageSourceType.HitByEnemyLaser, enemyLaserDamage);
                 TakeDamage(enemyLaserDamage);
                 break;
 
@@ -298,9 +294,9 @@ public class MechaController : MonoBehaviour
         SceneManager.LoadScene("GameOver");
     }
 
-    public void OnSpeedFirePowerBalanceChange(int balanceValue)
+    public void OnSpeedFirePowerBalanceChange(float balanceValue)
     {
-        EnergyConsumptionPerSecond = ConsumptionValues[balanceValue];
+        EnergyConsumptionPerSecond = (int) ((balanceValue + 2.0f) * BaseConsumptionValue);
     }
 
 }

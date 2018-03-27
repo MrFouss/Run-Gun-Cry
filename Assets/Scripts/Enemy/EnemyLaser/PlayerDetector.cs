@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class PlayerDetector : MonoBehaviour
 {
+
     #region Private Functions
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "MechaBody")
+        if (other.tag == Tags.MechaBodyTag)
         {
             GetComponentInParent<EnemyLaserController>().LockNLoad(other.transform);
         }
