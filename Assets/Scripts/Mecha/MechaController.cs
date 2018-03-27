@@ -131,6 +131,14 @@ public class MechaController : MonoBehaviour
     private Vector3 lastPlatformPosition;
     private Quaternion lastPlatformRotation;
 
+    //Difficulty curve
+    private int previousScore = 0;
+    public int StepToRaiseDifficulty = 5;
+    public int VoidDamageToIncreaseInPercentage = 1;
+    public int MissileConsumptionToIncreaseInPercentage = 1;
+    public int LaserConsumptionToIncreaseInPercentage = 1;
+    public int EnergyConsumptionToIncreaseInPercentage = 1;
+
     // Use this for initialization
     void Start()
     {
@@ -306,6 +314,21 @@ public class MechaController : MonoBehaviour
     public void OnSpeedFirePowerBalanceChange(int balanceValue)
     {
         EnergyConsumptionPerSecond = ConsumptionValues[balanceValue];
+    }
+
+    public void Update()
+    {
+        int score = gameObject.GetComponent<Scoring>().Score;
+
+        if (score - previousScore >= StepToRaiseDifficulty)
+        {
+            previousScore = score;
+            VoidDamage = (int)Mathf.Ceil(VoidDamage * (1 + (float)VoidDamageToIncreaseInPercentage / 100));
+            EnergyConsumptionPerSecond = (int)Mathf.Ceil(EnergyConsumptionPerSecond * (1 + (float)EnergyConsumptionToIncreaseInPercentage / 100));
+            gameObject.GetComponent<CannonBehavior>().LaserEnergyConsumption = (int)Mathf.Ceil(gameObject.GetComponent<CannonBehavior>().LaserEnergyConsumption * (1 + (float)LaserConsumptionToIncreaseInPercentage / 100));
+            gameObject.GetComponent<CannonBehavior>().MissileEnergyConsumption = (int)Mathf.Ceil(gameObject.GetComponent<CannonBehavior>().MissileEnergyConsumption * (1 + (float)MissileConsumptionToIncreaseInPercentage / 100));
+        }
+       
     }
 
 }
