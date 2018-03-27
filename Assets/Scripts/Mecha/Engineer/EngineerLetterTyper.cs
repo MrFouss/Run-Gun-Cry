@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -91,6 +92,12 @@ public class EngineerLetterTyper : MonoBehaviour
     private List<char> pastLetters = new List<char>();
     private List<bool> pastLettersSuccess = new List<bool>();
 
+    // arrow characters
+    private const char _leftArrow = '←';
+    private const char _rightArrow = '→';
+    private const char _downArrow = '↓';
+    private const char _upArrow = '↑';
+
     // Use this for initialization
     void Start()
     {
@@ -103,12 +110,12 @@ public class EngineerLetterTyper : MonoBehaviour
 
         // randomly init current and next letters
 
-        currLetter = (char)Random.Range('A', 'Z');
+        currLetter = GenerateRandomCharacter();
         EventManager.Instance.OnCurrentLetterChange.Invoke(currLetter.ToString());
 
         for (int i = 0; i < NextLettersNumber; ++i)
         {
-            nextLetters.Add((char)Random.Range('A', 'Z'));
+            nextLetters.Add(GenerateRandomCharacter());
         }
         EventManager.Instance.OnNextLettersChange.Invoke(new string(nextLetters.ToArray()));
 
@@ -132,45 +139,61 @@ public class EngineerLetterTyper : MonoBehaviour
             }
         }
 
-
-        // check letters typed
-        foreach (char c in Input.inputString)
+        // arrow typed ?
+        char key = '0';
+        if (Input.GetButtonDown("UpArrow"))
         {
-            char upperC = char.ToUpper(c);
-            if (upperC >= 'A' && upperC <= 'Z')
-            {
-                if (upperC == currLetter)
-                {
-                    // correct letter entered
-                    pastLettersSuccess.Add(true);
-                    OnLetterTyped(upperC, true);
-                }
-                else
-                {
-                    // wrong letter entered
-                    pastLettersSuccess.Add(false);
-                    OnLetterTyped(upperC, false);
-                }
-                
-                // update past letters
-                pastLetters.Add(currLetter);
-                if (pastLetters.Count > PastLettersNumber)
-                {
-                    pastLetters.RemoveAt(0);
-                    pastLettersSuccess.RemoveAt(0);
-                }
-                EventManager.Instance.OnPastLettersChange.Invoke(new string(pastLetters.ToArray()));
-
-                // update curr letter
-                currLetter = nextLetters[0];
-                EventManager.Instance.OnCurrentLetterChange.Invoke(currLetter.ToString());
-
-                // update next letters
-                nextLetters.RemoveAt(0);
-                nextLetters.Add((char)Random.Range('A', 'Z'));
-                EventManager.Instance.OnNextLettersChange.Invoke(new string(nextLetters.ToArray()));
-            }
+            key = _upArrow;
         }
+        else if (Input.GetButtonDown("DownArrow"))
+        {
+            key = _downArrow;
+        }
+        else if(Input.GetButtonDown("LeftArrow"))
+        {
+            key = _leftArrow;
+        }
+        else if(Input.GetButtonDown("RightArrow"))
+        {
+            key = _rightArrow;
+        }
+
+        // arrow typed
+        if (key != '0')
+        {
+            if (key == currLetter)
+            {
+                // correct arrow entered
+                pastLettersSuccess.Add(true);
+                OnLetterTyped(key, true);
+            }
+            else
+            {
+                // wrong arrow entered
+                pastLettersSuccess.Add(false);
+                OnLetterTyped(key, false);
+            }
+        
+            // update past letters
+            pastLetters.Add(currLetter);
+            if (pastLetters.Count > PastLettersNumber)
+            {
+                pastLetters.RemoveAt(0);
+                pastLettersSuccess.RemoveAt(0);
+            }
+            EventManager.Instance.OnPastLettersChange.Invoke(new string(pastLetters.ToArray()));
+
+            // update curr letter
+            currLetter = nextLetters[0];
+            EventManager.Instance.OnCurrentLetterChange.Invoke(currLetter.ToString());
+
+            // update next letters
+            nextLetters.RemoveAt(0);
+            nextLetters.Add(GenerateRandomCharacter());
+            EventManager.Instance.OnNextLettersChange.Invoke(new string(nextLetters.ToArray()));
+        }
+
+        
         
         // check timout
         RemainingTimeSec -= Time.deltaTime;
@@ -182,7 +205,7 @@ public class EngineerLetterTyper : MonoBehaviour
 
     private void OnLetterTyped(char letter, bool successful)
     {
-        scoring.OnLetterTyped(letter, successful);
+        scoring.OnLetterTyped(successful);
         // increment combo count
         if (successful)
         {
@@ -195,6 +218,22 @@ public class EngineerLetterTyper : MonoBehaviour
         {
             Combo = 0;
             RemainingTimeSec = 0;
+        }
+    }
+
+    private char GenerateRandomCharacter() {
+        int i = Random.Range(0, 4);
+        switch (i) {
+            case 0:
+                return _leftArrow;
+            case 1:
+                return _rightArrow;
+            case 2:
+                return _downArrow;
+            case 3:
+                return _upArrow;
+            default:
+                throw new KeyNotFoundException();
         }
     }
 }

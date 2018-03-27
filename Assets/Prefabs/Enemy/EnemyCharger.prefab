@@ -22,10 +22,9 @@ GameObject:
   - component: {fileID: 82529674376236520}
   - component: {fileID: 114960329010524154}
   - component: {fileID: 114639672230348864}
-  - component: {fileID: 114836633610653850}
+  - component: {fileID: 64652297588707466}
   - component: {fileID: 23112546676875606}
   - component: {fileID: 54171163386768098}
-  - component: {fileID: 135181668844336686}
   - component: {fileID: 33259971291371176}
   m_Layer: 0
   m_Name: EnemyCharger
@@ -40,13 +39,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1988730303334800}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!23 &23112546676875606
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -61,7 +60,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 935d9e703de26d0469e7bb6e28212b91, type: 2}
+  - {fileID: 2100000, guid: 934a215aae5a8914191bfbd8c17c39bc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -87,7 +86,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1988730303334800}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: d5aa31506730c124b992b1116a13f0d7, type: 3}
 --- !u!54 &54171163386768098
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -103,6 +102,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!64 &64652297588707466
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1988730303334800}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: d5aa31506730c124b992b1116a13f0d7, type: 3}
 --- !u!82 &82529674376236520
 AudioSource:
   m_ObjectHideFlags: 1
@@ -200,17 +213,6 @@ MonoBehaviour:
   DestructionSound: {fileID: 0}
   HitByLaserAnimation: {fileID: 0}
   DestructionAnimation: {fileID: 0}
---- !u!114 &114836633610653850
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1988730303334800}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdae93a4c490fbf4885fdd3f42079c77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114960329010524154
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -232,15 +234,3 @@ MonoBehaviour:
     type: 2}
   ExplosionClip: {fileID: 8300000, guid: f618e356637fbf94281f675eb20a048d, type: 3}
   ChargeClip: {fileID: 0}
---- !u!135 &135181668844336686
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1988730303334800}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
