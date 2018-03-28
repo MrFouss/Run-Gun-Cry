@@ -21,10 +21,10 @@ GameObject:
   - component: {fileID: 4613958629000596}
   - component: {fileID: 82768131285941932}
   - component: {fileID: 114002498438376236}
-  - component: {fileID: 54005615798186496}
+  - component: {fileID: 54741884946665820}
   m_Layer: 0
-  m_Name: LaserProjectile 1
-  m_TagString: Untagged
+  m_Name: LaserProjectile
+  m_TagString: MechaLaser
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -115,14 +115,14 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1263691178593478}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &54005615798186496
+--- !u!54 &54741884946665820
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1079405416700302}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 0.01
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
@@ -226,7 +226,7 @@ MonoBehaviour:
   ExplosionParticleSystem: {fileID: 1753248193243812, guid: 3850ae304315ee9499136e6271ecdb5a,
     type: 2}
   Source: 0
-  ProjectileSpeed: 3000
+  ProjectileSpeed: 30
   FuseTime: 1
   Damage: 25
 --- !u!136 &136124113652301776
@@ -236,7 +236,7 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1263691178593478}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 2

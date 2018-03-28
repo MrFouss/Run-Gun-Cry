@@ -1,7 +1,7 @@
 fileFormatVersion: 2
-guid: 76441a03813204a709e018d80d7d0602
-timeCreated: 1475703982
-licenseType: Store
+guid: f2d6e0433afccd0489a80bb4920b9956
+timeCreated: 1521585151
+licenseType: Free
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -12,8 +12,9 @@ TrueTypeFontImporter:
   includeFontData: 1
   fontName: Visitor TT1 BRK
   fontNames:
-  - Visitor TT1 BRK
-  fallbackFontReferences: []
+  - Pixel Font 2
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 76441a03813204a709e018d80d7d0602, type: 3}
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1

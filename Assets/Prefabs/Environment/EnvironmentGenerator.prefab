@@ -71,15 +71,10 @@ MonoBehaviour:
   - {fileID: 1967097199858572, guid: c71a2fd5b6a28ab4a96424693a3ae55a, type: 2}
   - {fileID: 1580175838333530, guid: 207b47edb10cc404a83aedd66e21b35d, type: 2}
   - {fileID: 1804459214142678, guid: f30e12b0c44f30549bf1080e175a9284, type: 2}
-  PreInstantiatedEnvironmentPrefabs:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  DistanceToDisappearingObject: 20
+  EnemiesPool:
+  - {fileID: 1998099787259262, guid: 9dfb5bb4d75a55c4faa15750b38f9521, type: 2}
+  - {fileID: 1988730303334800, guid: 64bc922a9fea68b4cb6219d9f075af0a, type: 2}
+  - {fileID: 1747274108200822, guid: 1ff796433a241b042b7bf2eefe8eb3ac, type: 2}
+  InitialNumberOfElements: 10
+  DistanceToDisappearingObject: 60
   PrefabHorizontalSpacing: 10

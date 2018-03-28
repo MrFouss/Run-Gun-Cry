@@ -13,15 +13,15 @@ public class PilotController : MonoBehaviour
     private int grounds = 0;
 
     // state of the speed/firepower balance
-    private int _speedFirePowerBalance;
-    public int SpeedFirePowerBalance
+    private float _speedFirePowerBalance;
+    public float SpeedFirePowerBalance
     {
         set
         {
-            _speedFirePowerBalance = Mathf.Clamp(value, 0, 4);
+            _speedFirePowerBalance = value;
 
-            EventManager.Instance.OnSpeedBalanceChange.Invoke((4.0f - _speedFirePowerBalance) / 4.0f);
-            EventManager.Instance.OnFirePowerBalanceChange.Invoke(_speedFirePowerBalance / 4.0f);
+            EventManager.Instance.OnSpeedBalanceChange.Invoke(_speedFirePowerBalance / 2.0f + 0.5f);
+            EventManager.Instance.OnFirePowerBalanceChange.Invoke(1.0f - (_speedFirePowerBalance / 2.0f + 0.5f));
 
             mechaController.OnSpeedFirePowerBalanceChange(_speedFirePowerBalance);
             canon.OnSpeedFirePowerBalanceChange(_speedFirePowerBalance);
@@ -32,7 +32,7 @@ public class PilotController : MonoBehaviour
             return _speedFirePowerBalance;
         }
     }
-    private float[] maxSpeedValues = new float[5] { 12, 8, 5, 3, 1 };
+    private float BaseSpeedValue = 2;
     private float maxZeroEnergyForwardSpeed;
 
     private float maxForwardSpeed; // depend on the situation
@@ -48,7 +48,7 @@ public class PilotController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         mechaController = GetComponent<MechaController>();
         canon = GetComponent<CannonBehavior>();
-        maxZeroEnergyForwardSpeed = maxSpeedValues[4];
+        maxZeroEnergyForwardSpeed = BaseSpeedValue * 0.75f;
     }
 
     private void Start()
@@ -95,6 +95,12 @@ public class PilotController : MonoBehaviour
             rb.AddRelativeForce(Vector3.up * JumpForce, ForceMode.Impulse);
         }
 
+        //Return to ground
+        if (grounds == 0 && Input.GetButtonDown("ReturnToGround"))
+        {
+            rb.AddRelativeForce(Vector3.down * 10, ForceMode.Impulse);
+        }
+
         // move left and right
         float sideInput = Input.GetAxis("Horizontal");
         rb.AddRelativeForce(Vector3.right * SideForce * sideInput * (grounds > 0 ? 1f : AirControlMultiplier));
@@ -113,20 +119,12 @@ public class PilotController : MonoBehaviour
             rb.velocity -= sideSpeed.normalized * (sideSpeed.magnitude - MaxSideSpeed);
         }
 
-        if (Input.GetButtonDown("IncreaseSpeed"))
-        {
-            SpeedFirePowerBalance--;
-        }
-
-        if (Input.GetButtonDown("IncreaseFirePower"))
-        {
-            SpeedFirePowerBalance++;
-        }
+        SpeedFirePowerBalance = -1.0f * Input.GetAxis("Vertical");
     }
 
-    private void OnSpeedFirePowerBalanceChange(int balanceValue)
+    private void OnSpeedFirePowerBalanceChange(float balanceValue)
     {
-        MaxNormalForwardSpeed = maxSpeedValues[balanceValue];
+        MaxNormalForwardSpeed = (Mathf.Pow(balanceValue * 2.0f + 3.0f, 2.0f) / 5.0f) * BaseSpeedValue;
     }
 
 }

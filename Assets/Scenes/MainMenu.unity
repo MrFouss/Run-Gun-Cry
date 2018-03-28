@@ -358,6 +358,30 @@ Prefab:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 171699934}
+    - target: {fileID: 114096513462885080, guid: 8b1106c7fe148ad419ef0e8d99428609,
+        type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: f2d6e0433afccd0489a80bb4920b9956,
+        type: 3}
+    - target: {fileID: 114908303346710362, guid: 8b1106c7fe148ad419ef0e8d99428609,
+        type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: f2d6e0433afccd0489a80bb4920b9956,
+        type: 3}
+    - target: {fileID: 114152865194728238, guid: 8b1106c7fe148ad419ef0e8d99428609,
+        type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: f2d6e0433afccd0489a80bb4920b9956,
+        type: 3}
+    - target: {fileID: 114526904571065158, guid: 8b1106c7fe148ad419ef0e8d99428609,
+        type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: f2d6e0433afccd0489a80bb4920b9956,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8b1106c7fe148ad419ef0e8d99428609, type: 2}
   m_IsPrefabParent: 0
