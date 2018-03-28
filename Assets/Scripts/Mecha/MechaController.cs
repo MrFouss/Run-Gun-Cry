@@ -133,11 +133,11 @@ public class MechaController : MonoBehaviour
 
     //Difficulty curve
     private int previousScore = 0;
-    public int StepToRaiseDifficulty = 5;
-    public int VoidDamageToIncreaseInPercentage = 1;
-    public int MissileConsumptionToIncreaseInPercentage = 1;
-    public int LaserConsumptionToIncreaseInPercentage = 1;
-    public int EnergyConsumptionToIncreaseInPercentage = 1;
+    public int StepToRaiseDifficulty = 10;
+    public float VoidDamageToIncreaseInPercentage = 1.0f;
+    public float MissileConsumptionToIncreaseInPercentage = 1.0f;
+    public float LaserConsumptionToIncreaseInPercentage = 1.0f;
+    public float EnergyConsumptionToIncreaseInPercentage = 1.0f;
 
     // Use this for initialization
     void Start()
@@ -314,10 +314,10 @@ public class MechaController : MonoBehaviour
         if (score - previousScore >= StepToRaiseDifficulty)
         {
             previousScore = score;
-            VoidDamage = (int)Mathf.Ceil(VoidDamage * (1 + (float)VoidDamageToIncreaseInPercentage / 100));
-            EnergyConsumptionPerSecond = (int)Mathf.Ceil(EnergyConsumptionPerSecond * (1 + (float)EnergyConsumptionToIncreaseInPercentage / 100));
-            gameObject.GetComponent<CannonBehavior>().LaserEnergyConsumption = (int)Mathf.Ceil(gameObject.GetComponent<CannonBehavior>().LaserEnergyConsumption * (1 + (float)LaserConsumptionToIncreaseInPercentage / 100));
-            gameObject.GetComponent<CannonBehavior>().MissileEnergyConsumption = (int)Mathf.Ceil(gameObject.GetComponent<CannonBehavior>().MissileEnergyConsumption * (1 + (float)MissileConsumptionToIncreaseInPercentage / 100));
+            VoidDamage = (int) Mathf.Ceil(VoidDamage * (1.0f + VoidDamageToIncreaseInPercentage / 100.0f));
+            EnergyConsumptionPerSecond = (int) Mathf.Ceil(EnergyConsumptionPerSecond * (1.0f + EnergyConsumptionToIncreaseInPercentage / 100.0f));
+            gameObject.GetComponent<CannonBehavior>().LaserEnergyConsumption = (int) Mathf.Ceil(gameObject.GetComponent<CannonBehavior>().LaserEnergyConsumption * (1.0f + LaserConsumptionToIncreaseInPercentage / 100.0f));
+            gameObject.GetComponent<CannonBehavior>().MissileEnergyConsumption = (int) Mathf.Ceil(gameObject.GetComponent<CannonBehavior>().MissileEnergyConsumption * (1.0f + MissileConsumptionToIncreaseInPercentage / 100.0f));
         }
        
     }
