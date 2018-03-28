@@ -55,8 +55,8 @@ public class CannonBehavior : MonoBehaviour {
 
     public void OnSpeedFirePowerBalanceChange(float balanceValue)
     {
-        FireRateLaser = (Mathf.Pow(balanceValue * 2.0f + 3.0f, 2.0f) / 5.0f) * BaseFireRateLaserValue;
-        FireRateMissile = (Mathf.Pow(balanceValue * 2.0f + 3.0f, 2.0f) / 5.0f) * BaseFireRateMissileValue;
+        FireRateLaser = (Mathf.Pow((-balanceValue) * 2.0f + 3.0f, 2.0f) / 5.0f) * BaseFireRateLaserValue;
+        FireRateMissile = (Mathf.Pow((-balanceValue) * 2.0f + 3.0f, 2.0f) / 5.0f) * BaseFireRateMissileValue;
     }
 
     private Ray GetRay()

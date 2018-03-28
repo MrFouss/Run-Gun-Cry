@@ -21,7 +21,7 @@ public class PilotController : MonoBehaviour
             _speedFirePowerBalance = value;
 
             EventManager.Instance.OnSpeedBalanceChange.Invoke(_speedFirePowerBalance / 2.0f + 0.5f);
-            EventManager.Instance.OnFirePowerBalanceChange.Invoke(1.0f - (_speedFirePowerBalance / 2.0f + 0.5f));
+            EventManager.Instance.OnFirePowerBalanceChange.Invoke(_speedFirePowerBalance / 2.0f + 0.5f);
 
             mechaController.OnSpeedFirePowerBalanceChange(_speedFirePowerBalance);
             canon.OnSpeedFirePowerBalanceChange(_speedFirePowerBalance);
@@ -32,29 +32,33 @@ public class PilotController : MonoBehaviour
             return _speedFirePowerBalance;
         }
     }
-    private float BaseSpeedValue = 2;
-    private float maxZeroEnergyForwardSpeed;
-
-    private float maxForwardSpeed; // depend on the situation
+    private float BaseForwardSpeed = 2f;
+    public float BaseSideSpeed = 2f;
     public float ForwardForce = 20f;
     public float SideForce = 20f;
     public float JumpForce = 25f;
-    public float MaxSideSpeed = 25f;
-    public float MaxNormalForwardSpeed = 30f;
     public float AirControlMultiplier = 0.25f;
+
+    private float _maxZeroEnergyForwardSpeed; 
+    
+    // depend on the situation
+    private float _currentMaxForwardSpeed;
+    private float _currentMaxSideSpeed;
+
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         mechaController = GetComponent<MechaController>();
         canon = GetComponent<CannonBehavior>();
-        maxZeroEnergyForwardSpeed = BaseSpeedValue * 0.75f;
+        _maxZeroEnergyForwardSpeed = BaseForwardSpeed * 0.75f;
+        _currentMaxSideSpeed = BaseSideSpeed;
     }
 
     private void Start()
     {
         // initialize speed/firepower balance
-        SpeedFirePowerBalance = 2;
+        SpeedFirePowerBalance = 0;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -78,15 +82,10 @@ public class PilotController : MonoBehaviour
         // change max speed depending on the energy
         if (mechaController.Energy == 0)
         {
-            maxForwardSpeed = maxZeroEnergyForwardSpeed;
-        }
-        else
-        {
-            maxForwardSpeed = MaxNormalForwardSpeed;
+            OnSpeedFirePowerBalanceChange(-1);
         }
 
         // move forward
-        // TODO fix to avoid stoping on the side of platforms
         rb.AddRelativeForce(Vector3.forward * ForwardForce);
         
         // jump
@@ -107,9 +106,9 @@ public class PilotController : MonoBehaviour
 
         // cap forward speed
         Vector3 forwardSpeed = Vector3.Project(rb.velocity, transform.forward);
-        if (forwardSpeed.magnitude > maxForwardSpeed)
+        if (forwardSpeed.magnitude > _currentMaxForwardSpeed)
         {
-            rb.velocity -= forwardSpeed.normalized * (forwardSpeed.magnitude - maxForwardSpeed);
+            rb.velocity -= forwardSpeed.normalized * (forwardSpeed.magnitude - _currentMaxForwardSpeed);
         }
 
         // cap side speed
@@ -119,19 +118,19 @@ public class PilotController : MonoBehaviour
             // stop side stepping
             rb.velocity -= sideSpeed;
         }
-        else if (sideSpeed.magnitude > MaxSideSpeed)
+        else if (sideSpeed.magnitude > _currentMaxSideSpeed)
         {
             // remove excess speed
-            rb.velocity -= sideSpeed.normalized * (sideSpeed.magnitude - MaxSideSpeed);
+            rb.velocity -= sideSpeed.normalized * (sideSpeed.magnitude - _currentMaxSideSpeed);
         }
-
 
         SpeedFirePowerBalance = -1.0f * Input.GetAxis("Vertical");
     }
 
     private void OnSpeedFirePowerBalanceChange(float balanceValue)
     {
-        MaxNormalForwardSpeed = (Mathf.Pow(balanceValue * 2.0f + 3.0f, 2.0f) / 5.0f) * BaseSpeedValue;
+        _currentMaxForwardSpeed = (Mathf.Pow(balanceValue * 2.0f + 3.0f, 2.0f) / 5.0f) * BaseForwardSpeed;
+        _currentMaxSideSpeed = (Mathf.Pow(balanceValue * 2.0f + 3.0f, 2.0f) / 5.0f) * BaseSideSpeed;
     }
 
 }
