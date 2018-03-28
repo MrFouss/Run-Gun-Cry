@@ -114,10 +114,17 @@ public class PilotController : MonoBehaviour
 
         // cap side speed
         Vector3 sideSpeed = Vector3.Project(rb.velocity, transform.right);
-        if (sideSpeed.magnitude > MaxSideSpeed)
+        if (sideInput == 0)
         {
+            // stop side stepping
+            rb.velocity -= sideSpeed;
+        }
+        else if (sideSpeed.magnitude > MaxSideSpeed)
+        {
+            // remove excess speed
             rb.velocity -= sideSpeed.normalized * (sideSpeed.magnitude - MaxSideSpeed);
         }
+
 
         SpeedFirePowerBalance = -1.0f * Input.GetAxis("Vertical");
     }
