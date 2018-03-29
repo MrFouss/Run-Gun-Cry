@@ -53,33 +53,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerTransform: {fileID: 0}
   EnvironmentPrefabPool:
-  - {fileID: 1151659555856266, guid: bec02156f752b9d468bd364ad190749b, type: 2}
-  - {fileID: 1524664140030808, guid: 97d9d0561c2a0114888af93101e93fd8, type: 2}
-  - {fileID: 1944651090659606, guid: f18465abddd35314db668d7f560a3829, type: 2}
-  - {fileID: 1742247116059092, guid: 387522626cce30340baa41bec36549d8, type: 2}
-  - {fileID: 1055581901864210, guid: 9d6dc2fb6e504d147bb728eb7f073d4f, type: 2}
-  - {fileID: 1527342363419300, guid: 5ac9a2d417f20c74d84dff2cde82c502, type: 2}
-  - {fileID: 1585113417466370, guid: 8c89feb9ea80b3541aa60bc3d95ea64e, type: 2}
-  - {fileID: 1214015693370266, guid: 9293d10a53e381045a737e266b49fb73, type: 2}
-  - {fileID: 1324503343535322, guid: 04f3122c496258c4b904c47cc12de9af, type: 2}
-  - {fileID: 1315574541816380, guid: df30039b9e8153d448e563b12d6ed040, type: 2}
-  - {fileID: 1364497656869726, guid: ac09d48e7ccaa40428697a0ca3ace379, type: 2}
-  - {fileID: 1056956382040864, guid: 0704a1a88e92f244e999aee248073251, type: 2}
-  - {fileID: 1043364817867658, guid: e331ad2c82663e948946ba9d3fced87b, type: 2}
-  - {fileID: 1946971162307272, guid: 40e3c0d269c95ec469969a832f43725e, type: 2}
-  - {fileID: 1900383326956646, guid: 7d6419c1c3ff1044e9e2e744ae467e45, type: 2}
-  - {fileID: 1967097199858572, guid: c71a2fd5b6a28ab4a96424693a3ae55a, type: 2}
-  - {fileID: 1580175838333530, guid: 207b47edb10cc404a83aedd66e21b35d, type: 2}
-  - {fileID: 1804459214142678, guid: f30e12b0c44f30549bf1080e175a9284, type: 2}
-  PreInstantiatedEnvironmentPrefabs:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  DistanceToDisappearingObject: 20
-  PrefabHorizontalSpacing: 10
+  - {fileID: 1888634613575884, guid: bec02156f752b9d468bd364ad190749b, type: 2}
+  - {fileID: 1092795107871568, guid: 4085470195471224593417777653775e, type: 2}
+  - {fileID: 1511261658362494, guid: cc31764c37f883647a0fc3d36311077b, type: 2}
+  - {fileID: 1578370802477878, guid: 4a832e95af9ee5c46b49f2679e4ab7f9, type: 2}
+  - {fileID: 1711365670945056, guid: 096d17964b52677468e3bfa6a3eb36b6, type: 2}
+  - {fileID: 1647345647623544, guid: 218b451ad136b6149a42640b4966590c, type: 2}
+  - {fileID: 1206006310101064, guid: f3e792a9f36d5984ab02dd4f8b578abe, type: 2}
+  - {fileID: 1089558773520422, guid: e5627cd709bc044469e33bca6a18b3b5, type: 2}
+  - {fileID: 1188604588463852, guid: 515ff816a749462468be1d7ed18794a5, type: 2}
+  - {fileID: 1527116519938808, guid: 944416b50dcd6b64190f3283dc9336d3, type: 2}
+  - {fileID: 1628502135900454, guid: ce8739831d327294ca19b1a99918d119, type: 2}
+  - {fileID: 1268438446453978, guid: e8cc0d78052cd984c80bbade0fadac02, type: 2}
+  - {fileID: 1427355074104646, guid: 423fa64c727f1074a91991ae046bbb80, type: 2}
+  - {fileID: 1453528238119372, guid: 9986a9b1f7164994d964752a0683395f, type: 2}
+  EnemiesPool:
+  - {fileID: 1998099787259262, guid: 9dfb5bb4d75a55c4faa15750b38f9521, type: 2}
+  - {fileID: 1988730303334800, guid: 64bc922a9fea68b4cb6219d9f075af0a, type: 2}
+  - {fileID: 1747274108200822, guid: 1ff796433a241b042b7bf2eefe8eb3ac, type: 2}
+  InitialNumberOfElements: 10
+  DistanceToDisappearingObject: 75
+  PrefabHorizontalSpacing: 50

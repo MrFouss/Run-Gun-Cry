@@ -34,6 +34,8 @@ public class ObstacleWallController : MonoBehaviour {
 
     // Detects collisions between the obstacle and things that can hurt it
     private void OnCollisionEnter(Collision other) {
+		int damage;
+
         switch (other.gameObject.tag) {
             case Tags.MechaBodyTag:
                 // remove all structure points and destroy the obstacle
@@ -42,17 +44,9 @@ public class ObstacleWallController : MonoBehaviour {
                 EventManager.onEnemyDestruction.Invoke(EnemyType.Obstacle, DestructionType.Collided);
                 break;
 
-            default:
-                break;
-        }
-    }
-    
-    // Detects collisions between the obstacle and immaterial things that can hurt it
-    private void OnTriggerEnter(Collider other) {
-        switch (other.gameObject.tag) {
-            case Tags.MechaLaserTag:
+			case Tags.MechaLaserTag:
             case Tags.MechaMissileTag:
-                int damage = other.GetComponentInParent<ProjectileBehavior>().Damage;
+                damage = other.gameObject.GetComponentInParent<ProjectileBehavior>().Damage;
                 TakeDamage(damage, other.gameObject);
                 break;
 

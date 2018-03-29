@@ -41,7 +41,7 @@ public class MechaController : MonoBehaviour
     public int MaxShield = 100;
     public int MaxEnergy = 70;
     public int EnergyConsumptionPerSecond;
-    public int[] ConsumptionValues = new int[5] { 5, 4, 3, 2, 1 };
+    public int BaseConsumptionValue = 3;
     public int HealthThreshold = 10;
     public int EnergyThreshold = 10;
 
@@ -128,7 +128,15 @@ public class MechaController : MonoBehaviour
     // heightRespawn after being positionned over a platform after falling into the void
     public float RespawnHeight = 0.0f;
 
-    private Transform lastPlatformCoordinates;
+    private Vector3 lastPlatformPosition;
+
+    //Difficulty curve
+    private int previousScore = 0;
+    public int StepToRaiseDifficulty = 10;
+    public float VoidDamageToIncreaseInPercentage = 1.0f;
+    public float MissileConsumptionToIncreaseInPercentage = 1.0f;
+    public float LaserConsumptionToIncreaseInPercentage = 1.0f;
+    public float EnergyConsumptionToIncreaseInPercentage = 1.0f;
 
     // Use this for initialization
     void Start()
@@ -236,8 +244,8 @@ public class MechaController : MonoBehaviour
                 // audioSource.clip = EnemyCollisionDamageSound;
                 // audioSource.Play();
                 // let the scoring script know about the damage taken
-                EventManager.onDamageTaken.Invoke(DamageSourceType.FallingIntoVoid, VoidDamage);
-                // EnemyCollisionDamageAnimation.Play();
+                EventManager.onDamageTaken.Invoke(DamageSourceType.CollidingCharger, VoidDamage);
+                GetComponent<CameraController>().IncreaseMovingFactor();
                 TakeDamage(other.gameObject.GetComponent<EnemyController>().Damage);
                 break;
 
@@ -246,10 +254,10 @@ public class MechaController : MonoBehaviour
                 // audioSource.clip = VoidDamageSound;
                 // audioSource.Play();
 
-                // VoidDamageAnimation.Play();
+                GetComponent<CameraController>().IncreaseMovingFactor();
                 TakeDamage(VoidDamage);
-                transform.position = new Vector3(lastPlatformCoordinates.position.x, lastPlatformCoordinates.position.y, lastPlatformCoordinates.position.z);
-                transform.eulerAngles = new Vector3(lastPlatformCoordinates.eulerAngles.x, lastPlatformCoordinates.eulerAngles.y, lastPlatformCoordinates.eulerAngles.z);
+                transform.position = new Vector3(lastPlatformPosition.x, lastPlatformPosition.y, lastPlatformPosition.z);
+                transform.eulerAngles = Quaternion.LookRotation(Vector3.forward, -1.0f * transform.position).eulerAngles;
                 transform.Translate(Vector3.up, Space.Self);
                 break;
 
@@ -257,7 +265,7 @@ public class MechaController : MonoBehaviour
                 // TODO uncomment when these files are added
                 // audioSource.clip = WallObstacleDamageSound;
                 // audioSource.Play();
-                // WallObstacleDamageAnimation.Play();
+                GetComponent<CameraController>().IncreaseMovingFactor();
                 // let the scoring script know about the damage taken
                 int obstacleWallDamage = other.gameObject.GetComponent<ObstacleWallController>().Damage;
                 EventManager.onDamageTaken.Invoke(DamageSourceType.CollidingObstacle, obstacleWallDamage);
@@ -265,26 +273,18 @@ public class MechaController : MonoBehaviour
                 break;
 
             case (Tags.PlatformTag):
-                lastPlatformCoordinates = other.gameObject.transform;
+                Vector3 oldPosition = other.gameObject.transform.position;
+                lastPlatformPosition = new Vector3(oldPosition.x, oldPosition.y, oldPosition.z);
                 break;
 
-            default:
-                break;
-        }
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        switch (other.gameObject.tag)
-        {
             case Tags.EnemyLaserTag:
                 // TODO uncomment when these files are added
                 // audioSource.clip = LaserDamageSound;
                 // audioSource.Play();
-                // LaserDamageAnimation.Play();
+                GetComponent<CameraController>().IncreaseMovingFactor();
                 // let the scoring script know about the damage taken
                 int enemyLaserDamage = other.gameObject.GetComponentInParent<ProjectileBehavior>().Damage;
-                EventManager.onDamageTaken.Invoke(DamageSourceType.CollidingCharger, enemyLaserDamage);
+                EventManager.onDamageTaken.Invoke(DamageSourceType.HitByEnemyLaser, enemyLaserDamage);
                 TakeDamage(enemyLaserDamage);
                 break;
 
@@ -298,9 +298,24 @@ public class MechaController : MonoBehaviour
         SceneManager.LoadScene("GameOver");
     }
 
-    public void OnSpeedFirePowerBalanceChange(int balanceValue)
+    public void OnSpeedFirePowerBalanceChange(float balanceValue)
     {
-        EnergyConsumptionPerSecond = ConsumptionValues[balanceValue];
+        EnergyConsumptionPerSecond = (int) ((balanceValue + 2.0f) * BaseConsumptionValue);
+    }
+
+    public void Update()
+    {
+        int score = gameObject.GetComponent<Scoring>().Score;
+
+        if (score - previousScore >= StepToRaiseDifficulty)
+        {
+            previousScore = score;
+            VoidDamage = (int) Mathf.Ceil(VoidDamage * (1.0f + VoidDamageToIncreaseInPercentage / 100.0f));
+            EnergyConsumptionPerSecond = (int) Mathf.Ceil(EnergyConsumptionPerSecond * (1.0f + EnergyConsumptionToIncreaseInPercentage / 100.0f));
+            gameObject.GetComponent<CannonBehavior>().LaserEnergyConsumption = (int) Mathf.Ceil(gameObject.GetComponent<CannonBehavior>().LaserEnergyConsumption * (1.0f + LaserConsumptionToIncreaseInPercentage / 100.0f));
+            gameObject.GetComponent<CannonBehavior>().MissileEnergyConsumption = (int) Mathf.Ceil(gameObject.GetComponent<CannonBehavior>().MissileEnergyConsumption * (1.0f + MissileConsumptionToIncreaseInPercentage / 100.0f));
+        }
+       
     }
 
 }

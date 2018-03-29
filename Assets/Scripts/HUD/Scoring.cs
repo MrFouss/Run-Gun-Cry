@@ -9,6 +9,7 @@ public class Scoring : MonoBehaviour {
     {
         set
         {
+            TeamScore = _score;
             _score = Mathf.Max(0, value);
             EventManager.Instance.OnScoreChange.Invoke(_score.ToString());
         }
@@ -30,13 +31,13 @@ public class Scoring : MonoBehaviour {
     private int destroyedShooters = 0;
     private int destroyedCowards = 0;
 
-    private int laserShots = 0;
-    private int missilesShot = 0;
-    private int laserHits = 0;
-    private int missilesHit = 0;
+    private float laserShots = 0;
+    private float missilesShot = 0;
+    private float laserHits = 0;
+    private float missilesHit = 0;
 
-    private int lettersTyped = 0;
-    private int lettersFailed = 0;
+    private float lettersCorrect = 0;
+    private float lettersFailed = 0;
 
     private int damageTakenFromChargers = 0;
     private int damageTakenFromLasers = 0;
@@ -44,14 +45,15 @@ public class Scoring : MonoBehaviour {
     private int damageTakenFromObstacles = 0;
 
     private int shieldReloaded = 0;
-    private int energyReloaded = 0;
+    private float energyReloaded = 0;
 
-    private int energyConsumedByGunner = 0;
+    private float energyConsumedByGunner = 0;
 
     private List<int> shieldAmounts = new List<int>();
 
 
     // Static variables for GameOver screen
+    public static int TeamScore;
     public static int PilotDamageTaken;
     public static int PilotDistanceTravelled;
     public static float GunnerAccuracy;
@@ -59,7 +61,7 @@ public class Scoring : MonoBehaviour {
     public static float GunnerEnergyConsumption;
     public static float EngineerAccuracy;
     public static int EngineerShieldGenerated;
-    public static int EngineerEnergyGenerated;
+    public static float EngineerEnergyGenerated;
     public static int EngineerTimeWithoutEnergy;
     public static float EngineerAverageEnergy;
 
@@ -93,6 +95,8 @@ public class Scoring : MonoBehaviour {
         EngineerEnergyGenerated = GetEnergyGeneratedByEngineer();
         EngineerTimeWithoutEnergy = GetTimeSpentWithoutEnergy();
         EngineerAverageEnergy = GetAverageEnergy();
+        
+
     }
 
     private void OnEnemyDestruction(EnemyType enemyType, DestructionType destructionType)
@@ -147,7 +151,8 @@ public class Scoring : MonoBehaviour {
         if (shotType == ShotType.Laser)
         {
             laserShots++;
-        } else
+        }
+		else
         {
             missilesShot++;
         }
@@ -158,17 +163,18 @@ public class Scoring : MonoBehaviour {
         if (shotType == ShotType.Laser)
         {
             laserHits++;
-        } else
+        }
+		else if (shotType == ShotType.Missile)
         {
             missilesHit++;
         }
     }
 
-    public void OnLetterTyped(char letter, bool success)
+    public void OnLetterTyped(bool success)
     {
         if (success)
         {
-            lettersTyped++;
+            lettersCorrect++;
         } else
         {
             lettersFailed++;
@@ -194,6 +200,7 @@ public class Scoring : MonoBehaviour {
             default:
                 break;
         }
+        
     }
 
     private void OnDistanceTravelledChange(int distance)
@@ -237,7 +244,7 @@ public class Scoring : MonoBehaviour {
     // For the gunner :
     public float GetGunnerAccuracy()
     {
-        return ((laserHits + missilesHit) / Mathf.Max(1, laserShots + missilesShot));
+        return ((laserHits + missilesHit) / Mathf.Max(1.0f, laserShots + missilesShot)) * 100.0f;
     }
 
     public int GetDamageFromGunnerMistakes()
@@ -247,13 +254,13 @@ public class Scoring : MonoBehaviour {
 
     public float GetGunnerEnergyConsumption()
     {
-        return (energyConsumedByGunner / Mathf.Max(1,energyReloaded));
+        return (energyConsumedByGunner);
     }
 
     // For the engineer
     public float GetEngineerAccuracy()
     {
-        return (lettersTyped / Mathf.Max(1, lettersTyped + lettersFailed));
+		return (lettersCorrect / Mathf.Max(1.0f, lettersCorrect + lettersFailed)) * 100.0f;
     }
 
     public int GetShieldGeneratedByEngineer()
@@ -261,7 +268,7 @@ public class Scoring : MonoBehaviour {
         return shieldReloaded;
     }
 
-    public int GetEnergyGeneratedByEngineer()
+    public float GetEnergyGeneratedByEngineer()
     {
         return energyReloaded;
     }
