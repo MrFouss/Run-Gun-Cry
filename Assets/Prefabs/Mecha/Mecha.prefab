@@ -26,7 +26,6 @@ GameObject:
   - component: {fileID: 33653232551573142}
   - component: {fileID: 114821899070583094}
   - component: {fileID: 114186245485220146}
-  - component: {fileID: 114906491555783440}
   - component: {fileID: 114476120437109418}
   - component: {fileID: 114184238518245382}
   - component: {fileID: 23260718210710876}
@@ -481,19 +480,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravityFactor: -5
---- !u!114 &114906491555783440
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1188656232111112}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 340de0dda6ddfa54fa4d4f47aef01287, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _selectedFilter: 0
-  EnergyConsumption: 1
 --- !u!124 &124683252935287432
 Behaviour:
   m_ObjectHideFlags: 1
