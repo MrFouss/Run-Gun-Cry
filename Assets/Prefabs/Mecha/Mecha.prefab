@@ -20,12 +20,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4820187997050818}
   - component: {fileID: 82154739753036882}
+  - component: {fileID: 114486174236093382}
   - component: {fileID: 114530531877120438}
   - component: {fileID: 75155705150897726}
   - component: {fileID: 33653232551573142}
   - component: {fileID: 114821899070583094}
   - component: {fileID: 114186245485220146}
-  - component: {fileID: 114906491555783440}
   - component: {fileID: 114476120437109418}
   - component: {fileID: 114184238518245382}
   - component: {fileID: 23260718210710876}
@@ -82,7 +82,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1188656232111112}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -4, z: -4}
+  m_LocalPosition: {x: 0, y: -10, z: -20}
   m_LocalScale: {x: 1.5, y: 2, z: 1}
   m_Children:
   - {fileID: 4970858048582836}
@@ -134,7 +134,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 1000
-  field of view: 90
+  field of view: 120
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -354,7 +354,7 @@ MonoBehaviour:
   MaxShield: 100
   MaxEnergy: 100
   EnergyConsumptionPerSecond: 1
-  ConsumptionValues: 0500000004000000030000000200000001000000
+  BaseConsumptionValue: 3
   HealthThreshold: 10
   EnergyThreshold: 10
   LowHealthSound: {fileID: 0}
@@ -371,6 +371,11 @@ MonoBehaviour:
   EnemyCollisionDamageAnimation: {fileID: 0}
   WallObstacleDamageAnimation: {fileID: 0}
   RespawnHeight: 1
+  StepToRaiseDifficulty: 10
+  VoidDamageToIncreaseInPercentage: 1
+  MissileConsumptionToIncreaseInPercentage: 1
+  LaserConsumptionToIncreaseInPercentage: 1
+  EnergyConsumptionToIncreaseInPercentage: 1
 --- !u!114 &114186245485220146
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -410,6 +415,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TextureMask: {fileID: 2800000, guid: 1ba695e220816654e91ba923224f2f70, type: 3}
+--- !u!114 &114486174236093382
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1188656232111112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35597a9aa33b56144a5aa89a7eb08df7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HorizontalSeed: 0
+  VerticalSeed: 5
+  RotationalSeed: 10
+  MovingFactorIncreaseStep: 0.3
+  DecaySpeed: 0.2
+  MaximumRotationAngle: 4
+  MovementSpeed: 8
+  CameraTransform: {fileID: 4970858048582836}
+  PlayerTransform: {fileID: 4820187997050818}
 --- !u!114 &114530531877120438
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -426,19 +451,9 @@ MonoBehaviour:
   MissileShot: {fileID: 1079405416700302, guid: b685910d7a5f2414eb1abe67e62b2e0c,
     type: 2}
   FireRateLaser: 0.1
-  FireRateLaserValues:
-  - 0.7
-  - 0.4
-  - 0.2
-  - 0.1
-  - 0.05
+  BaseFireRateLaserValue: 0.1
   FireRateMissile: 1
-  FireRateMissileValues:
-  - 2
-  - 1.5
-  - 1
-  - 0.7
-  - 0.4
+  BaseFireRateMissileValue: 0.5
   LaserEnergyConsumption: 1
   MissileEnergyConsumption: 10
   aimRange: 1e+18
@@ -465,19 +480,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravityFactor: -5
---- !u!114 &114906491555783440
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1188656232111112}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 340de0dda6ddfa54fa4d4f47aef01287, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _selectedFilter: 0
-  EnergyConsumption: 1
 --- !u!124 &124683252935287432
 Behaviour:
   m_ObjectHideFlags: 1

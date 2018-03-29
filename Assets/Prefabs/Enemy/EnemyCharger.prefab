@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 82529674376236520}
   - component: {fileID: 114960329010524154}
   - component: {fileID: 114639672230348864}
-  - component: {fileID: 114836633610653850}
   - component: {fileID: 64652297588707466}
   - component: {fileID: 23112546676875606}
   - component: {fileID: 54171163386768098}
@@ -42,7 +41,7 @@ Transform:
   m_GameObject: {fileID: 1988730303334800}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -214,17 +213,6 @@ MonoBehaviour:
   DestructionSound: {fileID: 0}
   HitByLaserAnimation: {fileID: 0}
   DestructionAnimation: {fileID: 0}
---- !u!114 &114836633610653850
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1988730303334800}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdae93a4c490fbf4885fdd3f42079c77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114960329010524154
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -236,10 +224,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caf587fcaa50b0844ac82281b28dfec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxSpeed: 30
-  Acceleration: 50
+  MaxSpeed: 20
+  Acceleration: 10
   Damage: 25
-  DetectionRange: 20
+  DetectionRange: 50
   Health: 10
   Trail: {fileID: 198326650279936038, guid: 24988565b3eca0146851afc4ccd5c199, type: 2}
   ExplosionParticleSystem: {fileID: 1909151092473932, guid: 3e3196536b9d7d544b076ca86bc8211c,
