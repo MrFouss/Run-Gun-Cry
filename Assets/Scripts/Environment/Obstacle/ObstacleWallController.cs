@@ -75,8 +75,8 @@ public class ObstacleWallController : MonoBehaviour {
 
     // Destroys the obstacles
     private void DestroyObstacle() {
-        Destroy(gameObject);
         Instantiate(BrokenObstacle, transform.position, transform.rotation);
+        Destroy(gameObject);
     }
 
     private void SpawnParticles(GameObject otherObject) {
