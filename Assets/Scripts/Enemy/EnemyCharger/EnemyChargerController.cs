@@ -79,8 +79,7 @@ public class EnemyChargerController : MonoBehaviour
                 //audioSource.loop = true;
                 //audioSource.clip = ChargeClip;
                 //audioSource.Play();
-                ParticleSystem trail = Instantiate(Trail, transform.position, Quaternion.Euler(180f, 0f, 0f));
-                trail.transform.parent = transform;
+                ParticleSystem trail = Instantiate(Trail, transform.position, Quaternion.identity, transform);
                 startedCharge = true;
             }
             rb.transform.LookAt(mecha.transform.position + mecha.GetComponent<Rigidbody>().velocity * Time.fixedDeltaTime);
