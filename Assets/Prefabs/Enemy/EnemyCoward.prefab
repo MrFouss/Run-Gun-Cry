@@ -221,8 +221,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxSpeed: 20
   Acceleration: 20
-  MinDistance: 10
-  SafeDistance: 1
+  MinDistance: 25
+  SafeDistance: 4
 --- !u!114 &114519112090657128
 MonoBehaviour:
   m_ObjectHideFlags: 1
