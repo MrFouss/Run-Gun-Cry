@@ -23,7 +23,7 @@ public class CheatConsoleController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyDown(KeyCode.F1))
+		if (Input.GetButtonDown("DeveloperConsole"))
         {
             if (!openConsole)
             {
@@ -77,7 +77,7 @@ public class CheatConsoleController : MonoBehaviour {
         if(inputString != "")
         {
             cheatEntered = inputString;
-            History.text = History.text + "\n" + ">" + inputString;
+            History.text = History.text + "\n" + "> " + inputString;
             inputField.text = "";
             ActivateCheat();
             inputField.ActivateInputField();
