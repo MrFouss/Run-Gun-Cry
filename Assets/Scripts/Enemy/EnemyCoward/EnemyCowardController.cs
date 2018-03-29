@@ -7,9 +7,9 @@ public class EnemyCowardController : MonoBehaviour
 
     public float MaxSpeed = 20f;
     public float Acceleration = 20f;
-    public float MinDistance = 10f;
+    public float MinDistance = 25f;
     private float minDistanceSqr;
-    public float SafeDistance = 1f;
+    public float SafeDistance = 4f;
     private float safeDistanceSqr;
 
     private bool foundMecha = false;
@@ -67,6 +67,7 @@ public class EnemyCowardController : MonoBehaviour
             if (Vector3.SqrMagnitude(mecha.position - transform.position) <= minDistanceSqr)
             {
                 rb.velocity += Vector3.forward * Acceleration * Time.fixedDeltaTime;
+                transform.LookAt(mecha.position);
             }
         }
         if (rb.velocity.magnitude > MaxSpeed)
