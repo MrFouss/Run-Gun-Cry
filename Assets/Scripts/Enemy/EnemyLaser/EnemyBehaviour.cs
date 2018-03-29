@@ -7,20 +7,18 @@ public class EnemyBehaviour : MonoBehaviour
 
     public float MaxSpeed = 20f;
     public float MoveForce = 15f;
-    public float MinRange = 5f;
+    public float MinRange = 10;
     public float DetectionRange = 40f;
-    public float ObstacleDetectionRange = 5f;
+    public float ObstacleDetectionRange = 10f;
 
     public Animation StaticAnimation;
     public Animation MovingAnimation;
-
-    private bool isMoving = false;
+    
     private float slowDownMultiplicator = 0.9f;
     private float shootingRange;
     private bool isInRange = false;
     private Transform mecha = null;
     private bool foundMecha = false;
-    private float stopAccel = 5f;
 
     private Rigidbody rb;
 
@@ -60,7 +58,6 @@ public class EnemyBehaviour : MonoBehaviour
     private void Stop()
     {
         rb.velocity *= slowDownMultiplicator;
-        isMoving = false;
         //TODO : Uncomment when animation is available
         //StaticAnimation.Play();
     }
@@ -82,17 +79,15 @@ public class EnemyBehaviour : MonoBehaviour
             {
                 if (isInRange)
                 {
-                    float distance = Vector3.Distance(transform.position, mecha.position);
+                    float distance = Mathf.Abs(transform.position.z - mecha.position.z);
                     if (distance <= MinRange)
                     {
                         rb.AddForce(Vector3.forward * MoveForce);
-                        isMoving = true;
                     }
                     else if (distance > shootingRange)
                     {
                         transform.LookAt(mecha.position);
                         rb.AddForce(transform.forward * MoveForce);
-                        isMoving = true;
                     }
                     else
                     {

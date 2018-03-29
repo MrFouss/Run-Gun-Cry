@@ -9,6 +9,7 @@ public class Scoring : MonoBehaviour {
     {
         set
         {
+            TeamScore = _score;
             _score = Mathf.Max(0, value);
             EventManager.Instance.OnScoreChange.Invoke(_score.ToString());
         }
@@ -52,6 +53,7 @@ public class Scoring : MonoBehaviour {
 
 
     // Static variables for GameOver screen
+    public static int TeamScore;
     public static int PilotDamageTaken;
     public static int PilotDistanceTravelled;
     public static float GunnerAccuracy;

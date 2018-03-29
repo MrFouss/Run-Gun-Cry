@@ -19,28 +19,36 @@ public class EnvironmentGenerator : MonoBehaviour {
         InstantiatedEnvironmentPrefabs.Add(Instantiate(EnvironmentPrefabPool[0], Vector3.zero, new Quaternion()));
 
         for (int i = 1; i < InitialNumberOfElements; i++) {
-            GameObject chosenPrefab = EnvironmentPrefabPool[Random.Range(0, EnvironmentPrefabPool.Length)];
             Vector3 instantiationPosition = InstantiatedEnvironmentPrefabs[InstantiatedEnvironmentPrefabs.Count - 1].transform.position;
-            instantiationPosition += (Vector3.forward * PrefabHorizontalSpacing);
-            InstantiatedEnvironmentPrefabs.Add(Instantiate(chosenPrefab, instantiationPosition, Quaternion.Euler(0, 0, Random.Range(0.0f, 360.0f))));
+            instantiationPosition += Vector3.forward * PrefabHorizontalSpacing;
+            SpawnEnvironmentPiece(instantiationPosition);
+            SpawnEnemy(instantiationPosition);
         }
 	}
-	
-	// Update is called once per frame
-	void Update () {
-        if ((PlayerTransform.position - InstantiatedEnvironmentPrefabs[0].transform.position).z > DistanceToDisappearingObject) {
+
+    // Update is called once per frame
+    void Update()
+    {
+        if ((PlayerTransform.position - InstantiatedEnvironmentPrefabs[0].transform.position).z > DistanceToDisappearingObject)
+        {
             Destroy(InstantiatedEnvironmentPrefabs[0]);
             InstantiatedEnvironmentPrefabs.RemoveAt(0);
 
-            GameObject chosenPrefab = EnvironmentPrefabPool[Random.Range(0, EnvironmentPrefabPool.Length)];
             Vector3 instantiationPosition = InstantiatedEnvironmentPrefabs[InstantiatedEnvironmentPrefabs.Count - 1].transform.position;
-            instantiationPosition += (Vector3.forward * PrefabHorizontalSpacing);
-            InstantiatedEnvironmentPrefabs.Add(Instantiate(chosenPrefab, instantiationPosition, Quaternion.Euler(0, 0, Random.Range(0.0f, 360.0f))));
-
-            if (Random.Range(0, 2) == 0)
-            {
-                Instantiate(EnemiesPool[Random.Range(0, EnemiesPool.Length)], instantiationPosition, new Quaternion());
-            }
+            instantiationPosition += Vector3.forward * PrefabHorizontalSpacing;
+            SpawnEnvironmentPiece(instantiationPosition);
+            SpawnEnemy(instantiationPosition);
         }
-	}
+    }
+
+    private void SpawnEnvironmentPiece(Vector3 position)
+    {
+        GameObject chosenPrefab = EnvironmentPrefabPool[Random.Range(0, EnvironmentPrefabPool.Length)];
+        InstantiatedEnvironmentPrefabs.Add(Instantiate(chosenPrefab, position, Quaternion.Euler(0, 0, Random.Range(0.0f, 360.0f))));
+    }
+
+    private void SpawnEnemy(Vector3 position)
+    {
+        Instantiate(EnemiesPool[Random.Range(0, EnemiesPool.Length)], position, Quaternion.LookRotation(PlayerTransform.position - position, PlayerTransform.up));
+    }
 }

@@ -129,7 +129,14 @@ public class MechaController : MonoBehaviour
     public float RespawnHeight = 0.0f;
 
     private Vector3 lastPlatformPosition;
-    private Quaternion lastPlatformRotation;
+
+    //Difficulty curve
+    private int previousScore = 0;
+    public int StepToRaiseDifficulty = 10;
+    public float VoidDamageToIncreaseInPercentage = 1.0f;
+    public float MissileConsumptionToIncreaseInPercentage = 1.0f;
+    public float LaserConsumptionToIncreaseInPercentage = 1.0f;
+    public float EnergyConsumptionToIncreaseInPercentage = 1.0f;
 
     // Use this for initialization
     void Start()
@@ -238,7 +245,7 @@ public class MechaController : MonoBehaviour
                 // audioSource.Play();
                 // let the scoring script know about the damage taken
                 EventManager.onDamageTaken.Invoke(DamageSourceType.CollidingCharger, VoidDamage);
-                // EnemyCollisionDamageAnimation.Play();
+                GetComponent<CameraController>().IncreaseMovingFactor();
                 TakeDamage(other.gameObject.GetComponent<EnemyController>().Damage);
                 break;
 
@@ -247,10 +254,10 @@ public class MechaController : MonoBehaviour
                 // audioSource.clip = VoidDamageSound;
                 // audioSource.Play();
 
-                // VoidDamageAnimation.Play();
+                GetComponent<CameraController>().IncreaseMovingFactor();
                 TakeDamage(VoidDamage);
                 transform.position = new Vector3(lastPlatformPosition.x, lastPlatformPosition.y, lastPlatformPosition.z);
-                transform.eulerAngles = new Vector3(lastPlatformRotation.eulerAngles.x, lastPlatformRotation.eulerAngles.y, lastPlatformRotation.eulerAngles.z);
+                transform.eulerAngles = Quaternion.LookRotation(Vector3.forward, -1.0f * transform.position).eulerAngles;
                 transform.Translate(Vector3.up, Space.Self);
                 break;
 
@@ -258,7 +265,7 @@ public class MechaController : MonoBehaviour
                 // TODO uncomment when these files are added
                 // audioSource.clip = WallObstacleDamageSound;
                 // audioSource.Play();
-                // WallObstacleDamageAnimation.Play();
+                GetComponent<CameraController>().IncreaseMovingFactor();
                 // let the scoring script know about the damage taken
                 int obstacleWallDamage = other.gameObject.GetComponent<ObstacleWallController>().Damage;
                 EventManager.onDamageTaken.Invoke(DamageSourceType.CollidingObstacle, obstacleWallDamage);
@@ -268,16 +275,13 @@ public class MechaController : MonoBehaviour
             case (Tags.PlatformTag):
                 Vector3 oldPosition = other.gameObject.transform.position;
                 lastPlatformPosition = new Vector3(oldPosition.x, oldPosition.y, oldPosition.z);
-
-                Quaternion oldRotation = other.gameObject.transform.rotation;
-                lastPlatformRotation = new Quaternion(oldRotation.x, oldRotation.y, oldRotation.z, oldRotation.w);
                 break;
 
             case Tags.EnemyLaserTag:
                 // TODO uncomment when these files are added
                 // audioSource.clip = LaserDamageSound;
                 // audioSource.Play();
-                // LaserDamageAnimation.Play();
+                GetComponent<CameraController>().IncreaseMovingFactor();
                 // let the scoring script know about the damage taken
                 int enemyLaserDamage = other.gameObject.GetComponentInParent<ProjectileBehavior>().Damage;
                 EventManager.onDamageTaken.Invoke(DamageSourceType.HitByEnemyLaser, enemyLaserDamage);
@@ -297,6 +301,21 @@ public class MechaController : MonoBehaviour
     public void OnSpeedFirePowerBalanceChange(float balanceValue)
     {
         EnergyConsumptionPerSecond = (int) ((balanceValue + 2.0f) * BaseConsumptionValue);
+    }
+
+    public void Update()
+    {
+        int score = gameObject.GetComponent<Scoring>().Score;
+
+        if (score - previousScore >= StepToRaiseDifficulty)
+        {
+            previousScore = score;
+            VoidDamage = (int) Mathf.Ceil(VoidDamage * (1.0f + VoidDamageToIncreaseInPercentage / 100.0f));
+            EnergyConsumptionPerSecond = (int) Mathf.Ceil(EnergyConsumptionPerSecond * (1.0f + EnergyConsumptionToIncreaseInPercentage / 100.0f));
+            gameObject.GetComponent<CannonBehavior>().LaserEnergyConsumption = (int) Mathf.Ceil(gameObject.GetComponent<CannonBehavior>().LaserEnergyConsumption * (1.0f + LaserConsumptionToIncreaseInPercentage / 100.0f));
+            gameObject.GetComponent<CannonBehavior>().MissileEnergyConsumption = (int) Mathf.Ceil(gameObject.GetComponent<CannonBehavior>().MissileEnergyConsumption * (1.0f + MissileConsumptionToIncreaseInPercentage / 100.0f));
+        }
+       
     }
 
 }
