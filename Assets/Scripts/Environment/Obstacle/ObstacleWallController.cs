@@ -25,11 +25,13 @@ public class ObstacleWallController : MonoBehaviour {
     public float BlinkingFrequency = 10.0f;
     public float BlinkingTransparency = 0.0f;
 
-    private Color startColor;
+    private Color startAlbedoColor;
+    private Color startEmissionColor;
 
     private void Start() {
         health = StructurePoints;
-        startColor = GetComponentInChildren<Renderer>().material.color;
+        startAlbedoColor = GetComponent<Renderer>().material.GetColor("_Color");
+        startEmissionColor = GetComponent<Renderer>().material.GetColor("_EmissionColor");
     }
 
     // Detects collisions between the obstacle and things that can hurt it
@@ -69,7 +71,8 @@ public class ObstacleWallController : MonoBehaviour {
         } else {
             AudioSource.PlayClipAtPoint(ObstacleHitSound, transform.position, 1.0f);
             SpawnParticles(otherObject);
-            GetComponent<Renderer>().material.color = Color.Lerp(startColor, new Color(0.0f, 0.0f, 0.0f), 1 - ((float) health / StructurePoints));
+            GetComponent<Renderer>().material.SetColor("_Color", Color.Lerp(startAlbedoColor, new Color(0.0f, 0.0f, 0.0f), 1.0f - ((float) health / StructurePoints)));
+            GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.Lerp(startEmissionColor, new Color(0.0f, 0.0f, 0.0f), 1.0f - ((float) health / StructurePoints)));
         }
     }
 
