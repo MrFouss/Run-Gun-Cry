@@ -226,7 +226,7 @@ MonoBehaviour:
   ExplosionParticleSystem: {fileID: 1753248193243812, guid: a77923818634b88438ca1c402994d34f,
     type: 2}
   Source: 1
-  ProjectileSpeed: 30
+  ProjectileSpeed: 60
   FuseTime: 1
   Damage: 10
 --- !u!136 &136124113652301776
