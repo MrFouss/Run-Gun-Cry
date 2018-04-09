@@ -240,3 +240,7 @@ MonoBehaviour:
   DestructionSound: {fileID: 0}
   HitByLaserAnimation: {fileID: 0}
   DestructionAnimation: {fileID: 0}
+  SpawningEffectPrefab: {fileID: 1000011128802252, guid: 96730f8640590934eacb6f860058e7f9,
+    type: 2}
+  ExplosionPrefab: {fileID: 1000011797152326, guid: acf39d9f4addf294d93fa56fa373961b,
+    type: 2}

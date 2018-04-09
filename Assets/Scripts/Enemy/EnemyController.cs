@@ -16,8 +16,12 @@ public class EnemyController : MonoBehaviour {
     public Animation HitByLaserAnimation;
     public Animation DestructionAnimation;
 
+    public GameObject SpawningEffectPrefab;
+    public GameObject ExplosionPrefab;
+
 	// Use this for initialization
 	protected void Start () {
+        Instantiate(SpawningEffectPrefab, gameObject.transform.position, gameObject.transform.rotation);
         audioSource = GetComponent<AudioSource>();
         audioSource.volume = 1.0f;
     }
@@ -70,7 +74,7 @@ public class EnemyController : MonoBehaviour {
         // TODO uncomment when these files are added
         //DestructionAnimation.Play();
         //yield return DestructionAnimation.clip.length;
-
+        Instantiate(ExplosionPrefab, gameObject.transform.position, gameObject.transform.rotation);
         Destroy(gameObject);
 
         yield return null;
