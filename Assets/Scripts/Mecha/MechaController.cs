@@ -179,7 +179,7 @@ public class MechaController : MonoBehaviour
             
             audioSource.clip = LowHealthSound;
             audioSource.Play();
-            LowHealthAnimation.Play();
+            //LowHealthAnimation.Play();
         }
         EventManager.Instance.OnHealthLow.Invoke(Health <= HealthThreshold && Shield == 0);
     }
@@ -198,7 +198,7 @@ public class MechaController : MonoBehaviour
             
             audioSource.clip = LowEnergySound;
             audioSource.Play();
-            LowEnergyAnimation.Play();
+            //LowEnergyAnimation.Play();
         }
         EventManager.Instance.OnEnergyLow.Invoke(Energy <= EnergyThreshold);
     }

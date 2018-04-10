@@ -1649,6 +1649,36 @@ Prefab:
       propertyPath: m_BackGroundColor.b
       value: 0.38235295
       objectReference: {fileID: 0}
+    - target: {fileID: 114184238518245382, guid: a6e44acc150964e4eab7f3c0dff0384b,
+        type: 2}
+      propertyPath: LowHealthSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 8d84f96c4177ad840a8b1a6daa8e0b45, type: 3}
+    - target: {fileID: 114184238518245382, guid: a6e44acc150964e4eab7f3c0dff0384b,
+        type: 2}
+      propertyPath: LowEnergySound
+      value: 
+      objectReference: {fileID: 8300000, guid: 1daf1db34ffd28f459ba7a2c1a8691d5, type: 3}
+    - target: {fileID: 114184238518245382, guid: a6e44acc150964e4eab7f3c0dff0384b,
+        type: 2}
+      propertyPath: VoidDamageSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 1e8de3ac0ea3f5343b12a0d1d41f9f41, type: 3}
+    - target: {fileID: 114184238518245382, guid: a6e44acc150964e4eab7f3c0dff0384b,
+        type: 2}
+      propertyPath: WallObstacleDamageSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 1e8de3ac0ea3f5343b12a0d1d41f9f41, type: 3}
+    - target: {fileID: 114184238518245382, guid: a6e44acc150964e4eab7f3c0dff0384b,
+        type: 2}
+      propertyPath: EnemyCollisionDamageSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 059d44c1ee6aa8a499474e7b22ed4519, type: 3}
+    - target: {fileID: 114184238518245382, guid: a6e44acc150964e4eab7f3c0dff0384b,
+        type: 2}
+      propertyPath: LaserDamageSound
+      value: 
+      objectReference: {fileID: 8300000, guid: f4a5e6ec4b4d36d4a957a07e78fb7152, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a6e44acc150964e4eab7f3c0dff0384b, type: 2}
   m_IsPrefabParent: 0
