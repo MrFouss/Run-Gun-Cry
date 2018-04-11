@@ -6,7 +6,7 @@ using UnityEngine;
 public class EnemyChargerController : MonoBehaviour
 {
 
-    public float MaxSpeed = 50f;
+    public float MaxSpeed = 40f;
     public float Acceleration = 100f;
 
     public int Damage = 25;
@@ -76,9 +76,9 @@ public class EnemyChargerController : MonoBehaviour
             if (!startedCharge)
             {
                 //TODO : Uncomment when charge clip is available
-                //audioSource.loop = true;
-                //audioSource.clip = ChargeClip;
-                //audioSource.Play();
+                audioSource.loop = true;
+                audioSource.clip = ChargeClip;
+                audioSource.Play();
                 Instantiate(Trail, transform.position, Quaternion.identity, transform);
                 startedCharge = true;
             }

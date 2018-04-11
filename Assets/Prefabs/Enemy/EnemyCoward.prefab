@@ -22,14 +22,13 @@ GameObject:
   - component: {fileID: 82545676660765882}
   - component: {fileID: 114519112090657128}
   - component: {fileID: 114339084714032852}
-  - component: {fileID: 114102138297503944}
   - component: {fileID: 64403718920526620}
   - component: {fileID: 23467895820243096}
   - component: {fileID: 54292911725291328}
   - component: {fileID: 33589534327975026}
   m_Layer: 0
   m_Name: EnemyCoward
-  m_TagString: Untagged
+  m_TagString: EnemyCoward
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -197,17 +196,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!114 &114102138297503944
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1747274108200822}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdae93a4c490fbf4885fdd3f42079c77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114339084714032852
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -236,7 +224,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 100
   Damage: 10
-  HitByLaserSound: {fileID: 0}
-  DestructionSound: {fileID: 0}
+  HitByLaserSound: {fileID: 8300000, guid: 7ceefc35beb52cf428260eec9b1abde8, type: 3}
+  DestructionSound: {fileID: 8300000, guid: 578fb24d31b57524baf162cebe175b42, type: 3}
   HitByLaserAnimation: {fileID: 0}
   DestructionAnimation: {fileID: 0}
+  SpawningEffectPrefab: {fileID: 1000011128802252, guid: 96730f8640590934eacb6f860058e7f9,
+    type: 2}
+  ExplosionPrefab: {fileID: 1000011797152326, guid: acf39d9f4addf294d93fa56fa373961b,
+    type: 2}
