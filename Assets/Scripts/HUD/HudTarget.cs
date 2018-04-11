@@ -37,7 +37,7 @@ public class HudTarget : MonoBehaviour {
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit info;
-        if (Physics.Raycast(ray, out info, canon.aimRange) && (info.transform.gameObject.tag == Tags.EnemyChargerTag || info.transform.gameObject.tag == Tags.EnemyLaserTag))
+        if (Physics.Raycast(ray, out info, canon.aimRange) && (info.transform.gameObject.tag == Tags.EnemyChargerTag || info.transform.gameObject.tag == Tags.EnemyLaserTag || info.transform.gameObject.tag == Tags.EnemyCowardTag))
         {
             // Raycast from crosshair position hit either an ennemy charger or an ennemy laser
             _image.color = HighlightColor;
