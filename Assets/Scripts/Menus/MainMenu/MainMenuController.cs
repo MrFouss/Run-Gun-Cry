@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour {
 
-    public AudioSource AudioSource;
-
+    public GameObject MainMenuContainer;
+    public GameObject CreditsContainer;
 
     public void OnStartGamePress()
     {
@@ -17,6 +17,18 @@ public class MainMenuController : MonoBehaviour {
     public void OnHighScorePress()
     {
         SceneManager.LoadScene("HighScores");
+    }
+
+    public void OnCreditsPress()
+    {
+        MainMenuContainer.SetActive(false);
+        CreditsContainer.SetActive(true);
+    }
+
+    public void OnCreditsBackToMainMenuPress()
+    {
+        CreditsContainer.SetActive(false);
+        MainMenuContainer.SetActive(true);
     }
 
     public void OnQuitGamePress()

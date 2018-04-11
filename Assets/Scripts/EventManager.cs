@@ -69,6 +69,7 @@ public class EventManager : MonoBehaviour {
     
     // when the current letter changes (for UI) <letter>
     public CustomEventString OnCurrentLetterChange;
+    public CustomEventBool OnCurrentLetterCorrectlyTyped;
 
     // when next letters list changes (for UI) <nextLetters>
     public CustomEventString OnNextLettersChange;

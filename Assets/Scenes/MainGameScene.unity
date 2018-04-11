@@ -2256,6 +2256,11 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: CustomEventString, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+  OnCurrentLetterCorrectlyTyped:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: CustomEventBool, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
   OnNextLettersChange:
     m_PersistentCalls:
       m_Calls:
@@ -3415,6 +3420,24 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1514549172}
   m_Script: {fileID: 11500000, guid: 66fc9ccd92628ca4dac0d1b979f16a8f, type: 3}
+--- !u!1 &1514549175 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1891465817653884, guid: dde6c1ddd160e04458ddb5c52a3ce539,
+    type: 2}
+  m_PrefabInternal: {fileID: 1514549172}
+--- !u!114 &1514549176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1514549175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bf894c17c413a64593f2d3fdadb1b03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SuccessColor: {r: 0.56412196, g: 0.8161765, b: 0.6805885, a: 1}
+  FailureColor: {r: 0.9338235, g: 0.534, b: 0.52870893, a: 1}
 --- !u!1 &1538598945
 GameObject:
   m_ObjectHideFlags: 0
