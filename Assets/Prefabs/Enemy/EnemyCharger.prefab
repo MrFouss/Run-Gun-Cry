@@ -183,7 +183,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -209,8 +209,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 100
   Damage: 30
-  HitByLaserSound: {fileID: 0}
-  DestructionSound: {fileID: 0}
+  HitByLaserSound: {fileID: 8300000, guid: 7ceefc35beb52cf428260eec9b1abde8, type: 3}
+  DestructionSound: {fileID: 8300000, guid: 578fb24d31b57524baf162cebe175b42, type: 3}
   HitByLaserAnimation: {fileID: 0}
   DestructionAnimation: {fileID: 0}
 --- !u!114 &114960329010524154
@@ -233,4 +233,4 @@ MonoBehaviour:
   ExplosionParticleSystem: {fileID: 1909151092473932, guid: 3e3196536b9d7d544b076ca86bc8211c,
     type: 2}
   ExplosionClip: {fileID: 8300000, guid: f618e356637fbf94281f675eb20a048d, type: 3}
-  ChargeClip: {fileID: 0}
+  ChargeClip: {fileID: 8300000, guid: 9f71979821fb13d48a31b1245abd23c9, type: 3}
