@@ -2537,6 +2537,22 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: CustomEventString, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+  OnCurrentLetterCorrectlyTyped:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1477447813}
+        m_MethodName: SetProgressBarColor
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: CustomEventBool, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
   OnNextLettersChange:
     m_PersistentCalls:
       m_Calls:
@@ -3094,6 +3110,11 @@ Prefab:
       propertyPath: OnFirePowerBalanceChange.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114223930444585144, guid: 79dada54cb026234bbc68a079e9929b5,
+        type: 2}
+      propertyPath: OnCurrentLetterCorrectlyTyped.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4650570255983394, guid: 79dada54cb026234bbc68a079e9929b5, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3336,6 +3357,26 @@ Prefab:
       propertyPath: m_VerticalAxis
       value: Vertical
       objectReference: {fileID: 0}
+    - target: {fileID: 114223930444585144, guid: 79dada54cb026234bbc68a079e9929b5,
+        type: 2}
+      propertyPath: OnCurrentLetterCorrectlyTyped.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1477447813}
+    - target: {fileID: 114223930444585144, guid: 79dada54cb026234bbc68a079e9929b5,
+        type: 2}
+      propertyPath: OnCurrentLetterCorrectlyTyped.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetProgressBarColor
+      objectReference: {fileID: 0}
+    - target: {fileID: 114223930444585144, guid: 79dada54cb026234bbc68a079e9929b5,
+        type: 2}
+      propertyPath: OnCurrentLetterCorrectlyTyped.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114223930444585144, guid: 79dada54cb026234bbc68a079e9929b5,
+        type: 2}
+      propertyPath: OnCurrentLetterCorrectlyTyped.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 79dada54cb026234bbc68a079e9929b5, type: 2}
   m_IsPrefabParent: 0
@@ -3448,6 +3489,24 @@ RectTransform:
   m_AnchoredPosition: {x: 788.1, y: 122.7}
   m_SizeDelta: {x: 260.8, y: 187.4}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1477447812 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1891465817653884, guid: dde6c1ddd160e04458ddb5c52a3ce539,
+    type: 2}
+  m_PrefabInternal: {fileID: 1514549172}
+--- !u!114 &1477447813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1477447812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bf894c17c413a64593f2d3fdadb1b03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SuccessColor: {r: 0.56412196, g: 0.8161765, b: 0.6805885, a: 1}
+  FailureColor: {r: 0.9338235, g: 0.534, b: 0.52870893, a: 1}
 --- !u!1 &1510765183
 GameObject:
   m_ObjectHideFlags: 0
