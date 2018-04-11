@@ -61,6 +61,7 @@ public class EnemyController : MonoBehaviour {
 
     public void TakeDamage(int damage, DamageType dmgType)
     {
+        StartCoroutine("DamageTakenFeedback");
         Health -= damage;
         if (Health <= 0)
         {
@@ -112,6 +113,28 @@ public class EnemyController : MonoBehaviour {
         Instantiate(ExplosionPrefab, gameObject.transform.position, gameObject.transform.rotation);
         Destroy(gameObject);
 
+        yield return null;
+    }
+
+    IEnumerator DamageTakenFeedback()
+    {
+        Renderer renderer = GetComponent<Renderer>();
+        Material mat = renderer.material;
+        Color baseColor = mat.GetColor("_EmissionColor");
+
+        for (int i = 1; i < 10; i++)
+        {
+            if (i < 5)
+            {
+                baseColor.r = Mathf.Min(baseColor.r + 0.2f, 1);
+            }
+            else
+            {
+                baseColor.r = Mathf.Max(baseColor.r - 0.2f, 0);
+            }
+            mat.SetColor("_EmissionColor", baseColor);
+            yield return new WaitForSeconds(0.03f);
+        }
         yield return null;
     }
 }
