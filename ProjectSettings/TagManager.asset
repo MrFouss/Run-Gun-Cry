@@ -12,6 +12,7 @@ TagManager:
   - MechaLaser
   - MechaMissile
   - Platform
+  - EnemyCoward
   layers:
   - Default
   - TransparentFX
