@@ -33,13 +33,13 @@ public class MechaController : MonoBehaviour
     }
 
 
-    public int BaseShieldReload = 1;
-    public int BaseEnergyReload = 1;
+    public int BaseShieldReload = 3;
+    public int BaseEnergyReload = 5;
 
     // resources
     public int MaxHealth = 100;
     public int MaxShield = 100;
-    public int MaxEnergy = 70;
+    public int MaxEnergy = 100;
     public int EnergyConsumptionPerSecond;
     public int BaseConsumptionValue = 3;
     public int HealthThreshold = 10;
@@ -132,11 +132,11 @@ public class MechaController : MonoBehaviour
 
     //Difficulty curve
     private int previousScore = 0;
-    public int StepToRaiseDifficulty = 10;
+    public int StepToRaiseDifficulty = 1000;
     public float VoidDamageToIncreaseInPercentage = 1.0f;
     public float MissileConsumptionToIncreaseInPercentage = 1.0f;
     public float LaserConsumptionToIncreaseInPercentage = 1.0f;
-    public float EnergyConsumptionToIncreaseInPercentage = 1.0f;
+    public float EnergyConsumptionToIncreaseInPercentage = 0.0f;
 
     // Use this for initialization
     void Start()
@@ -176,9 +176,9 @@ public class MechaController : MonoBehaviour
         }
         if (Health <= HealthThreshold && Shield == 0)
         {
-            // TODO uncomment when files are added
-            //audioSource.clip = LowHealthSound;
-            //audioSource.Play();
+            
+            audioSource.clip = LowHealthSound;
+            audioSource.Play();
             //LowHealthAnimation.Play();
         }
         EventManager.Instance.OnHealthLow.Invoke(Health <= HealthThreshold && Shield == 0);
@@ -195,9 +195,9 @@ public class MechaController : MonoBehaviour
         Energy = Mathf.Max(0, Energy - consumption);
         if (Energy <= EnergyThreshold)
         {
-            // TODO uncomment when files are added
-            //audioSource.clip = LowEnergySound;
-            //audioSource.Play();
+            
+            audioSource.clip = LowEnergySound;
+            audioSource.Play();
             //LowEnergyAnimation.Play();
         }
         EventManager.Instance.OnEnergyLow.Invoke(Energy <= EnergyThreshold);
@@ -240,9 +240,9 @@ public class MechaController : MonoBehaviour
         switch (other.gameObject.tag)
         {
             case Tags.EnemyChargerTag:
-                // TODO uncomment when these files are added
-                // audioSource.clip = EnemyCollisionDamageSound;
-                // audioSource.Play();
+                
+                audioSource.clip = EnemyCollisionDamageSound;
+                audioSource.Play();
                 // let the scoring script know about the damage taken
                 EventManager.onDamageTaken.Invoke(DamageSourceType.CollidingCharger, VoidDamage);
                 GetComponent<CameraController>().IncreaseMovingFactor();
@@ -250,9 +250,9 @@ public class MechaController : MonoBehaviour
                 break;
 
             case Tags.VoidTag:
-                // TODO uncomment when these files are added
-                // audioSource.clip = VoidDamageSound;
-                // audioSource.Play();
+                
+                audioSource.clip = VoidDamageSound;
+                audioSource.Play();
 
                 GetComponent<CameraController>().IncreaseMovingFactor();
                 TakeDamage(VoidDamage);
@@ -262,9 +262,9 @@ public class MechaController : MonoBehaviour
                 break;
 
             case Tags.ObstacleWallTag:
-                // TODO uncomment when these files are added
-                // audioSource.clip = WallObstacleDamageSound;
-                // audioSource.Play();
+                
+                audioSource.clip = WallObstacleDamageSound;
+                audioSource.Play();
                 GetComponent<CameraController>().IncreaseMovingFactor();
                 // let the scoring script know about the damage taken
                 int obstacleWallDamage = other.gameObject.GetComponent<ObstacleWallController>().Damage;
@@ -278,9 +278,9 @@ public class MechaController : MonoBehaviour
                 break;
 
             case Tags.EnemyLaserTag:
-                // TODO uncomment when these files are added
-                // audioSource.clip = LaserDamageSound;
-                // audioSource.Play();
+                
+                audioSource.clip = LaserDamageSound;
+                audioSource.Play();
                 GetComponent<CameraController>().IncreaseMovingFactor();
                 // let the scoring script know about the damage taken
                 int enemyLaserDamage = other.gameObject.GetComponentInParent<ProjectileBehavior>().Damage;
@@ -300,7 +300,7 @@ public class MechaController : MonoBehaviour
 
     public void OnSpeedFirePowerBalanceChange(float balanceValue)
     {
-        EnergyConsumptionPerSecond = (int) ((balanceValue + 2.0f) * BaseConsumptionValue);
+        //EnergyConsumptionPerSecond = (int) ((balanceValue + 2.0f) * BaseConsumptionValue);
     }
 
     public void Update()
