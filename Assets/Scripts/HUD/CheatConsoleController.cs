@@ -7,9 +7,10 @@ public class CheatConsoleController : MonoBehaviour {
 
     public GameObject ConsoleHUD;
     public GameObject Mecha;
+    public GameObject PauseMenu;
     public Text History;
 
-    private bool openConsole;
+    private bool openConsole = false;
     private InputField inputField;
     private string cheatEntered;
     
@@ -17,8 +18,6 @@ public class CheatConsoleController : MonoBehaviour {
     // Use this for initialization
     void Start () {
         inputField = ConsoleHUD.GetComponent<InputField>();
-        openConsole = false;
-        ConsoleHUD.SetActive(false);
     }
 	
 	// Update is called once per frame
@@ -27,16 +26,16 @@ public class CheatConsoleController : MonoBehaviour {
         {
             if (!openConsole)
             {
-                openConsoleAndPauseGame();
+                OpenConsoleAndPauseGame();
                 
             } else
             {
-                resumeGame();
+                ResumeGame();
             }
         }
 	}
 
-    private void openConsoleAndPauseGame()
+    private void OpenConsoleAndPauseGame()
     {
         History.text = "Run Gun Cry - Copyright (c) 2018";
         openConsole = true;
@@ -53,11 +52,12 @@ public class CheatConsoleController : MonoBehaviour {
         Mecha.GetComponent<CannonBehavior>().enabled = false;
         Mecha.GetComponent<EngineerLetterTyper>().enabled = false;
         Mecha.GetComponent<FollowMouse>().enabled = false;
+        PauseMenu.GetComponent<PauseMenuController>().enabled = false;
 
         inputField.ActivateInputField();
     }
 
-    private void resumeGame()
+    private void ResumeGame()
     {
         openConsole = false;
         ConsoleHUD.SetActive(false);
@@ -70,6 +70,7 @@ public class CheatConsoleController : MonoBehaviour {
         Mecha.GetComponent<CannonBehavior>().enabled = true;
         Mecha.GetComponent<EngineerLetterTyper>().enabled = true;
         Mecha.GetComponent<FollowMouse>().enabled = true;
+        PauseMenu.GetComponent<PauseMenuController>().enabled = true;
     }
 
     public void GetInput(string inputString)
