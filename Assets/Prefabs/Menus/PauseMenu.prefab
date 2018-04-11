@@ -552,6 +552,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PauseMenu: {fileID: 1376635573920136}
   Mecha: {fileID: 0}
+  DeveloperConsole: {fileID: 0}
 --- !u!114 &114323992115877756
 MonoBehaviour:
   m_ObjectHideFlags: 1

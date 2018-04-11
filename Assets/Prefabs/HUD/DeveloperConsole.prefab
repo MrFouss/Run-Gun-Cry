@@ -129,6 +129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ConsoleHUD: {fileID: 1200275914312472}
   Mecha: {fileID: 0}
+  PauseMenu: {fileID: 0}
   History: {fileID: 114882226020569732}
 --- !u!114 &114097482840085736
 MonoBehaviour:
