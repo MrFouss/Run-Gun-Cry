@@ -11,7 +11,7 @@ public class ProjectileBehavior : MonoBehaviour {
     public enum ProjectileSource { MECHA, ENEMY_LASER };
 
     public ProjectileSource Source;
-    public float ProjectileSpeed = 1000.0f;
+    public float ProjectileSpeed = 60f;
     public float FuseTime = 2.0f;
     public int Damage = 10;
 
