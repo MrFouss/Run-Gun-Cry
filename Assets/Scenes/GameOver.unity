@@ -2680,7 +2680,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Eng
+  m_Text: Cry
 --- !u!222 &1712122754
 CanvasRenderer:
   m_ObjectHideFlags: 0

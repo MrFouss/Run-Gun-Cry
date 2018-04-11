@@ -38,8 +38,6 @@ public class PilotController : MonoBehaviour
     public float SideForce = 50f;
     public float JumpForce = 15f;
     public float AirControlMultiplier = 0.25f;
-
-    private float _maxZeroEnergyForwardSpeed; 
     
     // depend on the situation
     private float _currentMaxForwardSpeed;
@@ -51,7 +49,6 @@ public class PilotController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         mechaController = GetComponent<MechaController>();
         canon = GetComponent<CannonBehavior>();
-        _maxZeroEnergyForwardSpeed = BaseForwardSpeed * 0.75f;
         _currentMaxSideSpeed = BaseSideSpeed;
     }
 
