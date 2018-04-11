@@ -11,7 +11,7 @@ public class EngineerLetterTyper : MonoBehaviour
     public int MaxMultiplier = 4;
 
     // if the player doesn't type a successful letter before timeout, the combo is reset
-    public float TimeOutSec = 1;
+    public float TimeOutSec = 2;
 
     private float _remainingTimeSec;
     private float RemainingTimeSec
