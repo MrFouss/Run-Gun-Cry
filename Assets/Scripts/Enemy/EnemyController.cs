@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour {
 
+    public enum DamageType{SHOTBYPLAYER,COLLISION};
+
     public int Health = 100;
 
     public int Damage = 10;
@@ -31,14 +33,14 @@ public class EnemyController : MonoBehaviour {
         switch (collision.gameObject.tag)
         {
             case Tags.ObstacleWallTag:
-                TakeDamage(Health / 2);
+                TakeDamage(Health / 2, DamageType.COLLISION);
                 break;
             case Tags.MechaBodyTag:
-                TakeDamage(Health);
+                TakeDamage(Health, DamageType.COLLISION);
                 break;
             case Tags.MechaLaserTag:
 				EventManager.onShotHitting.Invoke(ShotType.Laser);
-				TakeDamage(collision.gameObject.GetComponentInParent<ProjectileBehavior>().Damage);
+				TakeDamage(collision.gameObject.GetComponentInParent<ProjectileBehavior>().Damage, DamageType.SHOTBYPLAYER);
 				// TODO uncomment when these files are added
 				//HitByLaserAnimation.Play();
 				//audioSource.clip = HitByLaserSound;
@@ -46,7 +48,7 @@ public class EnemyController : MonoBehaviour {
                 break;
             case Tags.MechaMissileTag:
 				EventManager.onShotHitting.Invoke(ShotType.Missile);
-				TakeDamage(collision.gameObject.GetComponentInParent<ProjectileBehavior>().Damage);
+				TakeDamage(collision.gameObject.GetComponentInParent<ProjectileBehavior>().Damage, DamageType.SHOTBYPLAYER);
 				// TODO uncomment when these files are added
                 //HitByLaserAnimation.Play();
                 //audioSource.clip = HitByLaserSound;
@@ -57,7 +59,7 @@ public class EnemyController : MonoBehaviour {
         }
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, DamageType dmgType)
     {
         Health -= damage;
         if (Health <= 0)
@@ -65,6 +67,39 @@ public class EnemyController : MonoBehaviour {
             // TODO uncomment when these files are added
             //audioSource.clip = DestructionSound;
             //audioSource.Play();
+            if (dmgType == DamageType.SHOTBYPLAYER)
+            {
+                switch (gameObject.tag)
+                {
+                    case Tags.EnemyCowardTag:
+                        EventManager.onEnemyDestruction.Invoke(EnemyType.Coward, DestructionType.Shot);
+                        break;
+                    case Tags.EnemyChargerTag:
+                        EventManager.onEnemyDestruction.Invoke(EnemyType.Charger, DestructionType.Shot);
+                        break;
+                    case Tags.EnemyLaserTag:
+                        EventManager.onEnemyDestruction.Invoke(EnemyType.Shooter, DestructionType.Shot);
+                        break;
+                    default:
+                        break;
+                }
+            } else
+            {
+                switch (gameObject.tag)
+                {
+                    case Tags.EnemyCowardTag:
+                        EventManager.onEnemyDestruction.Invoke(EnemyType.Coward, DestructionType.Collided);
+                        break;
+                    case Tags.EnemyChargerTag:
+                        EventManager.onEnemyDestruction.Invoke(EnemyType.Charger, DestructionType.Collided);
+                        break;
+                    case Tags.EnemyLaserTag:
+                        EventManager.onEnemyDestruction.Invoke(EnemyType.Shooter, DestructionType.Collided);
+                        break;
+                    default:
+                        break;
+                }
+            }
             StartCoroutine("Death");
         }
     }
