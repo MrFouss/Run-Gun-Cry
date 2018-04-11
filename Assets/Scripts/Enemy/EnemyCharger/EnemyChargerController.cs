@@ -76,9 +76,9 @@ public class EnemyChargerController : MonoBehaviour
             if (!startedCharge)
             {
                 //TODO : Uncomment when charge clip is available
-                //audioSource.loop = true;
-                //audioSource.clip = ChargeClip;
-                //audioSource.Play();
+                audioSource.loop = true;
+                audioSource.clip = ChargeClip;
+                audioSource.Play();
                 Instantiate(Trail, transform.position, Quaternion.identity, transform);
                 startedCharge = true;
             }
