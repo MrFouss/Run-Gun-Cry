@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using UnityEditor;
-
-[System.Serializable]
+﻿[System.Serializable]
 public class HighScoresEntry
 {
     public string RunnerName = "N/A";

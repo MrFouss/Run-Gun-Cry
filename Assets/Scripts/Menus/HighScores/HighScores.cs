@@ -1,8 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.IO;
-using System.Collections.Generic;
-using UnityEditor;
 
 [System.Serializable]
 public class HighScores
