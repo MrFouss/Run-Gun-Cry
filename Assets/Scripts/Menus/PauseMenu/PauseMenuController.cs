@@ -8,6 +8,7 @@ public class PauseMenuController : MonoBehaviour {
 
     public GameObject PauseMenu;
     public GameObject Mecha;
+    public GameObject DeveloperConsole;
 
     private Slider volumeSlider;
     private Text volumeValueText;
@@ -48,6 +49,7 @@ public class PauseMenuController : MonoBehaviour {
         Mecha.GetComponent<CannonBehavior>().enabled = false;
         Mecha.GetComponent<EngineerLetterTyper>().enabled = false;
         Mecha.GetComponent<FollowMouse>().enabled = false;
+        DeveloperConsole.GetComponent<CheatConsoleController>().enabled = false;
 
         // Correctly load the volume slider
         volumeSlider.value = (int) (AudioListener.volume * 100.0f);
@@ -73,6 +75,7 @@ public class PauseMenuController : MonoBehaviour {
         Mecha.GetComponent<CannonBehavior>().enabled = true;
         Mecha.GetComponent<EngineerLetterTyper>().enabled = true;
         Mecha.GetComponent<FollowMouse>().enabled = true;
+        DeveloperConsole.GetComponent<CheatConsoleController>().enabled = true;
     }
 
     public void ExitGame() {

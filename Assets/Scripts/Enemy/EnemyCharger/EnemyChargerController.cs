@@ -6,7 +6,7 @@ using UnityEngine;
 public class EnemyChargerController : MonoBehaviour
 {
 
-    public float MaxSpeed = 50f;
+    public float MaxSpeed = 40f;
     public float Acceleration = 100f;
 
     public int Damage = 25;

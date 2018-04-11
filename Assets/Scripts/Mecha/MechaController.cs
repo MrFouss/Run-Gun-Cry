@@ -33,13 +33,13 @@ public class MechaController : MonoBehaviour
     }
 
 
-    public int BaseShieldReload = 1;
-    public int BaseEnergyReload = 1;
+    public int BaseShieldReload = 3;
+    public int BaseEnergyReload = 5;
 
     // resources
     public int MaxHealth = 100;
     public int MaxShield = 100;
-    public int MaxEnergy = 70;
+    public int MaxEnergy = 100;
     public int EnergyConsumptionPerSecond;
     public int BaseConsumptionValue = 3;
     public int HealthThreshold = 10;
@@ -132,11 +132,11 @@ public class MechaController : MonoBehaviour
 
     //Difficulty curve
     private int previousScore = 0;
-    public int StepToRaiseDifficulty = 10;
+    public int StepToRaiseDifficulty = 1000;
     public float VoidDamageToIncreaseInPercentage = 1.0f;
     public float MissileConsumptionToIncreaseInPercentage = 1.0f;
     public float LaserConsumptionToIncreaseInPercentage = 1.0f;
-    public float EnergyConsumptionToIncreaseInPercentage = 1.0f;
+    public float EnergyConsumptionToIncreaseInPercentage = 0.0f;
 
     // Use this for initialization
     void Start()
@@ -300,7 +300,7 @@ public class MechaController : MonoBehaviour
 
     public void OnSpeedFirePowerBalanceChange(float balanceValue)
     {
-        EnergyConsumptionPerSecond = (int) ((balanceValue + 2.0f) * BaseConsumptionValue);
+        //EnergyConsumptionPerSecond = (int) ((balanceValue + 2.0f) * BaseConsumptionValue);
     }
 
     public void Update()

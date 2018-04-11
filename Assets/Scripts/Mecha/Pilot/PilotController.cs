@@ -35,8 +35,8 @@ public class PilotController : MonoBehaviour
     private float BaseForwardSpeed = 2f;
     public float BaseSideSpeed = 2f;
     public float ForwardForce = 20f;
-    public float SideForce = 20f;
-    public float JumpForce = 25f;
+    public float SideForce = 50f;
+    public float JumpForce = 15f;
     public float AirControlMultiplier = 0.25f;
 
     private float _maxZeroEnergyForwardSpeed; 
@@ -130,7 +130,7 @@ public class PilotController : MonoBehaviour
     private void OnSpeedFirePowerBalanceChange(float balanceValue)
     {
         _currentMaxForwardSpeed = (Mathf.Pow(balanceValue * 2.0f + 3.0f, 2.0f) / 5.0f) * BaseForwardSpeed;
-        _currentMaxSideSpeed = (Mathf.Pow(balanceValue * 2.0f + 3.0f, 2.0f) / 5.0f) * BaseSideSpeed;
+        _currentMaxSideSpeed = (Mathf.Pow(balanceValue * 4.0f + 3.0f, 2.0f) / 5.0f) * BaseSideSpeed;
     }
 
 }

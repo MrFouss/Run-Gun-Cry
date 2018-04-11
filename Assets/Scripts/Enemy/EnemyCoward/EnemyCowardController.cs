@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyCowardController : MonoBehaviour
 {
 
-    public float MaxSpeed = 20f;
+    public float MaxSpeed = 40f;
     public float Acceleration = 20f;
     public float MinDistance = 25f;
     private float minDistanceSqr;

@@ -106,19 +106,19 @@ public class Scoring : MonoBehaviour {
             switch (enemyType)
             {
                 case (EnemyType.Obstacle):
-                    scoreOthers += 100;
+                    scoreOthers += 10;
                     destroyedObstacles++;
                     break;
                 case (EnemyType.Shooter):
-                    scoreOthers += 300;
+                    scoreOthers += 30;
                     destroyedShooters++;
                     break;
                 case (EnemyType.Charger):
-                    scoreOthers += 300;
+                    scoreOthers += 50;
                     destroyedChargers++;
                     break;
                 case (EnemyType.Coward):
-                    scoreOthers += 500;
+                    scoreOthers += 70;
                     destroyedCowards++;
                     break;
                 default:

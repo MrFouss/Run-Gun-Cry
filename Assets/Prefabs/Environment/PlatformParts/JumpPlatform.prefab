@@ -19,8 +19,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4822263283228110}
+  - component: {fileID: 65873405180685080}
   - component: {fileID: 33689537018388936}
-  - component: {fileID: 64575304870974274}
   - component: {fileID: 23467884922808690}
   m_Layer: 8
   m_Name: JumpPlatform
@@ -83,8 +83,8 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1974494638189758}
   m_Mesh: {fileID: 4300000, guid: 713ac94f481d202408205762710736d2, type: 3}
---- !u!64 &64575304870974274
-MeshCollider:
+--- !u!65 &65873405180685080
+BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -92,8 +92,6 @@ MeshCollider:
   m_Material: {fileID: 13400000, guid: 36a6a2fe8ac097841aa3b010ba78f3f4, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300000, guid: 713ac94f481d202408205762710736d2, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 38.566494, y: 16.993803, z: 16.9938}
+  m_Center: {x: 0, y: 0, z: 0}
