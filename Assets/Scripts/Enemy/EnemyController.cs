@@ -120,21 +120,11 @@ public class EnemyController : MonoBehaviour {
     {
         Renderer renderer = GetComponent<Renderer>();
         Material mat = renderer.material;
-        Color baseColor = mat.GetColor("_EmissionColor");
-
-        for (int i = 1; i < 10; i++)
-        {
-            if (i < 5)
-            {
-                baseColor.r = Mathf.Min(baseColor.r + 0.2f, 1);
-            }
-            else
-            {
-                baseColor.r = Mathf.Max(baseColor.r - 0.2f, 0);
-            }
-            mat.SetColor("_EmissionColor", baseColor);
-            yield return new WaitForSeconds(0.03f);
-        }
+        Color originalColor = mat.GetColor("_EmissionColor");
+        Color baseColor = new Color(3, 0.7f, 0.7f, 1);
+        mat.SetColor("_EmissionColor", baseColor);
+        yield return new WaitForSeconds(0.15f);
+        mat.SetColor("_EmissionColor", originalColor);
         yield return null;
     }
 }
