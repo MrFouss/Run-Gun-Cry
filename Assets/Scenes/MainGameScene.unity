@@ -813,22 +813,22 @@ Prefab:
     - target: {fileID: 224612689984399552, guid: dde6c1ddd160e04458ddb5c52a3ce539,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: -81.68
+      value: -81.43
       objectReference: {fileID: 0}
     - target: {fileID: 224612689984399552, guid: dde6c1ddd160e04458ddb5c52a3ce539,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: -81.68
+      value: -81.43
       objectReference: {fileID: 0}
     - target: {fileID: 224715606786998236, guid: dde6c1ddd160e04458ddb5c52a3ce539,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 81.68
+      value: 81.43
       objectReference: {fileID: 0}
     - target: {fileID: 224715606786998236, guid: dde6c1ddd160e04458ddb5c52a3ce539,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 81.68
+      value: 81.43
       objectReference: {fileID: 0}
     - target: {fileID: 224986453808483980, guid: dde6c1ddd160e04458ddb5c52a3ce539,
         type: 2}
@@ -1143,17 +1143,47 @@ Prefab:
     - target: {fileID: 114849981697116660, guid: 04d56357bb809444391bddaa29b32139,
         type: 2}
       propertyPath: HighlightColor.r
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114849981697116660, guid: 04d56357bb809444391bddaa29b32139,
         type: 2}
       propertyPath: HighlightColor.g
-      value: 0.372
+      value: 0.71505886
       objectReference: {fileID: 0}
     - target: {fileID: 114849981697116660, guid: 04d56357bb809444391bddaa29b32139,
         type: 2}
       propertyPath: HighlightColor.b
-      value: 0.27964133
+      value: 0.17647058
+      objectReference: {fileID: 0}
+    - target: {fileID: 114816519102657208, guid: 04d56357bb809444391bddaa29b32139,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 114816519102657208, guid: 04d56357bb809444391bddaa29b32139,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 114816519102657208, guid: 04d56357bb809444391bddaa29b32139,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 114849981697116660, guid: 04d56357bb809444391bddaa29b32139,
+        type: 2}
+      propertyPath: DefaultColor.r
+      value: 0.7490196
+      objectReference: {fileID: 0}
+    - target: {fileID: 114849981697116660, guid: 04d56357bb809444391bddaa29b32139,
+        type: 2}
+      propertyPath: DefaultColor.g
+      value: 0.7490196
+      objectReference: {fileID: 0}
+    - target: {fileID: 114849981697116660, guid: 04d56357bb809444391bddaa29b32139,
+        type: 2}
+      propertyPath: DefaultColor.b
+      value: 0.7490196
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 04d56357bb809444391bddaa29b32139, type: 2}
@@ -1468,8 +1498,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 150, y: -99.95996}
-  m_SizeDelta: {x: 170.5, y: 87.73001}
+  m_AnchoredPosition: {x: 150, y: -62}
+  m_SizeDelta: {x: 170, y: 87.73001}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &756372472
 Prefab:
@@ -1851,7 +1881,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1859,7 +1889,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: f2d6e0433afccd0489a80bb4920b9956, type: 3}
     m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
@@ -2023,7 +2053,7 @@ Prefab:
     - target: {fileID: 224612689984399552, guid: dde6c1ddd160e04458ddb5c52a3ce539,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: -81.68
+      value: -81.43
       objectReference: {fileID: 0}
     - target: {fileID: 224715606786998236, guid: dde6c1ddd160e04458ddb5c52a3ce539,
         type: 2}
@@ -2033,7 +2063,7 @@ Prefab:
     - target: {fileID: 224715606786998236, guid: dde6c1ddd160e04458ddb5c52a3ce539,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 81.68
+      value: 81.43
       objectReference: {fileID: 0}
     - target: {fileID: 224986453808483980, guid: dde6c1ddd160e04458ddb5c52a3ce539,
         type: 2}
@@ -2245,7 +2275,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: f2d6e0433afccd0489a80bb4920b9956, type: 3}
     m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
@@ -4338,8 +4368,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -150, y: -100}
-  m_SizeDelta: {x: 170.5, y: 87.73001}
+  m_AnchoredPosition: {x: -150, y: -62.040123}
+  m_SizeDelta: {x: 170, y: 87.73001}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1972710154
 Prefab:

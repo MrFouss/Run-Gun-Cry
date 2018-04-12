@@ -50,5 +50,6 @@ public class EnvironmentGenerator : MonoBehaviour {
     private void SpawnEnemy(Vector3 position)
     {
         Instantiate(EnemiesPool[Random.Range(0, EnemiesPool.Length)], position, Quaternion.LookRotation(PlayerTransform.position - position, PlayerTransform.up));
+        Instantiate(EnemiesPool[Random.Range(0, EnemiesPool.Length)], position + (Vector3.forward * PrefabHorizontalSpacing / 2f), Quaternion.LookRotation(PlayerTransform.position - position, PlayerTransform.up));
     }
 }
